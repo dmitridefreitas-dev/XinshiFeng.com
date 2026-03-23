@@ -51,16 +51,15 @@ export default function AboutContent() {
     <>
       {/* ── Hero ── */}
       <section
-        className="section-full flex-col text-center px-6 pt-24"
+        className="section-full flex-col text-center px-6 pt-28"
         aria-label="About hero"
-        style={{ minHeight: '100vh' }}
       >
         {/* Headshot */}
         <motion.div
           initial={{ opacity: 0, scale: 0.88 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.9 }}
-          className="relative mb-10"
+          className="relative mb-6"
         >
           {/* Rotating gradient ring */}
           <div className="headshot-ring-outer" aria-hidden="true" />
@@ -70,7 +69,7 @@ export default function AboutContent() {
           <motion.div
             whileHover={{ scale: 1.04 }}
             transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-            className="relative w-36 h-36 md:w-48 md:h-48 rounded-full overflow-hidden ring-1 ring-gray-200 headshot-container"
+            className="relative w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden ring-1 ring-gray-200 headshot-container"
             style={{ boxShadow: '0 0 50px rgba(220,38,38,0.18)' }}
           >
             <Image
@@ -93,7 +92,7 @@ export default function AboutContent() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.8 }}
-          className="font-mono text-xs uppercase tracking-[0.4em] text-accent mt-6"
+          className="font-mono text-xs uppercase tracking-[0.4em] text-accent mt-4"
         >
           CS &amp; Math · WashU · Available Fall 2027
         </motion.p>
@@ -103,7 +102,7 @@ export default function AboutContent() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.0 }}
-          className="mt-6 flex flex-wrap justify-center gap-3"
+          className="mt-4 flex flex-wrap justify-center gap-2"
         >
           {['Git & GitHub', 'HTML/CSS/JS', 'Cloud Computing', 'Software Engineering'].map((cert) => (
             <span
@@ -117,17 +116,17 @@ export default function AboutContent() {
       </section>
 
       {/* ── Content Grid ── */}
-      <div className="lg:grid lg:grid-cols-2 lg:gap-x-20 lg:gap-y-32 lg:max-w-[1400px] lg:mx-auto px-6 lg:px-12 py-24 relative items-start">
+      <div className="lg:grid lg:grid-cols-2 lg:gap-x-16 lg:gap-y-16 lg:max-w-[1400px] lg:mx-auto px-6 lg:px-12 py-12 relative items-start">
 
         {/* ── Row 1: Background (Left) | Teaching & Leadership (Right) ── */}
         
         {/* Background */}
-        <section className="flex flex-col mb-24 lg:mb-0" aria-label="Background">
+        <section className="flex flex-col mb-12 lg:mb-0" aria-label="Background">
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="font-mono text-xs uppercase tracking-[0.4em] text-muted mb-12 self-start"
+            className="font-mono text-xs uppercase tracking-[0.4em] text-muted mb-6 self-start"
           >
             Background
           </motion.p>
@@ -140,7 +139,7 @@ export default function AboutContent() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-10%' }}
                 transition={{ duration: 0.8, delay: i * 0.08 }}
-                className="text-subhead text-foreground leading-snug font-sans"
+                className="text-base text-muted leading-relaxed font-sans"
               >
                 {para}
               </motion.p>
@@ -149,12 +148,12 @@ export default function AboutContent() {
         </section>
 
         {/* Teaching & Leadership */}
-        <section className="mb-24 lg:mb-0" aria-label="Teaching & Leadership">
+        <section className="mb-12 lg:mb-0" aria-label="Teaching & Leadership">
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="font-mono text-xs uppercase tracking-[0.4em] text-muted mb-12"
+            className="font-mono text-xs uppercase tracking-[0.4em] text-muted mb-6"
           >
             Teaching &amp; Leadership
           </motion.p>
@@ -167,7 +166,7 @@ export default function AboutContent() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: i * 0.06 }}
-                className="py-7 relative group cursor-pointer hover:bg-red-50/40 transition-colors rounded-xl px-5 -mx-5"
+                className="py-7 relative group cursor-pointer bg-transparent hover:bg-red-50 transition-colors rounded-xl px-5 -mx-5"
                 role="button"
                 tabIndex={0}
                 data-cursor="expand"
@@ -197,14 +196,14 @@ export default function AboutContent() {
 
         {/* ── Row 2: Education & Research (Left) | Proficiency (Right) ── */}
 
-        <div className="flex flex-col mb-24 lg:mb-0">
+        <div className="flex flex-col mb-12 lg:mb-0">
           {/* Education */}
           <section aria-label="Education">
             <motion.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              className="font-mono text-xs uppercase tracking-[0.4em] text-muted mb-12"
+              className="font-mono text-xs uppercase tracking-[0.4em] text-muted mb-6"
             >
               Education
             </motion.p>
@@ -223,7 +222,7 @@ export default function AboutContent() {
                   <p className="font-mono text-xs uppercase tracking-[0.25em] text-accent mb-1.5">
                     {edu.years}
                   </p>
-                  <h3 className="font-serif font-bold text-xl md:text-2xl text-foreground mb-1">
+                  <h3 className="font-serif font-bold text-base md:text-lg text-foreground mb-1">
                     {edu.school}
                   </h3>
                   {edu.department && (
@@ -255,7 +254,7 @@ export default function AboutContent() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              className="font-mono text-xs uppercase tracking-[0.4em] text-muted mb-12 hidden lg:block invisible"
+              className="font-mono text-xs uppercase tracking-[0.4em] text-muted mb-6 hidden lg:block invisible"
             >
               {/* Spacer matching the label height */}
             </motion.p>
@@ -263,7 +262,7 @@ export default function AboutContent() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              className="font-mono text-xs uppercase tracking-[0.4em] text-muted mb-12 mt-12 lg:hidden"
+              className="font-mono text-xs uppercase tracking-[0.4em] text-muted mb-6 mt-8 lg:hidden"
             >
               Research
             </motion.p>
@@ -276,7 +275,7 @@ export default function AboutContent() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.7, delay: i * 0.07 }}
-                  className="py-8 relative group cursor-pointer hover:bg-red-50/40 transition-colors rounded-xl px-5 -mx-5"
+                  className="py-8 relative group cursor-pointer bg-transparent hover:bg-red-50 transition-colors rounded-xl px-5 -mx-5"
                   role="button"
                   tabIndex={0}
                   data-cursor="expand"
@@ -319,12 +318,12 @@ export default function AboutContent() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="font-mono text-xs uppercase tracking-[0.4em] text-muted mb-12"
+            className="font-mono text-xs uppercase tracking-[0.4em] text-muted mb-6"
           >
             Proficiency
           </motion.p>
 
-          <div className="flex flex-col gap-10">
+          <div className="flex flex-col gap-7">
             {skillCategories.map((cat, ci) => (
               <motion.div
                 key={cat.title}
@@ -333,10 +332,10 @@ export default function AboutContent() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: ci * 0.06 }}
               >
-                <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted mb-5">
+                <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted mb-3">
                   {cat.title}
                 </p>
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-3">
                   {cat.skills.map((skill, si) => (
                     <div key={skill.name}>
                       <div className="flex justify-between items-baseline mb-1.5">
@@ -370,7 +369,6 @@ export default function AboutContent() {
       <section
         className="section-full px-6"
         aria-label="Philosophy"
-        style={{ minHeight: '70vh' }}
       >
         <blockquote className="max-w-2xl text-center">
           <motion.p
@@ -396,13 +394,13 @@ export default function AboutContent() {
       </section>
 
       {/* ── Personal Interests ── */}
-      <section className="py-32 px-6 lg:px-12" aria-label="Personal Interests">
+      <section className="py-16 px-6 lg:px-12" aria-label="Personal Interests">
         <div className="max-w-5xl mx-auto">
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="font-mono text-xs uppercase tracking-[0.4em] text-muted mb-16 text-center"
+            className="font-mono text-xs uppercase tracking-[0.4em] text-muted mb-8 text-center"
           >
             Outside the Classroom
           </motion.p>
@@ -441,9 +439,8 @@ export default function AboutContent() {
       <section
         className="section-full flex-col text-center px-6"
         aria-label="Connect"
-        style={{ minHeight: '60vh' }}
       >
-        <h2 className="font-serif font-bold text-headline text-foreground text-balance mb-10 will-change-transform">
+        <h2 className="font-serif font-bold text-headline text-foreground text-balance mb-7 will-change-transform">
           <TextReveal splitBy="word" staggerDelay={0.08}>
             Let&apos;s Connect
           </TextReveal>

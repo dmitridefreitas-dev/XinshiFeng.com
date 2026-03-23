@@ -21,7 +21,7 @@ export default function CounterDisplay({ value, label, delay = 0 }) {
 
   return (
     <div className="flex flex-col items-center gap-4 relative">
-      <div className="relative border-l-2 border-r-2 border-accent px-8 py-3 rounded-none overflow-hidden">
+      <div className="relative border-l-2 border-r-2 border-accent px-6 py-2 rounded-none overflow-hidden">
         {/* Pulse brackets that fire on completion */}
         {ringVisible && (
           <span

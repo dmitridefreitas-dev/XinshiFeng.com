@@ -7,6 +7,41 @@ const METERS = [
   { label: 'Coffee Consumed', baseVal: 88, unit: '%', color: '#991B1B' },
 ];
 
+function SineWave() {
+  const width = 120;
+  const height = 24;
+  const amplitude = 6;
+  const frequency = 0.08;
+  const points = Array.from({ length: 61 }, (_, i) => {
+    const x = (i / 60) * width;
+    const y = height / 2 - amplitude * Math.sin(frequency * Math.PI * i);
+    return `${x},${y}`;
+  }).join(' ');
+
+  return (
+    <svg
+      width={width}
+      height={height}
+      viewBox={`0 0 ${width} ${height}`}
+      fill="none"
+      className="overflow-visible"
+      aria-hidden="true"
+    >
+      <motion.polyline
+        points={points}
+        stroke="rgba(220,38,38,0.55)"
+        strokeWidth="1"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+        initial={{ pathLength: 0, opacity: 0 }}
+        animate={{ pathLength: 1, opacity: 1 }}
+        transition={{ duration: 2, ease: 'easeInOut', repeat: Infinity, repeatType: 'loop', repeatDelay: 1 }}
+      />
+    </svg>
+  );
+}
+
 export default function FooterMeters() {
   const [values, setValues] = useState(METERS.map((m) => m.baseVal));
 
@@ -29,7 +64,7 @@ export default function FooterMeters() {
               {meter.label}
             </span>
             <span className="font-mono text-xs text-muted">
-              {Math.round(values[i])}{meter.unit}
+              {Math.round(values[i])} {meter.unit}
             </span>
           </div>
           <div className="h-[2px] bg-gray-100 rounded-full overflow-hidden">
@@ -42,13 +77,10 @@ export default function FooterMeters() {
           </div>
         </div>
       ))}
-      <div className="flex items-center gap-2 ml-auto">
-        <span
-          className="dot-pulse w-1.5 h-1.5 rounded-full bg-accent inline-block"
-          style={{ backgroundColor: '#DC2626' }}
-        />
-        <span className="font-mono text-xs uppercase tracking-[0.3em] text-muted">
-          p &lt; 0.05
+      <div className="flex items-center gap-3 ml-auto">
+        <SineWave />
+        <span className="font-mono text-xs tracking-[0.2em] text-muted" style={{ fontStyle: 'italic' }}>
+          f(x) = sin(x)
         </span>
       </div>
     </div>

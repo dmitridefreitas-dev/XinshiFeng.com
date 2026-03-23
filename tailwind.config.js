@@ -41,10 +41,10 @@ module.exports = {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
       },
       fontSize: {
-        'display':    ['clamp(2.25rem,5vw,4.5rem)',  { lineHeight: '0.95', letterSpacing: '-0.03em' }],
-        'headline':   ['clamp(1.5rem,3vw,3rem)',     { lineHeight: '1.0',  letterSpacing: '-0.02em' }],
-        'subhead':    ['clamp(1.15rem,2vw,1.75rem)', { lineHeight: '1.1',  letterSpacing: '-0.01em' }],
-        'body-fluid': ['clamp(0.875rem,1vw,1.05rem)',{ lineHeight: '1.7'  }],
+        'display':    ['clamp(1.75rem,3.5vw,2.75rem)', { lineHeight: '1.0',  letterSpacing: '-0.03em' }],
+        'headline':   ['clamp(1.2rem,2vw,1.75rem)',    { lineHeight: '1.05', letterSpacing: '-0.02em' }],
+        'subhead':    ['clamp(0.95rem,1.5vw,1.2rem)',  { lineHeight: '1.15', letterSpacing: '-0.01em' }],
+        'body-fluid': ['clamp(0.8rem,0.9vw,0.95rem)',  { lineHeight: '1.65' }],
       },
       keyframes: {
         'ticker-scroll': {

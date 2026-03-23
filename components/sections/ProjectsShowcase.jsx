@@ -10,7 +10,7 @@ import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 function ProjectCard({ project, index, isActive }) {
   return (
     <TiltCard
-      className={`relative flex-shrink-0 w-[85vw] md:w-[55vw] lg:w-[40vw] h-[48vh] shimmer-card overflow-hidden ${
+      className={`relative flex-shrink-0 w-[82vw] md:w-[50vw] lg:w-[36vw] h-[40vh] shimmer-card overflow-hidden ${
         isActive ? 'animated-border-card' : 'academic-card'
       }`}
       style={{ borderRadius: '8px' }}
@@ -23,7 +23,7 @@ function ProjectCard({ project, index, isActive }) {
       />
 
       <motion.div
-        className="w-full h-full flex flex-col justify-end p-8 md:p-10 overflow-hidden rounded-lg relative z-10"
+        className="w-full h-full flex flex-col justify-end p-6 md:p-8 overflow-hidden rounded-lg relative z-10"
         animate={{
           opacity: isActive ? 1 : 0.5,
           scale: isActive ? 1 : 0.97,
@@ -34,8 +34,8 @@ function ProjectCard({ project, index, isActive }) {
         <p
           className="absolute top-6 right-8 font-serif font-bold select-none pointer-events-none"
           style={{
-            fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
-            color: isActive ? 'rgba(220,38,38,0.12)' : 'rgba(220,38,38,0.07)',
+            fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)',
+            color: isActive ? 'rgba(220,38,38,0.20)' : 'rgba(220,38,38,0.13)',
             lineHeight: 1,
             letterSpacing: '-0.04em',
           }}
@@ -102,10 +102,10 @@ export default function ProjectsShowcase() {
     <section
       className="section-full flex-col"
       aria-label="Research Showcase"
-      style={{ minHeight: '100vh', gap: 0 }}
+      style={{ gap: 0 }}
     >
       {/* Header */}
-      <div className="w-full px-6 lg:px-12 mb-12">
+      <div className="w-full px-6 lg:px-12 mb-8">
         <div className="flex items-end justify-between max-w-7xl mx-auto">
           <div>
             <motion.p

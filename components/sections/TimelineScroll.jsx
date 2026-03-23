@@ -6,8 +6,8 @@ import { timeline } from '@/data/constants';
 const TYPE_COLORS = {
   research: '#DC2626',
   teaching: '#991B1B',
-  education: '#059669',
-  activity: '#D97706',
+  education: '#DC2626',
+  activity: '#7F1D1D',
 };
 
 export default function TimelineScroll() {
@@ -20,12 +20,12 @@ export default function TimelineScroll() {
   const lineScaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
-    <section ref={sectionRef} className="py-32 px-6 lg:px-12" aria-label="Timeline">
+    <section ref={sectionRef} className="py-16 px-6 lg:px-12" aria-label="Timeline">
       <motion.p
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        className="font-mono text-xs uppercase tracking-[0.4em] text-muted text-center mb-24"
+        className="font-mono text-xs uppercase tracking-[0.4em] text-muted text-center mb-12"
       >
         Journey
       </motion.p>
@@ -60,11 +60,11 @@ export default function TimelineScroll() {
                   delay: i * 0.06,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="academic-card shimmer-card pl-12 py-12 relative rounded-xl mb-2"
+                className="academic-card shimmer-card pl-10 py-7 relative rounded-xl mb-2"
               >
                 {/* Pulsing dot on timeline */}
                 <motion.div
-                  className="absolute left-[-4.5px] top-14 w-2.5 h-2.5 rounded-full dot-pulse border-2 border-white"
+                  className="absolute left-[-4.5px] top-9 w-2.5 h-2.5 rounded-full dot-pulse border-2 border-white"
                   style={{ backgroundColor: dotColor }}
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
@@ -76,9 +76,9 @@ export default function TimelineScroll() {
                 <p
                   className="font-serif font-bold select-none pointer-events-none"
                   style={{
-                    fontSize: 'clamp(2rem, 6vw, 4.5rem)',
+                    fontSize: 'clamp(1.5rem, 4vw, 2.75rem)',
                     lineHeight: 0.9,
-                    color: 'rgba(220,38,38,0.05)',
+                    color: 'rgba(220,38,38,0.14)',
                     letterSpacing: '-0.04em',
                   }}
                   aria-hidden="true"
@@ -93,7 +93,7 @@ export default function TimelineScroll() {
                   >
                     {entry.year} — {entry.type}
                   </span>
-                  <h3 className="font-serif font-bold text-xl md:text-2xl text-foreground mt-1.5 mb-2">
+                  <h3 className="font-serif font-bold text-base md:text-lg text-foreground mt-1 mb-1.5">
                     {entry.title}
                   </h3>
                   <p className="text-body-fluid text-muted max-w-md">

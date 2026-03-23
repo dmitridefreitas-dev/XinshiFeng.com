@@ -8,7 +8,6 @@ export default function KPIFullscreen() {
     <section
       className="section-full"
       aria-label="Key Metrics"
-      style={{ minHeight: '100vh' }}
     >
       <div className="container mx-auto px-6 lg:px-12 w-full">
         {/* Section label */}
@@ -17,7 +16,7 @@ export default function KPIFullscreen() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="font-mono text-xs uppercase tracking-[0.35em] text-accent text-center mb-20"
+          className="font-mono text-xs uppercase tracking-[0.35em] text-accent text-center mb-10"
         >
           By The Numbers
         </motion.p>

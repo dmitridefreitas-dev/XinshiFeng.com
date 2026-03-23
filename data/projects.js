@@ -5,7 +5,7 @@ export const heroProjects = [
     technicalDescription: 'Q-learning models phase transitions in bimodal cooperation mixtures; published Physical Review E 112, 054309 (2025).',
     metric: 'Published · Physical Review E',
     image: null,
-    gradient: 'linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%)',
+    gradient: 'linear-gradient(135deg, #fecaca 0%, #fca5a5 100%)',
     alt: 'Abstract visualization of cooperation dynamics and game theory',
   },
   {
@@ -14,7 +14,7 @@ export const heroProjects = [
     technicalDescription: 'Computing cohomology groups of classical manifolds via Mayer–Vietoris sequences and differential forms.',
     metric: 'Ongoing · WashU Math',
     image: null,
-    gradient: 'linear-gradient(135deg, #ede9fe 0%, #dbeafe 100%)',
+    gradient: 'linear-gradient(135deg, #fee2e2 0%, #fecaca 100%)',
     alt: 'Mathematical diagram of manifold topology',
   },
   {
@@ -23,7 +23,7 @@ export const heroProjects = [
     technicalDescription: 'Reinforcement learning (Q-Table) model of cooperation/defection dynamics under varying power hierarchies.',
     metric: 'RL · Game Theory',
     image: null,
-    gradient: 'linear-gradient(135deg, #f0fdf4 0%, #dbeafe 100%)',
+    gradient: 'linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%)',
     alt: 'Network graph of agents cooperating and defecting',
   },
   {
@@ -32,7 +32,7 @@ export const heroProjects = [
     technicalDescription: 'Multi-model comparison: SVC, Random Forest, and CNN for character classification and historical document digitization.',
     metric: 'CNN · SVM · RF',
     image: null,
-    gradient: 'linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%)',
+    gradient: 'linear-gradient(135deg, #fff5f5 0%, #fef2f2 100%)',
     alt: 'Character recognition model architecture diagram',
   },
   {
@@ -41,7 +41,7 @@ export const heroProjects = [
     technicalDescription: 'Dataset collection, video labeling, and model training for autonomous robot navigation in the Robomaster Competition.',
     metric: 'CV · Robotics',
     image: null,
-    gradient: 'linear-gradient(135deg, #fce7f3 0%, #ede9fe 100%)',
+    gradient: 'linear-gradient(135deg, #ffffff 0%, #fff5f5 100%)',
     alt: 'Robot with computer vision detection bounding boxes',
   },
 ];

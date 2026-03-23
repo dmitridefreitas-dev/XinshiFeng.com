@@ -9,6 +9,7 @@ export default function TextReveal({
   staggerDelay = 0.06,
   as: Tag = 'p',
   splitBy = 'word', // 'word' | 'char' | 'line'
+  center = false,
 }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-10% 0px' });
@@ -55,7 +56,7 @@ export default function TextReveal({
   return (
     <Tag ref={ref} className={`overflow-hidden ${className}`} aria-label={text}>
       <span className="sr-only">{text}</span>
-      <span aria-hidden="true" className="flex flex-wrap">
+      <span aria-hidden="true" className={`flex flex-wrap${center ? ' justify-center' : ''}`}>
         {units.map((unit, i) => (
           <motion.span
             key={i}

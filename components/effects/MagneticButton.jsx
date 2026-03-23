@@ -23,17 +23,17 @@ export default function MagneticButton({
 
   const variants = {
     default:
-      'bg-accent text-white hover:bg-red-700 shadow-[0_2px_16px_rgba(220,38,38,0.25)] hover:shadow-[0_4px_24px_rgba(220,38,38,0.35)]',
+      'border border-accent text-accent bg-transparent hover:bg-red-50 hover:text-red-900 shadow-[3px_3px_0px_0px_rgba(220,38,38,1)] hover:shadow-none hover:translate-y-[3px] hover:translate-x-[3px] transition-all rounded-none',
     outline:
-      'border border-accent/40 text-accent hover:bg-red-50 hover:border-accent/70',
-    ghost: 'text-muted hover:text-foreground hover:bg-gray-100/80',
+      'border border-accent/40 text-accent hover:bg-red-50 hover:border-accent/70 rounded-none',
+    ghost: 'text-muted hover:text-foreground hover:bg-gray-100/80 rounded-none',
   };
 
   const sizes = {
-    default: 'h-11 px-6 py-2 rounded-lg',
-    sm: 'h-9 px-4 rounded-md text-xs',
-    lg: 'h-14 px-8 py-3 rounded-lg text-base',
-    icon: 'h-10 w-10 rounded-full',
+    default: 'h-11 px-6 py-2',
+    sm: 'h-9 px-4 text-xs',
+    lg: 'h-14 px-8 py-3 text-base',
+    icon: 'h-10 w-10',
   };
 
   const classes = cn(baseStyles, variants[variant], sizes[size], className);

@@ -13,7 +13,7 @@ function ProjectRow({ project, index, onOpen }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -8 }}
       transition={{ duration: 0.5, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
-      className="group relative border-b border-gray-200/80 py-8 cursor-pointer hover:bg-red-50/30 transition-all rounded-lg px-4 -mx-4"
+      className="group relative border-b border-gray-200/80 py-5 cursor-pointer hover:bg-red-50 transition-all rounded-lg px-4 -mx-4"
       onClick={() => onOpen(project)}
       role="button"
       tabIndex={0}
@@ -106,15 +106,14 @@ export default function ProjectsContent() {
     <>
       {/* ── Hero ── */}
       <section
-        className="section-full flex-col text-center px-6 pt-24 overflow-hidden"
+        className="section-full flex-col text-center px-6 overflow-hidden pt-28"
         aria-label="Research hero"
-        style={{ minHeight: '100vh' }}
       >
         {/* Ghost background text */}
         <p
           className="absolute font-serif font-bold select-none pointer-events-none"
           style={{
-            fontSize: 'clamp(4rem, 14vw, 12rem)',
+            fontSize: 'clamp(2.5rem, 8vw, 7rem)',
             color: 'rgba(220,38,38,0.03)',
             letterSpacing: '-0.06em',
             lineHeight: 1,
@@ -160,7 +159,7 @@ export default function ProjectsContent() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.1 }}
-          className="relative z-10 mt-8 inline-flex items-center gap-3 academic-card shimmer-card px-5 py-3 rounded-xl hover:border-accent/40 transition-all group"
+          className="relative z-10 mt-5 inline-flex items-center gap-3 academic-card shimmer-card px-5 py-3 rounded-xl hover:border-accent/40 transition-all group"
           data-cursor="expand"
         >
           <div className="flex-shrink-0 w-2 h-2 rounded-full bg-accent dot-pulse" />
@@ -179,7 +178,7 @@ export default function ProjectsContent() {
         <div className="max-w-5xl mx-auto">
 
           {/* Category filter */}
-          <div className="flex flex-wrap gap-3 mb-12">
+          <div className="flex flex-wrap gap-3 mb-8">
             {projectCategories.map((cat) => (
               <motion.button
                 key={cat}

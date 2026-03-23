@@ -30,7 +30,7 @@ export default function Footer() {
           </div>
 
           {/* Nav — py-2 for adequate touch height */}
-          <nav className="flex flex-wrap gap-4" aria-label="Footer navigation">
+          <nav className="flex-1 flex justify-center flex-wrap gap-4" aria-label="Footer navigation">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}

@@ -10,37 +10,37 @@ const MATH_SHAPES = [
   {
     label: '∂',
     className: 'float-geo-slow font-serif select-none pointer-events-none absolute',
-    style: { fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', top: '16%', left: '5%', color: 'rgba(26,26,46,0.055)', animationDuration: '11s' },
+    style: { fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', top: '16%', left: '5%', color: 'rgba(26,26,46,0.055)', animationDuration: '11s' },
   },
   {
     label: '∑',
     className: 'float-geo font-serif select-none pointer-events-none absolute',
-    style: { fontSize: 'clamp(2rem, 4vw, 3.5rem)', top: '20%', right: '6%', color: 'rgba(220,38,38,0.055)', animationDelay: '1.5s', animationDuration: '9s' },
+    style: { fontSize: 'clamp(1.25rem, 2.5vw, 2.25rem)', top: '20%', right: '6%', color: 'rgba(220,38,38,0.055)', animationDelay: '1.5s', animationDuration: '9s' },
   },
   {
     label: '∇',
     className: 'float-geo-reverse font-serif select-none pointer-events-none absolute',
-    style: { fontSize: 'clamp(1.8rem, 3.5vw, 3rem)', bottom: '28%', left: '4%', color: 'rgba(153,27,27,0.05)', animationDelay: '0.8s', animationDuration: '12s' },
+    style: { fontSize: 'clamp(1.1rem, 2.2vw, 1.9rem)', bottom: '28%', left: '4%', color: 'rgba(153,27,27,0.05)', animationDelay: '0.8s', animationDuration: '12s' },
   },
   {
     label: 'ℝ',
     className: 'float-geo font-serif select-none pointer-events-none absolute',
-    style: { fontSize: 'clamp(1.5rem, 2.5vw, 2.5rem)', bottom: '22%', right: '5%', color: 'rgba(26,26,46,0.045)', animationDelay: '2s', animationDuration: '8s' },
+    style: { fontSize: 'clamp(1rem, 1.8vw, 1.6rem)', bottom: '22%', right: '5%', color: 'rgba(26,26,46,0.045)', animationDelay: '2s', animationDuration: '8s' },
   },
   {
     label: '∫',
     className: 'float-geo-slow font-serif select-none pointer-events-none absolute',
-    style: { fontSize: 'clamp(2rem, 3.5vw, 3.2rem)', top: '52%', right: '9%', color: 'rgba(239,68,68,0.048)', animationDelay: '3s', animationDuration: '13s' },
+    style: { fontSize: 'clamp(1.2rem, 2.2vw, 2rem)', top: '52%', right: '9%', color: 'rgba(239,68,68,0.048)', animationDelay: '3s', animationDuration: '13s' },
   },
   {
     label: '∈',
     className: 'float-geo-reverse font-serif select-none pointer-events-none absolute',
-    style: { fontSize: 'clamp(1.2rem, 2vw, 2rem)', top: '62%', left: '8%', color: 'rgba(220,38,38,0.04)', animationDelay: '1.2s', animationDuration: '10s' },
+    style: { fontSize: 'clamp(0.85rem, 1.4vw, 1.35rem)', top: '62%', left: '8%', color: 'rgba(220,38,38,0.04)', animationDelay: '1.2s', animationDuration: '10s' },
   },
   {
     label: '⊂',
     className: 'float-geo font-serif select-none pointer-events-none absolute',
-    style: { fontSize: 'clamp(1rem, 1.8vw, 1.8rem)', top: '35%', left: '3%', color: 'rgba(26,26,46,0.035)', animationDelay: '4s', animationDuration: '14s' },
+    style: { fontSize: 'clamp(0.75rem, 1.2vw, 1.2rem)', top: '35%', left: '3%', color: 'rgba(26,26,46,0.035)', animationDelay: '4s', animationDuration: '14s' },
   },
 ];
 
@@ -104,7 +104,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="font-mono text-xs uppercase tracking-[0.45em] text-accent mb-8"
+          className="font-mono text-xs uppercase tracking-[0.45em] text-accent mb-5"
         >
           Portfolio — Available Fall 2027
         </motion.p>
@@ -119,12 +119,16 @@ export default function HeroSection() {
           </TextReveal>
         </h1>
 
-        {/* Thin rule divider */}
+        {/* Elegant thin red line */}
         <motion.div
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 0.9, delay: 0.95 }}
-          className="neon-line w-20 my-7 origin-left"
+          initial={{ scaleX: 0, opacity: 0 }}
+          animate={{ scaleX: 1, opacity: 1 }}
+          transition={{ duration: 0.9, delay: 0.95, ease: 'easeOut' }}
+          className="w-32 my-6 origin-center"
+          style={{
+            height: '1px',
+            background: 'radial-gradient(ellipse at center, rgba(220,38,38,0.8) 0%, transparent 70%)',
+          }}
         />
 
         {/* Subtitle — blue gradient shift */}
@@ -160,7 +164,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 1.45 }}
-          className="mt-10 flex flex-col sm:flex-row items-center gap-4"
+          className="mt-7 flex flex-col sm:flex-row items-center gap-4"
         >
           <MagneticButton href="/projects" data-cursor="expand">
             View Research

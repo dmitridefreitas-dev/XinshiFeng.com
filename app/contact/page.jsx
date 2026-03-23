@@ -9,10 +9,10 @@ import { contactInfo, opportunityGroups, socialLinks } from '@/data/constants';
 
 // Floating math symbols for contact hero
 const CONTACT_SHAPES = [
-  { label: '∀', style: { fontSize: 'clamp(3rem, 7vw, 6rem)', top: '16%', left: '5%', color: 'rgba(220,38,38,0.06)' } },
-  { label: '∃', style: { fontSize: 'clamp(2rem, 4vw, 4rem)', top: '22%', right: '7%', color: 'rgba(153,27,27,0.05)' } },
-  { label: '⊃', style: { fontSize: 'clamp(2.5rem, 5vw, 5rem)', bottom: '24%', left: '6%', color: 'rgba(220,38,38,0.05)' } },
-  { label: '∴', style: { fontSize: 'clamp(1.5rem, 3vw, 3rem)', bottom: '28%', right: '5%', color: 'rgba(239,68,68,0.05)' } },
+  { label: '∀', style: { fontSize: 'clamp(1.75rem, 3.5vw, 3rem)', top: '16%', left: '5%', color: 'rgba(220,38,38,0.06)' } },
+  { label: '∃', style: { fontSize: 'clamp(1.25rem, 2.5vw, 2.25rem)', top: '22%', right: '7%', color: 'rgba(153,27,27,0.05)' } },
+  { label: '⊃', style: { fontSize: 'clamp(1.5rem, 3vw, 2.75rem)', bottom: '24%', left: '6%', color: 'rgba(220,38,38,0.05)' } },
+  { label: '∴', style: { fontSize: 'clamp(1rem, 2vw, 1.75rem)', bottom: '28%', right: '5%', color: 'rgba(239,68,68,0.05)' } },
 ];
 
 export default function ContactPage() {
@@ -67,9 +67,8 @@ export default function ContactPage() {
     <>
       {/* ── Hero ── */}
       <section
-        className="section-full flex-col text-center px-6 pt-24 overflow-hidden"
+        className="section-full flex-col text-center px-6 overflow-hidden pt-28"
         aria-label="Contact hero"
-        style={{ minHeight: '100vh' }}
       >
         {/* Floating math symbols */}
         {CONTACT_SHAPES.map((shape, i) => (
@@ -90,7 +89,7 @@ export default function ContactPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
-          className="font-mono text-xs uppercase tracking-[0.4em] text-accent mb-8 relative z-10"
+          className="font-mono text-xs uppercase tracking-[0.4em] text-accent mb-5 relative z-10"
         >
           Let&apos;s Talk
         </motion.p>
@@ -105,7 +104,7 @@ export default function ContactPage() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9 }}
-          className="font-mono text-xs uppercase tracking-[0.3em] text-muted mt-8 relative z-10 break-all"
+          className="font-mono text-xs uppercase tracking-[0.3em] text-muted mt-5 relative z-10 break-all"
         >
           Available Fall 2027 &nbsp;·&nbsp; {contactInfo.email}
         </motion.p>

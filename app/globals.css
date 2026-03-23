@@ -25,18 +25,7 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Custom cursor — dark on light */
-  body, * {
-    cursor: none;
-  }
-
-  @media (pointer: coarse) {
-    body, * {
-      cursor: auto;
-    }
-  }
-
-  /* Selection */
+  /* Custom cursor removed — default pointer enabled */
   ::selection {
     background: rgba(220,38,38, 0.15);
     color: #1A1A2E;
@@ -54,18 +43,20 @@
 ───────────────────────────────────────────────────────────────────────────── */
 @layer components {
   .section-full {
-    min-height: 100vh;
+    min-height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
   }
 
   /* Fluid typography utilities */
-  .text-display    { font-size: clamp(2.25rem, 5vw, 4.5rem);   line-height: 0.95; letter-spacing: -0.03em; }
-  .text-headline   { font-size: clamp(1.5rem, 3vw, 3rem);      line-height: 1.0;  letter-spacing: -0.02em; }
-  .text-subhead    { font-size: clamp(1.15rem, 2vw, 1.75rem);  line-height: 1.1;  letter-spacing: -0.01em; }
-  .text-body-fluid { font-size: clamp(0.875rem, 1vw, 1.05rem); line-height: 1.7;  }
+  .text-display    { font-size: clamp(1.75rem, 3.5vw, 2.75rem); line-height: 1.0;  letter-spacing: -0.03em; }
+  .text-headline   { font-size: clamp(1.2rem, 2vw, 1.75rem);    line-height: 1.05; letter-spacing: -0.02em; }
+  .text-subhead    { font-size: clamp(0.95rem, 1.5vw, 1.2rem);  line-height: 1.15; letter-spacing: -0.01em; }
+  .text-body-fluid { font-size: clamp(0.8rem, 0.9vw, 0.95rem);  line-height: 1.65; }
 
   /* Blue accent gradient text */
   .text-accent-gradient {
@@ -73,13 +64,6 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-  }
-
-  /* Thin ruled line — blue */
-  .neon-line {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #DC2626, transparent);
-    border: none;
   }
 
   /* GPU compositing hint */
@@ -232,6 +216,22 @@
     -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
     mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
   }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   INFINITE SCROLL KEYFRAMES — GPU-composited, never pauses on touch/hover
+───────────────────────────────────────────────────────────────────────────── */
+@keyframes scroll-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-33.3333%); }
+}
+@keyframes scroll-right {
+  0%   { transform: translateX(-33.3333%); }
+  100% { transform: translateX(0); }
+}
+@keyframes scroll-left-mobile {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────

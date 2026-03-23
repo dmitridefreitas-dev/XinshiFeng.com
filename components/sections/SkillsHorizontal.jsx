@@ -1,30 +1,27 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import HorizontalScroll from '@/components/effects/HorizontalScroll';
-import TiltCard from '@/components/effects/TiltCard';
 import SkillDetailModal from '@/components/modals/SkillDetailModal';
 import { skillsData } from '@/data/skills';
 
-function SkillSlide({ skill, onClick, className = '' }) {
+function SkillCard({ skill, onClick, className = '' }) {
   return (
-    <TiltCard
-      className={`skill-glow-border shimmer-card flex-shrink-0 w-[80vw] md:w-[50vw] lg:w-[35vw] h-[60vh] lg:h-screen flex flex-col justify-center px-10 md:px-16 border-r border-gray-200/70 last:border-r-0 cursor-pointer group bg-white/60 hover:bg-white transition-colors ${className}`}
+    <div
+      className={`flex-shrink-0 w-[75vw] md:w-[44vw] lg:w-[28vw] h-full flex flex-col justify-center items-center text-center px-8 md:px-10 border-r border-gray-200/70 cursor-pointer group bg-white/60 hover:bg-white transition-colors ${className}`}
       onClick={onClick}
       role="button"
       tabIndex={0}
-      data-cursor="expand"
     >
-      <p className="font-mono text-xs uppercase tracking-[0.35em] text-accent mb-6">
+      <p className="font-mono text-xs uppercase tracking-[0.35em] text-accent mb-3">
         {skill.category}
       </p>
-      <h3 className="font-serif font-bold text-xl md:text-2xl text-foreground mb-5 will-change-transform group-hover:text-accent transition-colors duration-300">
+      <h3 className="font-serif font-bold text-base md:text-lg text-foreground mb-1.5 group-hover:text-accent transition-colors duration-300">
         {skill.name}
       </h3>
-      <p className="text-xs md:text-sm text-muted max-w-xs leading-relaxed">
+      <p className="text-xs text-muted max-w-xs leading-relaxed">
         {skill.description}
       </p>
-      <div className="mt-8 flex flex-wrap gap-2">
+      <div className="mt-4 flex flex-wrap justify-center gap-2">
         {skill.keyFeatures.slice(0, 3).map((f, i) => (
           <span
             key={i}
@@ -34,129 +31,146 @@ function SkillSlide({ skill, onClick, className = '' }) {
           </span>
         ))}
       </div>
-      <motion.p
-        className="mt-10 font-mono text-xs uppercase tracking-[0.2em] text-accent border border-accent/30 hover:border-accent/70 rounded px-3 py-1.5 w-fit transition-colors"
-        whileHover={{ x: 4 }}
-        transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+    </div>
+  );
+}
+
+const ROW_1 = skillsData.slice(0, 5);
+const ROW_2 = skillsData.slice(5, 10);
+const ROW_3 = skillsData.slice(10);
+
+const CARD_VW = 28;
+
+function InfiniteRow({ skills, direction = 'left', duration = 80, onCardClick }) {
+  const tripled = [...skills, ...skills, ...skills];
+  const setWidthVw = skills.length * CARD_VW;
+
+  return (
+    <div className="flex-1 overflow-hidden border-b border-gray-200/70 last:border-b-0 contain-paint">
+      <div
+        className="flex h-full"
+        style={{
+          width: `${setWidthVw * 3}vw`,
+          animation: `scroll-${direction} ${duration}s linear infinite`,
+          willChange: 'transform',
+        }}
       >
-        View Details →
-      </motion.p>
-    </TiltCard>
+        {tripled.map((skill, i) => (
+          <SkillCard
+            key={`${skill.name}-${i}`}
+            skill={skill}
+            onClick={() => onCardClick(skill)}
+          />
+        ))}
+      </div>
+    </div>
   );
 }
 
 export default function SkillsHorizontal() {
   const [selectedSkill, setSelectedSkill] = useState(null);
-  const [dragLeft, setDragLeft] = useState(-2000);
-  const trackRef = useRef(null);
-
-  // Measure actual track width after mount for correct drag constraints
-  useEffect(() => {
-    const measure = () => {
-      if (trackRef.current) {
-        const trackWidth = trackRef.current.scrollWidth;
-        const viewportWidth = window.innerWidth;
-        setDragLeft(-(trackWidth - viewportWidth + 48)); // +48 for px-6 on both sides
-      }
-    };
-    measure();
-    window.addEventListener('resize', measure);
-    return () => window.removeEventListener('resize', measure);
-  }, []);
-
-  const duplicatedSkills = [...skillsData, ...skillsData];
+  const allSkillsTripled = [...skillsData, ...skillsData, ...skillsData];
+  const mobileSetWidth = skillsData.length * 75;
 
   return (
     <section aria-label="Skills" className="overflow-hidden">
-      {/* Header */}
-      <div className="pt-12 pb-4 flex items-end px-6 lg:px-12">
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="font-mono text-xs uppercase tracking-[0.4em] text-muted"
-        >
-          Tools &amp; Languages —{' '}
-          <span className="hidden lg:inline">Scroll to explore</span>
-          <span className="lg:hidden">Swipe to explore</span>
-        </motion.p>
-      </div>
 
-      {/* Desktop: Horizontal Scroll with edge fade masks */}
-      <div className="hidden lg:block scroll-fade-edges">
-        <HorizontalScroll pages={2}>
-          {skillsData.map((skill) => (
-            <SkillSlide
-              key={skill.name}
-              skill={skill}
-              onClick={() => setSelectedSkill(skill)}
-            />
-          ))}
-        </HorizontalScroll>
-      </div>
-
-      {/* Mobile/Tablet: Draggable */}
-      <div className="lg:hidden relative pb-20">
-        <div className="scroll-fade-edges overflow-hidden">
-          <motion.div
-            ref={trackRef}
-            className="flex gap-4 px-6"
-            drag="x"
-            dragConstraints={{ right: 0, left: dragLeft }}
-            dragElastic={0.08}
-            style={{ width: 'max-content' }}
+      {/* ── Desktop: 3 auto-scrolling infinite rows ──────────────────────── */}
+      <div className="hidden lg:flex flex-col" style={{ height: '88vh' }}>
+        <div className="flex items-center px-12 border-b border-gray-200/70 flex-shrink-0" style={{ height: '3rem' }}>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+            className="font-mono text-xs uppercase tracking-[0.4em] text-muted"
           >
-            {skillsData.map((skill) => (
-              <SkillSlide
-                key={skill.name}
+            Tools &amp; Languages
+          </motion.p>
+        </div>
+
+        <InfiniteRow skills={ROW_1} direction="left"  duration={80}  onCardClick={setSelectedSkill} />
+        <InfiniteRow skills={ROW_2} direction="right" duration={100} onCardClick={setSelectedSkill} />
+        <InfiniteRow skills={ROW_3} direction="left"  duration={90}  onCardClick={setSelectedSkill} />
+      </div>
+
+      {/* ── Mobile/Tablet: single auto-scrolling row ─────────────────────── */}
+      <div className="lg:hidden relative">
+        <div className="pt-12 pb-4 flex items-end px-6">
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="font-mono text-xs uppercase tracking-[0.4em] text-muted"
+          >
+            Tools &amp; Languages
+          </motion.p>
+        </div>
+
+        <div className="overflow-hidden contain-paint" style={{ height: '50vh' }}>
+          <div
+            className="flex h-full"
+            style={{
+              width: `${mobileSetWidth * 2}vw`,
+              animation: 'scroll-left-mobile 90s linear infinite',
+              willChange: 'transform',
+            }}
+          >
+            {[...skillsData, ...skillsData].map((skill, i) => (
+              <SkillCard
+                key={`mob-${skill.name}-${i}`}
                 skill={skill}
-                className="!h-[50vh] !w-[75vw] !px-8"
+                className="!h-full !w-[75vw] !px-8"
                 onClick={() => setSelectedSkill(skill)}
               />
             ))}
-          </motion.div>
+          </div>
         </div>
 
-        {/* Infinite marquee with edge blur */}
-        <div className="mt-12 overflow-hidden whitespace-nowrap border-y border-gray-200/60 py-8 scroll-fade-edges">
-          <motion.div
+        {/* Mobile marquee */}
+        <div className="mt-4 overflow-hidden whitespace-nowrap border-y border-gray-200/60 py-8 scroll-fade-edges contain-paint">
+          <div
             className="flex gap-12 items-center"
-            animate={{ x: [0, -1000] }}
-            transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
-            style={{ width: 'max-content' }}
+            style={{
+              width: 'max-content',
+              animation: 'scroll-left-mobile 30s linear infinite',
+              willChange: 'transform',
+            }}
           >
-            {duplicatedSkills.map((skill, i) => (
+            {[...skillsData, ...skillsData].map((skill, i) => (
               <span
                 key={`${skill.name}-${i}`}
-                className="font-serif font-bold text-4xl md:text-6xl uppercase tracking-tighter hover:text-accent/60 transition-colors cursor-pointer"
+                className="font-serif font-bold text-4xl md:text-6xl uppercase tracking-tighter cursor-pointer"
                 style={{ color: 'rgba(26,26,46,0.15)' }}
                 onClick={() => setSelectedSkill(skill)}
               >
                 {skill.name}
               </span>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
 
-      {/* Desktop marquee strip below horizontal scroll */}
-      <div className="hidden lg:block mt-8 overflow-hidden border-y border-gray-200/60 py-5 scroll-fade-edges">
-        <motion.div
+      {/* ── Desktop marquee strip ─────────────────────────────────────────── */}
+      <div className="hidden lg:block overflow-hidden border-y border-gray-200/60 py-5 scroll-fade-edges contain-paint">
+        <div
           className="flex gap-16 items-center whitespace-nowrap"
-          animate={{ x: [0, -1200] }}
-          transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
-          style={{ width: 'max-content' }}
+          style={{
+            width: 'max-content',
+            animation: 'scroll-left-mobile 40s linear infinite',
+            willChange: 'transform',
+          }}
         >
-          {[...skillsData, ...skillsData, ...skillsData].map((skill, i) => (
+          {allSkillsTripled.map((skill, i) => (
             <span
               key={`marquee-${skill.name}-${i}`}
-              className="font-mono text-xs uppercase tracking-[0.3em] text-muted hover:text-accent transition-colors cursor-pointer"
+              className="inline-flex items-center font-mono text-xs uppercase tracking-[0.3em] text-muted hover:text-accent transition-colors cursor-pointer"
               onClick={() => setSelectedSkill(skill)}
             >
+              <span className="w-1 h-1 rounded-full bg-accent/30 mr-4 flex-shrink-0" />
               {skill.name}
             </span>
           ))}
-        </motion.div>
+        </div>
       </div>
 
       {selectedSkill && (
