@@ -30,6 +30,26 @@ export const metadata = {
   title: 'Xinshi Feng — Computer Science & Mathematics',
   description:
     'Portfolio of Xinshi Feng, double major in Computer Science and Mathematics at Washington University in St. Louis. Researcher in manifold theory, reinforcement learning, and machine learning. Available for Math PhD programs and research internships, Fall 2027.',
+  openGraph: {
+    title: 'Xinshi Feng — Computer Science & Mathematics',
+    description: 'Portfolio of Xinshi Feng, double major in Computer Science and Mathematics at Washington University in St. Louis.',
+    url: 'https://xinshifeng.com',
+    siteName: 'Xinshi Feng',
+    images: [
+      {
+        url: '/images/headshot.jpeg', // Fallback OG image
+        width: 800,
+        height: 800,
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Xinshi Feng — Computer Science & Mathematics',
+    description: 'Portfolio of Xinshi Feng, double major in Computer Science and Mathematics at Washington University in St. Louis.',
+  },
 };
 
 const jsonLd = {
