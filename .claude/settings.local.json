@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "Bash(powershell -Command \"Get-NetTCPConnection -LocalPort 3000 | Select-Object -ExpandProperty OwningProcess\")"
+    ]
+  }
+}
