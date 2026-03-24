@@ -15,6 +15,10 @@
   --border: #e2e8f0;
   --border-strong: #cbd5e1;
 
+  /* Default dot grid colors */
+  --dot-grid-color: var(--dot-grid-light-color);
+  --dot-grid-fine-color: var(--dot-grid-light-fine-color);
+
   /* Accent Red Theme */
   --accent-base: #DC2626;      /* red-600 */
   --accent-indigo: #991B1B;    /* red-800 */
@@ -23,6 +27,11 @@
   --accent-glow: rgba(220,38,38,0.15);
   --accent-glow-strong: rgba(220,38,38,0.4);
   --accent-glow-subtle: rgba(220,38,38,0.08);
+
+  /* Light mode dot grid colors (white) */
+  --dot-grid-light-color: rgba(255,255,255,0.8);
+  --dot-grid-light-fine-color: rgba(255,255,255,0.7);
+}
   
   /* Research Cards Gradients - Red */
   --card-1-gradient: linear-gradient(135deg, #f87171 0%, #fca5a5 100%);
@@ -421,30 +430,30 @@
    DOT-GRID BACKGROUND LAYERS (replace star field)
 ───────────────────────────────────────────────────────────────────────────── */
 
-/* Fixed dot-grid pattern — faint graph paper */
-.dot-grid-layer {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image: radial-gradient(circle, var(--muted) 1px, transparent 1px);
-  background-size: 32px 32px;
-  opacity: 0.15;
-}
+  /* Fixed dot-grid pattern — faint graph paper */
+  .dot-grid-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle, var(--dot-grid-color) 1px, transparent 1px);
+    background-size: 32px 32px;
+    opacity: 0.15;
+  }
 
-/* Secondary finer grid */
-.dot-grid-layer-fine {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image: radial-gradient(circle, var(--accent-base) 1px, transparent 1px);
-  background-size: 8px 8px;
-  opacity: 0.04;
-}
+  /* Secondary finer grid */
+  .dot-grid-layer-fine {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle, var(--dot-grid-fine-color) 1px, transparent 1px);
+    background-size: 8px 8px;
+    opacity: 0.04;
+  }
 
-.theme-blue .dot-grid-layer-fine,
-.theme-purple .dot-grid-layer-fine {
+.theme-blue.dark .dot-grid-layer-fine,
+.theme-purple.dark .dot-grid-layer-fine {
   background-image: radial-gradient(circle, var(--accent-base) 1px, transparent 1px);
 }
 

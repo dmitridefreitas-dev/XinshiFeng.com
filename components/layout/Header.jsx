@@ -5,7 +5,6 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Github, Linkedin, FileText, Sun, Moon, Languages } from 'lucide-react';
 import { useTheme } from 'next-themes';
-import { useLanguage } from '@/contexts/LanguageContext';
 import MagneticButton from '@/components/effects/MagneticButton';
 import { socialLinks } from '@/data/constants';
 
@@ -14,7 +13,6 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
-  const { language, toggleLanguage, t, mounted: langMounted } = useLanguage();
   const [mounted, setMounted] = useState(false);
   const [isBlue, setIsBlue] = useState(false);
 
@@ -48,15 +46,15 @@ export default function Header() {
   useEffect(() => { setMenuOpen(false); }, [pathname]);
 
   const NAV_LINKS = [
-    { href: '/',        label: t('nav.home') },
-    { href: '/about',   label: t('nav.about') },
-    { href: '/projects', label: t('nav.research') },
-    { href: '/contact', label: t('nav.contact') },
+    { href: '/',        label: 'Home' },
+    { href: '/about',   label: 'About' },
+    { href: '/projects', label: 'Research' },
+    { href: '/contact', label: 'Contact' },
   ];
 
   const MOBILE_NAV_LINKS = [
     ...NAV_LINKS,
-    { href: 'https://drive.google.com/file/d/1K6AhFHorjonEPDpiJxP-X-GpC_9k4x67/view?usp=drive_link', label: t('nav.resume'), external: true }
+    { href: 'https://drive.google.com/file/d/1K6AhFHorjonEPDpiJxP-X-GpC_9k4x67/view?usp=drive_link', label: 'Resume', external: true }
   ];
 
   const toggleTheme = () => {
@@ -112,25 +110,17 @@ export default function Header() {
         {/* Desktop right side — social icons */}
         <div className="hidden md:flex items-center gap-4 relative z-10">
           <div className="flex items-center gap-2 mr-2">
-            <button
-              onClick={toggleLanguage}
-              className="flex items-center gap-1.5 px-2 py-1 rounded border border-border/50 hover:border-accent/40 transition-[border-color] group"
-              aria-label="Toggle Language"
-              data-cursor="expand"
-            >
-              <Languages className="h-3 w-3 text-muted group-hover:text-accent" />
-              <span className="font-mono text-[10px] font-bold text-muted group-hover:text-accent uppercase tracking-wider">
-                {language === 'en' ? 'EN' : 'CN'}
-              </span>
-            </button>
+          <div className="flex items-center gap-2 mr-2">
             <button
               onClick={toggleTheme}
               className="w-8 h-8 flex items-center justify-center text-muted hover:text-accent transition-colors rounded-full hover:bg-accent/5"
               aria-label="Toggle Dark Mode"
               data-cursor="expand"
+              style={{ touchAction: 'manipulation' }}
             >
               {mounted && resolvedTheme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </button>
+          </div>
           </div>
           <div className="w-px h-4 bg-border mx-1" />
           <a
@@ -164,22 +154,11 @@ export default function Header() {
             <FileText className="h-4 w-4" />
           </a>
           <MagneticButton href="/contact" variant="ghost" className="text-sm px-4 py-1.5" data-cursor="expand">
-            {t('hero.getInTouch')}
+            Get In Touch
           </MagneticButton>
         </div>
 
         <div className="flex items-center gap-1 relative z-10 md:hidden">
-          <button
-            onClick={toggleLanguage}
-            className="w-10 h-10 flex items-center justify-center text-muted hover:text-accent transition-colors"
-            aria-label="Toggle Language"
-            data-cursor="expand"
-            style={{ touchAction: 'manipulation' }}
-          >
-            <span className="font-mono text-[10px] font-bold uppercase tracking-wider">
-              {language === 'en' ? 'EN' : 'CN'}
-            </span>
-          </button>
           <button
             onClick={toggleTheme}
             className="min-w-[44px] min-h-[44px] flex items-center justify-center text-muted hover:text-accent transition-colors"

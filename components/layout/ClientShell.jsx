@@ -1,7 +1,6 @@
 'use client';
 import { useEffect } from 'react';
 import { ScrollParallaxProvider, useScrollParallax } from '@/contexts/ScrollParallaxContext';
-import { LanguageProvider } from '@/contexts/LanguageContext';
 import ParallaxScene from '@/components/effects/ParallaxScene';
 import { motion } from 'framer-motion';
 
@@ -38,6 +37,12 @@ function ParallaxBackgroundLayers() {
  */
 export default function ClientShell({ children }) {
   useEffect(() => {
+    // Set default accent to blue if not already set (e.g., from local storage or server render)
+    if (!document.documentElement.classList.contains('theme-blue') &&
+        !document.documentElement.classList.contains('theme-purple')) {
+      document.documentElement.classList.add('theme-blue');
+    }
+
     const handleKeyDown = (e) => {
       if (e.shiftKey) {
         if (e.key.toLowerCase() === 'b') {
@@ -57,12 +62,10 @@ export default function ClientShell({ children }) {
   }, []);
 
   return (
-    <LanguageProvider>
-      <ScrollParallaxProvider>
-        <ParallaxScene>
-          {children}
-        </ParallaxScene>
-      </ScrollParallaxProvider>
-    </LanguageProvider>
+    <ScrollParallaxProvider>
+      <ParallaxScene>
+        {children}
+      </ParallaxScene>
+    </ScrollParallaxProvider>
   );
 }

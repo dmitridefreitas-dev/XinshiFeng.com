@@ -1,7 +1,7 @@
-perf: Improve animation performance and mobile navigation smoothness
+feat: Implement infinite image carousel, set blue default theme, remove Chinese switch, and fix light mode graph paper
 
-- Optimize GalaxyBackground canvas: pre-allocate gradients, use time-based animation (rAF), add `will-change` to canvas and nebula blobs for GPU compositing.
-- Optimize AtmosphericBlobs: cache parsed values outside rAF loop, add `will-change` and `contain: paint` to CSS classes for early GPU promotion.
-- Refine Header transitions: replace `transition-all` with specific properties on header and language/accent buttons to avoid unnecessary recalculations.
-- Enhance mobile navigation drawer: use `will-change: transform, opacity`, faster cubic-bezier ease, and shorter duration for crisp animation.
-- Implement global `touch-action: manipulation` on `body` and interactive elements to eliminate 300ms tap delay on mobile.
+- Added `ImageCarousel.jsx` component for infinite scroll image display on the About page.
+- Configured `ClientShell.jsx` to set blue as the default accent theme on load and ensure theme persistence across page navigations.
+- Removed all traces of the Chinese language switch from `Header.jsx` (desktop and mobile) and deleted `LanguageContext.js`.
+- Updated `globals.css` to render graph paper dots as white in light mode, while preserving accent colors in dark mode.
+- Corrected `devicePixelRatio` scaling for stars in `GalaxyBackground.jsx` to ensure visibility on all desktop screens.
