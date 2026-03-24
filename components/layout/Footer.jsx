@@ -2,19 +2,17 @@
 import Link from 'next/link';
 import { Github, Linkedin, FileText, Mail } from 'lucide-react';
 import { socialLinks, contactInfo } from '@/data/constants';
-import { useLanguage } from '@/contexts/LanguageContext';
 import FooterMeters from './FooterMeters';
 
 export default function Footer() {
   const year = new Date().getFullYear();
-  const { language, t } = useLanguage();
 
   const NAV_LINKS = [
-    { href: '/',        label: t('nav.home') },
-    { href: '/about',   label: t('nav.about') },
-    { href: '/projects', label: t('nav.research') },
-    { href: '/contact', label: t('nav.contact') },
-    { href: 'https://drive.google.com/file/d/1K6AhFHorjonEPDpiJxP-X-GpC_9k4x67/view?usp=drive_link', label: t('nav.resume'), external: true },
+    { href: '/',        label: "HOME" },
+    { href: '/about',   label: "ABOUT" },
+    { href: '/projects', label: "RESEARCH" },
+    { href: '/contact', label: "CONTACT" },
+    { href: 'https://drive.google.com/file/d/1K6AhFHorjonEPDpiJxP-X-GpC_9k4x67/view?usp=drive_link', label: "RESUME", external: true },
   ];
 
   return (
@@ -27,10 +25,10 @@ export default function Footer() {
           {/* Branding */}
           <div>
             <p className="font-serif text-lg font-bold text-foreground">
-              {language === 'en' ? 'Xinshi Feng' : '冯信实'}
+              Xinshi Feng
             </p>
             <p className="font-mono text-xs uppercase tracking-[0.35em] text-muted mt-1">
-              {t('footer.tagline')}
+              PHD CANDIDATE IN MATH & CS
             </p>
           </div>
 
@@ -108,10 +106,10 @@ export default function Footer() {
         {/* Bottom row */}
         <div className="mt-10 pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="font-mono text-xs md:text-sm uppercase tracking-[0.3em] text-muted">
-            © {year} {language === 'en' ? 'Xinshi Feng' : '冯信实'} · {t('footer.stLouis')}
+            © {year} Xinshi Feng · ST. LOUIS, MO
           </p>
           <p className="font-mono text-xs md:text-sm uppercase tracking-[0.3em] text-muted">
-            {t('footer.available')}
+            AVAILABLE FOR MATH PHD PROGRAMS & RESEARCH INTERNSHIPS, FALL 2027
           </p>
         </div>
       </div>
