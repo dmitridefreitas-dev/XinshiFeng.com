@@ -3,10 +3,8 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import SkillDetailModal from '@/components/modals/SkillDetailModal';
 import { skillsData } from '@/data/skills';
-import { useLanguage } from '@/contexts/LanguageContext';
 
 function SkillCard({ skill, onClick, className = '' }) {
-  const { language } = useLanguage();
   return (
     <div
       className={`flex-shrink-0 w-[75vw] md:w-[44vw] lg:w-[28vw] h-full flex flex-col justify-center items-center text-center px-8 md:px-10 border-r border-border cursor-pointer group bg-[var(--surface-overlay)] hover:bg-[var(--surface-overlay-solid)] transition-colors duration-200 ${className}`}
@@ -15,13 +13,13 @@ function SkillCard({ skill, onClick, className = '' }) {
       tabIndex={0}
     >
       <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-accent mb-2">
-        {typeof skill.category === 'string' ? skill.category : skill.category[language]}
+        {skill.category}
       </p>
       <h3 className="font-serif font-bold text-base md:text-lg text-foreground mb-1 group-hover:text-accent transition-colors duration-300">
-        {typeof skill.name === 'string' ? skill.name : skill.name[language]}
+        {skill.name}
       </h3>
       <p className="text-[11px] text-muted max-w-[240px] leading-relaxed">
-        {typeof skill.description === 'string' ? skill.description : skill.description[language]}
+        {skill.description}
       </p>
       <div className="mt-3 flex flex-wrap justify-center gap-1.5">
         {(skill.keyFeatures || []).slice(0, 3).map((f, i) => (
@@ -29,7 +27,7 @@ function SkillCard({ skill, onClick, className = '' }) {
             key={i}
             className="font-mono text-[9px] uppercase tracking-widest text-muted/60 border-b border-muted/10 pb-0.5"
           >
-            {typeof f === 'string' ? f : f[language]}
+            {f}
           </span>
         ))}
       </div>
@@ -71,7 +69,6 @@ function InfiniteRow({ skills, direction = 'left', duration = 120, onCardClick }
 
 export default function SkillsHorizontal() {
   const [selectedSkill, setSelectedSkill] = useState(null);
-  const { language } = useLanguage();
   const allSkillsTripled = [...skillsData, ...skillsData, ...skillsData];
   const mobileSetWidth = skillsData.length * 75;
 
@@ -86,7 +83,7 @@ export default function SkillsHorizontal() {
             transition={{ duration: 1 }}
             className="font-mono text-[10px] uppercase tracking-[0.5em] text-muted/70"
           >
-            {language === 'en' ? 'Tools & Languages' : '工具与语言'}
+            Tools & Languages
           </motion.p>
         </div>
 
@@ -99,7 +96,7 @@ export default function SkillsHorizontal() {
       <div className="lg:hidden relative">
         <div className="pt-10 pb-4 flex items-end px-6">
           <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-muted/70">
-            {language === 'en' ? 'Tools & Languages' : '工具与语言'}
+            Tools & Languages
           </p>
         </div>
 
@@ -138,7 +135,7 @@ export default function SkillsHorizontal() {
                 key={i}
                 className="font-serif font-bold text-4xl uppercase tracking-tighter text-foreground"
               >
-                {typeof skill.name === 'string' ? skill.name : skill.name[language]}
+                {skill.name}
               </span>
             ))}
           </div>
@@ -156,14 +153,14 @@ export default function SkillsHorizontal() {
           }}
         >
           {allSkillsTripled.map((skill, i) => (
-            <span
-              key={`marquee-${i}`}
-              className="inline-flex items-center font-mono text-[9px] uppercase tracking-[0.4em] text-muted/60 hover:text-accent transition-colors duration-300 cursor-pointer"
-              onClick={() => setSelectedSkill(skill)}
-            >
-              <span className="w-1 h-1 rounded-full bg-accent/20 mr-4 flex-shrink-0" />
-              {typeof skill.name === 'string' ? skill.name : skill.name[language]}
-            </span>
+              <span
+                key={`marquee-${i}`}
+                className="inline-flex items-center font-mono text-[9px] uppercase tracking-[0.4em] text-muted/60 hover:text-accent transition-colors duration-300 cursor-pointer"
+                onClick={() => setSelectedSkill(skill)}
+              >
+                <span className="w-1 h-1 rounded-full bg-accent/20 mr-4 flex-shrink-0" />
+                {skill.name}
+              </span>
           ))}
         </div>
       </div>
