@@ -10,10 +10,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { FileText } from 'lucide-react';
 
-import { useLanguage } from '@/contexts/LanguageContext';
-
 export default function ExperienceModal({ experience, isOpen, onClose }) {
-  const { language, t } = useLanguage();
   if (!experience) return null;
 
   const details = experience.description;
@@ -24,20 +21,20 @@ export default function ExperienceModal({ experience, isOpen, onClose }) {
       <DialogContent className="max-w-lg">
         <DialogHeader>
           <div className="flex items-center gap-2 mb-2">
-            <Badge variant="outline" className="text-xs">{experience.date[language]}</Badge>
+            <Badge variant="outline" className="text-xs">{experience.date.en}</Badge>
             {experience.type && (
               <Badge variant="secondary" className="text-xs capitalize">{experience.type}</Badge>
             )}
           </div>
-          <DialogTitle className="font-serif leading-snug">{experience.title[language]}</DialogTitle>
+          <DialogTitle className="font-serif leading-snug">{experience.title.en}</DialogTitle>
           <DialogDescription>
-            {experience.role[language]} &middot; {experience.organization[language]}
+            {experience.role.en} &middot; {experience.organization.en}
           </DialogDescription>
         </DialogHeader>
 
         <div className="mt-4">
           <h4 className="text-xs font-mono uppercase tracking-[0.2em] text-accent mb-3">
-            {language === 'en' ? 'Key Responsibilities & Achievements' : '核心职责与科研成果'}
+            Key Responsibilities & Achievements
           </h4>
           <ul className="space-y-3">
             {detailsArray.map((item, i) => (
@@ -49,7 +46,7 @@ export default function ExperienceModal({ experience, isOpen, onClose }) {
                 className="flex items-start gap-3"
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-accent mt-1.5 shrink-0" />
-                <span className="text-sm text-muted leading-relaxed">{item[language]}</span>
+                <span className="text-sm text-muted leading-relaxed">{item.en}</span>
               </motion.li>
             ))}
           </ul>
@@ -61,7 +58,7 @@ export default function ExperienceModal({ experience, isOpen, onClose }) {
               rel="noopener noreferrer"
               className="mt-5 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-accent border border-accent/30 hover:border-accent/60 rounded px-3 py-2 transition-colors"
             >
-              <FileText className="h-3.5 w-3.5" /> {t('common.arxiv')}
+              <FileText className="h-3.5 w-3.5" /> ARXIV
             </a>
           )}
         </div>
