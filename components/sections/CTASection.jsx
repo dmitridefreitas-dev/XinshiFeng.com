@@ -3,11 +3,9 @@ import { motion } from 'framer-motion';
 import TextReveal from '@/components/effects/TextReveal';
 import MagneticButton from '@/components/effects/MagneticButton';
 import { targetRoles } from '@/data/constants';
-import { useLanguage } from '@/contexts/LanguageContext';
 import { ArrowUpRight } from 'lucide-react';
 
 export default function CTASection() {
-  const { language, t } = useLanguage();
   return (
     <section
       className="section-full flex-col text-center px-6 overflow-hidden"
@@ -33,18 +31,18 @@ export default function CTASection() {
       </p>
 
       <div className="relative z-10 max-w-3xl mx-auto">
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="font-mono text-xs uppercase tracking-[0.4em] text-accent mb-5"
-        >
-          {t('hero.available')}
-        </motion.p>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="font-mono text-xs uppercase tracking-[0.4em] text-accent mb-5"
+          >
+            AVAILABLE FOR MATH PHD PROGRAMS & RESEARCH INTERNSHIPS, FALL 2027
+          </motion.p>
 
         <h2 className="font-serif font-bold text-headline text-foreground text-center w-full will-change-transform mb-6">
-          <TextReveal key={language} splitBy="word" staggerDelay={0.08} center className="pb-2">
-            {t('cta.title')}
+          <TextReveal key="en" splitBy="word" staggerDelay={0.08} center className="pb-2">
+            LOOKING FOR A RESEARCHER OR SOFTWARE ENGINEER?
           </TextReveal>
         </h2>
 
@@ -55,7 +53,7 @@ export default function CTASection() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-body-fluid text-muted max-w-lg mx-auto leading-relaxed mb-7"
         >
-          {t('cta.description')}
+          I am actively seeking opportunities for Fall 2027 in Mathematics PhD programs and research internships in machine learning, reinforcement learning, and manifold theory.
         </motion.p>
 
         {/* Target roles */}
@@ -72,7 +70,7 @@ export default function CTASection() {
               className="font-mono text-xs uppercase tracking-[0.2em] text-muted"
             >
               {i > 0 && <span className="mr-6 text-accent/50">·</span>}
-              {role[language]}
+              {role.en}
             </span>
           ))}
         </motion.div>
@@ -84,7 +82,7 @@ export default function CTASection() {
           transition={{ duration: 0.7, delay: 0.7 }}
         >
           <MagneticButton href="/contact" size="lg" data-cursor="expand">
-            {t('hero.getInTouch')}
+            GET IN TOUCH
             <ArrowUpRight className="h-4 w-4" />
           </MagneticButton>
         </motion.div>
