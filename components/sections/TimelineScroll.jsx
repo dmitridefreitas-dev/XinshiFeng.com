@@ -2,7 +2,6 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { timeline } from '@/data/constants';
-import { useLanguage } from '@/contexts/LanguageContext';
 
 const TYPE_COLORS = {
   research: 'var(--accent-base)',
@@ -13,7 +12,6 @@ const TYPE_COLORS = {
 
 export default function TimelineScroll() {
   const sectionRef = useRef(null);
-  const { language, t } = useLanguage();
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start 0.8', 'end 0.2'],
@@ -29,7 +27,7 @@ export default function TimelineScroll() {
         viewport={{ once: true }}
         className="font-mono text-xs uppercase tracking-[0.4em] text-muted text-center mb-12"
       >
-        {t('metrics.journey')}
+        JOURNEY
       </motion.p>
 
       <div className="relative max-w-3xl mx-auto">
@@ -51,7 +49,7 @@ export default function TimelineScroll() {
         <div className="flex flex-col gap-0">
           {timeline.map((entry, i) => {
             const dotColor = TYPE_COLORS[entry.type] || 'var(--accent-base)';
-            const yearStr = typeof entry.year === 'string' ? entry.year : entry.year[language];
+            const yearStr = entry.year.en;
             return (
               <motion.article
                 key={i}
@@ -94,13 +92,13 @@ export default function TimelineScroll() {
                     className="font-mono text-xs uppercase tracking-[0.25em]"
                     style={{ color: dotColor }}
                   >
-                    {yearStr} — {t(`metrics.types.${entry.type}`)}
+                    {yearStr} — {entry.type.charAt(0).toUpperCase() + entry.type.slice(1)}
                   </span>
                   <h3 className="font-serif font-bold text-base md:text-lg text-foreground mt-1 mb-1.5">
-                    {entry.title[language]}
+                    {entry.title.en}
                   </h3>
                   <p className="text-body-fluid text-muted max-w-md">
-                    {entry.description[language]}
+                    {entry.description.en}
                   </p>
                 </div>
               </motion.article>
