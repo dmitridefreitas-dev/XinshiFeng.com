@@ -12,37 +12,37 @@ const MATH_SHAPES = [
   {
     label: '∂',
     className: 'float-geo-slow font-serif select-none pointer-events-none absolute',
-    style: { fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', top: '16%', left: '5%', color: 'var(--muted)', opacity: 0.15, animationDuration: '11s' },
+    style: { fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', top: '16%', left: '5%', color: 'var(--muted)', opacity: 0.075, animationDuration: '11s' },
   },
   {
     label: '∑',
     className: 'float-geo font-serif select-none pointer-events-none absolute',
-    style: { fontSize: 'clamp(1.25rem, 2.5vw, 2.25rem)', top: '20%', right: '6%', color: 'var(--accent-base)', opacity: 0.055, animationDelay: '1.5s', animationDuration: '9s' },
+    style: { fontSize: 'clamp(1.25rem, 2.5vw, 2.25rem)', top: '20%', right: '6%', color: 'var(--accent-base)', opacity: 0.0275, animationDelay: '1.5s', animationDuration: '9s' },
   },
   {
     label: '∇',
     className: 'float-geo-reverse font-serif select-none pointer-events-none absolute',
-    style: { fontSize: 'clamp(1.1rem, 2.2vw, 1.9rem)', bottom: '28%', left: '4%', color: 'var(--accent-indigo)', opacity: 0.05, animationDelay: '0.8s', animationDuration: '12s' },
+    style: { fontSize: 'clamp(1.1rem, 2.2vw, 1.9rem)', bottom: '28%', left: '4%', color: 'var(--accent-indigo)', opacity: 0.025, animationDelay: '0.8s', animationDuration: '12s' },
   },
   {
     label: 'ℝ',
     className: 'float-geo font-serif select-none pointer-events-none absolute',
-    style: { fontSize: 'clamp(1rem, 1.8vw, 1.6rem)', bottom: '22%', right: '5%', color: 'var(--muted)', opacity: 0.1, animationDelay: '2s', animationDuration: '8s' },
+    style: { fontSize: 'clamp(1rem, 1.8vw, 1.6rem)', bottom: '22%', right: '5%', color: 'var(--muted)', opacity: 0.05, animationDelay: '2s', animationDuration: '8s' },
   },
   {
     label: '∫',
     className: 'float-geo-slow font-serif select-none pointer-events-none absolute',
-    style: { fontSize: 'clamp(1.2rem, 2.2vw, 2rem)', top: '52%', right: '9%', color: 'var(--accent-light)', opacity: 0.05, animationDelay: '3s', animationDuration: '13s' },
+    style: { fontSize: 'clamp(1.2rem, 2.2vw, 2rem)', top: '52%', right: '9%', color: 'var(--accent-light)', opacity: 0.025, animationDelay: '3s', animationDuration: '13s' },
   },
   {
     label: '∈',
     className: 'float-geo-reverse font-serif select-none pointer-events-none absolute',
-    style: { fontSize: 'clamp(0.85rem, 1.4vw, 1.35rem)', top: '62%', left: '8%', color: 'var(--accent-base)', opacity: 0.04, animationDelay: '1.2s', animationDuration: '10s' },
+    style: { fontSize: 'clamp(0.85rem, 1.4vw, 1.35rem)', top: '62%', left: '8%', color: 'var(--accent-base)', opacity: 0.02, animationDelay: '1.2s', animationDuration: '10s' },
   },
   {
     label: '⊂',
     className: 'float-geo font-serif select-none pointer-events-none absolute',
-    style: { fontSize: 'clamp(0.75rem, 1.2vw, 1.2rem)', top: '35%', left: '3%', color: 'var(--muted)', opacity: 0.1, animationDelay: '4s', animationDuration: '14s' },
+    style: { fontSize: 'clamp(0.75rem, 1.2vw, 1.2rem)', top: '35%', left: '3%', color: 'var(--muted)', opacity: 0.05, animationDelay: '4s', animationDuration: '14s' },
   },
 ];
 
@@ -107,7 +107,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="font-mono text-xs uppercase tracking-[0.45em] text-accent mb-5"
+          className="font-mono text-xs md:text-sm uppercase tracking-[0.45em] text-accent mb-5"
         >
           {t('hero.available')}
         </motion.p>
@@ -130,7 +130,7 @@ export default function HeroSection() {
           className="w-32 my-6 origin-center"
           style={{
             height: '1px',
-            background: 'radial-gradient(ellipse at center, rgba(220,38,38,0.8) 0%, transparent 70%)',
+            background: 'radial-gradient(ellipse at center, var(--accent-glow-strong) 0%, transparent 70%)',
           }}
         />
 
@@ -139,9 +139,9 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 1.05 }}
-          className="font-mono text-xs uppercase tracking-[0.3em] max-w-sm"
+          className="font-mono text-xs md:text-sm uppercase tracking-[0.3em] max-w-sm"
           style={{
-            background: 'linear-gradient(90deg, #DC2626, #EF4444, #991B1B, #DC2626)',
+            background: 'linear-gradient(90deg, var(--accent-base), var(--accent-light), var(--accent-indigo), var(--accent-base))',
             backgroundSize: '300% 100%',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
@@ -157,7 +157,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.25 }}
-          className="font-mono text-xs uppercase tracking-[0.3em] text-muted mt-3"
+          className="font-mono text-xs md:text-sm uppercase tracking-[0.3em] text-muted mt-3"
         >
           {contactInfo.location[language]}
         </motion.p>

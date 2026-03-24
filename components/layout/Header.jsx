@@ -13,11 +13,31 @@ export default function Header() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const { language, toggleLanguage, t, mounted: langMounted } = useLanguage();
   const [mounted, setMounted] = useState(false);
+  const [isBlue, setIsBlue] = useState(false);
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    setMounted(true);
+    const checkBlue = () => setIsBlue(document.documentElement.classList.contains('theme-blue'));
+    checkBlue();
+    
+    // Add a simple listener for theme changes if needed, or just let the button handle it.
+    // Since ClientShell.jsx uses keyboard shortcuts, we should listen for them.
+    window.addEventListener('keydown', checkBlue);
+    return () => window.removeEventListener('keydown', checkBlue);
+  }, []);
+
+  const toggleAccent = () => {
+    const next = !isBlue;
+    setIsBlue(next);
+    if (next) {
+      document.documentElement.classList.add('theme-blue');
+    } else {
+      document.documentElement.classList.remove('theme-blue');
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -39,6 +59,11 @@ export default function Header() {
     { href: 'https://drive.google.com/file/d/1K6AhFHorjonEPDpiJxP-X-GpC_9k4x67/view?usp=drive_link', label: t('nav.resume'), external: true }
   ];
 
+  const toggleTheme = () => {
+    const newTheme = resolvedTheme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+  };
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -47,7 +72,7 @@ export default function Header() {
           : 'bg-transparent'
       }`}
     >
-      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div className="max-w-[1400px] xl:max-w-[1600px] mx-auto px-6 md:px-10 h-16 flex items-center justify-between relative">
 
         {/* Logo — serif monogram */}
         <Link href="/" className="group flex items-center gap-2 relative z-10" data-cursor="expand">
@@ -57,9 +82,6 @@ export default function Header() {
           >
             X. Feng
           </motion.span>
-          <span className="hidden sm:block font-mono text-sm uppercase tracking-[0.2em] text-muted mt-0.5">
-            — {t('hero.subtitle').toLowerCase()}
-          </span>
         </Link>
 
         {/* Desktop nav */}
@@ -70,8 +92,8 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="relative font-mono text-xs uppercase tracking-[0.25em] transition-colors duration-200 hover:text-accent"
-                style={{ color: isActive ? '#DC2626' : '#6B7280' }}
+                className="relative font-mono text-xs md:text-sm uppercase tracking-[0.25em] transition-colors duration-200 hover:text-accent"
+                style={{ color: isActive ? 'var(--accent-base)' : 'var(--muted)' }}
                 data-cursor="expand"
               >
                 {link.label}
@@ -101,12 +123,12 @@ export default function Header() {
               </span>
             </button>
             <button
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              onClick={toggleTheme}
               className="w-8 h-8 flex items-center justify-center text-muted hover:text-accent transition-colors rounded-full hover:bg-accent/5"
               aria-label="Toggle Dark Mode"
               data-cursor="expand"
             >
-              {mounted && theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+              {mounted && resolvedTheme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </button>
           </div>
           <div className="w-px h-4 bg-border mx-1" />
@@ -157,12 +179,12 @@ export default function Header() {
             </span>
           </button>
           <button
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            onClick={toggleTheme}
             className="min-w-[44px] min-h-[44px] flex items-center justify-center text-muted hover:text-accent transition-colors"
             aria-label="Toggle Dark Mode"
             data-cursor="expand"
           >
-            {mounted && theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            {mounted && resolvedTheme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
           </button>
           
           {/* Mobile menu toggle — min 44×44 touch target */}
@@ -204,22 +226,36 @@ export default function Header() {
                   key={link.href}
                   href={link.href}
                   className="font-mono text-xs uppercase tracking-[0.3em] transition-colors py-2 min-h-[44px] flex items-center"
-                  style={{ color: isActive ? '#DC2626' : 'inherit' }}
+                  style={{ color: isActive ? 'var(--accent-base)' : 'inherit' }}
                 >
                   {link.label}
                 </Link>
               );
             })}
-            <div className="flex items-center gap-2 pt-4 border-t border-border">
-              <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="min-w-[44px] min-h-[44px] flex items-center justify-center text-muted hover:text-accent transition-colors">
-                <Linkedin className="h-4 w-4" />
-              </a>
-              <a href={socialLinks.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="min-w-[44px] min-h-[44px] flex items-center justify-center text-muted hover:text-accent transition-colors">
-                <Github className="h-4 w-4" />
-              </a>
-              <a href={socialLinks.arxiv} target="_blank" rel="noopener noreferrer" aria-label="arXiv paper" className="min-w-[44px] min-h-[44px] flex items-center justify-center text-muted hover:text-accent transition-colors">
-                <FileText className="h-4 w-4" />
-              </a>
+            <div className="flex items-center justify-between pt-4 border-t border-border">
+              <div className="flex items-center gap-2">
+                <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="min-w-[44px] min-h-[44px] flex items-center justify-center text-muted hover:text-accent transition-colors">
+                  <Linkedin className="h-4 w-4" />
+                </a>
+                <a href={socialLinks.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="min-w-[44px] min-h-[44px] flex items-center justify-center text-muted hover:text-accent transition-colors">
+                  <Github className="h-4 w-4" />
+                </a>
+                <a href={socialLinks.arxiv} target="_blank" rel="noopener noreferrer" aria-label="arXiv paper" className="min-w-[44px] min-h-[44px] flex items-center justify-center text-muted hover:text-accent transition-colors">
+                  <FileText className="h-4 w-4" />
+                </a>
+              </div>
+
+              {/* Red / Blue Accent Switch */}
+              <button
+                onClick={toggleAccent}
+                className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-border/50 hover:border-accent/40 transition-all group"
+                aria-label="Toggle Accent Color"
+              >
+                <div className={`w-3 h-3 rounded-full ${isBlue ? 'bg-[#0ea5e9]' : 'bg-[#DC2626]'}`} />
+                <span className="font-mono text-[10px] font-bold text-muted group-hover:text-accent uppercase tracking-wider">
+                  {isBlue ? 'Blue' : 'Red'}
+                </span>
+              </button>
             </div>
           </motion.div>
         )}

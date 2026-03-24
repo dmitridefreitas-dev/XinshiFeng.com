@@ -7,13 +7,13 @@
 ───────────────────────────────────────────────────────────────────────────── */
 :root {
   /* Default light theme */
-  --bg: #FAFAF8;
+  --bg: #FFFFFF;
   --fg: #1A1A2E;
-  --muted: #6B7280;
+  --muted: #64748b;
   --surface: #FFFFFF;
-  --surface-hover: #F3F4F6;
-  --border: #E5E7EB;
-  --border-strong: #D1D5DB;
+  --surface-hover: #f1f5f9;
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
 
   /* Accent Red Theme */
   --accent-base: #DC2626;      /* red-600 */
@@ -31,9 +31,9 @@
   --card-4-gradient: linear-gradient(135deg, #fee2e2 0%, #fef2f2 100%);
   --card-5-gradient: linear-gradient(135deg, #fef2f2 0%, #ffffff 100%);
 
-  /* Watermark opacities in ProjectShowcase (darker as requested) */
-  --watermark-active: rgba(220,38,38,0.40);
-  --watermark-inactive: rgba(220,38,38,0.25);
+  /* Card watermarks */
+  --watermark-active: rgba(220, 38, 38, 0.4);
+  --watermark-inactive: rgba(220, 38, 38, 0.15);
   --card-bottom-line-active: rgba(220,38,38,0.6), rgba(153,27,27,0.4);
   --card-bottom-line-inactive: rgba(220,38,38,0.2), rgba(153,27,27,0.1);
 
@@ -41,6 +41,13 @@
   --surface-overlay: rgba(255, 255, 255, 0.5);
   --surface-overlay-strong: rgba(255, 255, 255, 0.9);
   --surface-overlay-solid: rgba(255, 255, 255, 0.98);
+
+  --kpi-number: var(--fg);
+
+  /* Research Card Content Text */
+  --card-fg: #1A1A2E;
+  --card-muted: rgba(26, 26, 46, 0.75);
+  --card-accent: var(--accent-base);
 }
 
 .dark {
@@ -56,6 +63,23 @@
   --surface-overlay: rgba(17, 17, 17, 0.7);
   --surface-overlay-strong: rgba(17, 17, 17, 0.9);
   --surface-overlay-solid: rgba(17, 17, 17, 0.98);
+
+  --kpi-number: #FFFFFF;
+
+  /* Dark Mode Research Card Gradients - Red (Dark to Light) */
+  --card-1-gradient: linear-gradient(135deg, #450a0a 0%, #7f1d1d 100%);
+  --card-2-gradient: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%);
+  --card-3-gradient: linear-gradient(135deg, #991b1b 0%, #b91c1c 100%);
+  --card-4-gradient: linear-gradient(135deg, #b91c1c 0%, #dc2626 100%);
+  --card-5-gradient: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+
+  /* Watermark opacities in Dark Mode (more visible) */
+  --watermark-active: rgba(255, 255, 255, 0.3);
+  --watermark-inactive: rgba(255, 255, 255, 0.1);
+
+  --card-fg: #FFFFFF;
+  --card-muted: rgba(255, 255, 255, 0.85);
+  --card-accent: #FFFFFF;
 
   /* Note: Accent colors remain the same unless blue theme is active */
 }
@@ -83,6 +107,15 @@
   --card-bottom-line-inactive: rgba(14,165,233,0.2), rgba(7,89,133,0.1);
 }
 
+.theme-blue.dark {
+  /* Dark Mode Research Card Gradients - Blue (Dark to Light) */
+  --card-1-gradient: linear-gradient(135deg, #082f49 0%, #0c4a6e 100%);
+  --card-2-gradient: linear-gradient(135deg, #0c4a6e 0%, #075985 100%);
+  --card-3-gradient: linear-gradient(135deg, #075985 0%, #0369a1 100%);
+  --card-4-gradient: linear-gradient(135deg, #0369a1 0%, #0284c7 100%);
+  --card-5-gradient: linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);
+}
+
 /* ─────────────────────────────────────────────────────────────────────────────
    BASE RESET & ROOT STYLES — Light academic theme
 ───────────────────────────────────────────────────────────────────────────── */
@@ -95,10 +128,12 @@
 
   html {
     scroll-behavior: smooth;
+    background-color: var(--bg);
+    color: var(--fg);
   }
 
   body {
-    background-color: var(--bg);
+    background-color: var(--bg) !important;
     color: var(--fg);
     font-family: var(--font-inter), "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
     overflow-x: hidden;
@@ -133,12 +168,12 @@
   }
 
   /* Fluid typography utilities */
-  .text-display    { font-family: var(--font-playfair), "Source Han Serif SC", "Noto Serif SC", serif; font-size: clamp(1.75rem, 3.5vw, 2.75rem); line-height: 1.0;  letter-spacing: -0.03em; }
-  .text-headline   { font-family: var(--font-playfair), "Source Han Serif SC", "Noto Serif SC", serif; font-size: clamp(1.2rem, 2vw, 1.75rem);    line-height: 1.05; letter-spacing: -0.02em; }
-  .text-subhead    { font-family: var(--font-playfair), "Source Han Serif SC", "Noto Serif SC", serif; font-size: clamp(0.95rem, 1.5vw, 1.2rem);  line-height: 1.15; letter-spacing: -0.01em; }
-  .text-body-fluid { font-size: clamp(0.8rem, 0.9vw, 0.95rem);  line-height: 1.65; }
+  .text-display    { font-family: var(--font-playfair), "Source Han Serif SC", "Noto Serif SC", serif; font-size: clamp(1.85rem, 4.5vw, 4.25rem); line-height: 1.0;  letter-spacing: -0.03em; }
+  .text-headline   { font-family: var(--font-playfair), "Source Han Serif SC", "Noto Serif SC", serif; font-size: clamp(1.25rem, 3vw, 2.75rem);    line-height: 1.05; letter-spacing: -0.02em; }
+  .text-subhead    { font-family: var(--font-playfair), "Source Han Serif SC", "Noto Serif SC", serif; font-size: clamp(1.0rem, 2vw, 1.85rem);  line-height: 1.15; letter-spacing: -0.01em; }
+  .text-body-fluid { font-size: clamp(0.85rem, 1.2vw, 1.25rem);  line-height: 1.65; }
 
-  /* Blue accent gradient text */
+  /* Accent gradient text */
   .text-accent-gradient {
     background: linear-gradient(135deg, var(--accent-base), var(--accent-light), var(--accent-indigo));
     -webkit-background-clip: text;
@@ -156,7 +191,7 @@
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.25em;
-    color: #6B7280;
+    color: var(--muted);
     text-decoration: none;
     position: relative;
     transition: color 0.2s;
@@ -183,15 +218,15 @@
     width: 100%;
     background: transparent;
     border: none;
-    border-bottom: 1px solid #D1D5DB;
+    border-bottom: 1px solid var(--border-strong);
     padding: 8px 0;
-    font-size: 14px;
+    font-size: 16px;
     font-family: var(--font-inter), sans-serif;
-    color: #1A1A2E;
+    color: var(--fg);
     outline: none;
     transition: border-color 0.25s;
   }
-  .input-line::placeholder { color: #9CA3AF; }
+  .input-line::placeholder { color: var(--muted); }
   .input-line:focus { border-bottom-color: var(--accent-base); }
 
   .textarea-line {
@@ -200,7 +235,7 @@
     border: none;
     border-bottom: 1px solid var(--border-strong);
     padding: 8px 0;
-    font-size: 14px;
+    font-size: 16px;
     font-family: var(--font-inter), sans-serif;
     color: var(--fg);
     outline: none;
@@ -342,6 +377,10 @@
   background-image: radial-gradient(circle, var(--accent-base) 1px, transparent 1px);
   background-size: 8px 8px;
   opacity: 0.04;
+}
+
+.theme-blue .dot-grid-layer-fine {
+  background-image: radial-gradient(circle, var(--accent-base) 1px, transparent 1px);
 }
 
 /* Warm paper wash — edge gradient */
@@ -536,7 +575,7 @@
   transform: translateX(-50%);
   width: 1px;
   height: 100%;
-  background: #E5E7EB;
+  background: var(--border);
   top: 0;
   z-index: 0;
 }

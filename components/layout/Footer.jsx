@@ -43,7 +43,7 @@ export default function Footer() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-mono text-xs uppercase tracking-[0.25em] text-muted hover:text-accent transition-colors py-2 min-h-[44px] flex items-center"
+                  className="font-mono text-xs md:text-sm uppercase tracking-[0.25em] text-muted hover:text-accent transition-colors py-2 min-h-[44px] flex items-center"
                 >
                   {link.label}
                 </a>
@@ -51,7 +51,7 @@ export default function Footer() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="font-mono text-xs uppercase tracking-[0.25em] text-muted hover:text-accent transition-colors py-2 min-h-[44px] flex items-center"
+                  className="font-mono text-xs md:text-sm uppercase tracking-[0.25em] text-muted hover:text-accent transition-colors py-2 min-h-[44px] flex items-center"
                 >
                   {link.label}
                 </Link>
@@ -107,10 +107,10 @@ export default function Footer() {
 
         {/* Bottom row */}
         <div className="mt-10 pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted">
+          <p className="font-mono text-xs md:text-sm uppercase tracking-[0.3em] text-muted">
             © {year} {language === 'en' ? 'Xinshi Feng' : '冯信实'} · {t('footer.stLouis')}
           </p>
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted">
+          <p className="font-mono text-xs md:text-sm uppercase tracking-[0.3em] text-muted">
             {t('footer.available')}
           </p>
         </div>

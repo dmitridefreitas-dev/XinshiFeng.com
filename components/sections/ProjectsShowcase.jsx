@@ -20,7 +20,7 @@ function ProjectCard({ project, index, isActive }) {
       {/* Gradient background — each card has its own color */}
       <div
         className="absolute inset-0 rounded-lg"
-        style={{ background: project.gradient || 'linear-gradient(135deg, #dbeafe 0%, #ede9fe 100%)' }}
+        style={{ background: project.gradient || 'linear-gradient(135deg, var(--surface-hover) 0%, var(--surface) 100%)' }}
         aria-hidden="true"
       />
 
@@ -59,13 +59,13 @@ function ProjectCard({ project, index, isActive }) {
 
         {/* Content */}
         <div className="relative z-10">
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent mb-3">
+          <p className="font-mono text-xs md:text-sm uppercase tracking-[0.3em] mb-3" style={{ color: 'var(--card-accent)' }}>
             {project.metric[language]}
           </p>
-          <h3 className="font-serif font-bold text-lg md:text-xl text-foreground leading-tight mb-3">
+          <h3 className="font-serif font-bold text-lg md:text-xl lg:text-2xl leading-tight mb-3" style={{ color: 'var(--card-fg)' }}>
             {project.title[language]}
           </h3>
-          <p className="text-sm text-muted/80 max-w-xs leading-relaxed">
+          <p className="text-sm md:text-base max-w-xs leading-relaxed" style={{ color: 'var(--card-muted)' }}>
             {project.description[language]}
           </p>
         </div>

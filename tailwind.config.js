@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: [
     './app/**/*.{js,jsx}',
     './components/**/*.{js,jsx}',
@@ -41,10 +42,10 @@ module.exports = {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
       },
       fontSize: {
-        'display':    ['clamp(1.75rem,3.5vw,2.75rem)', { lineHeight: '1.0',  letterSpacing: '-0.03em' }],
-        'headline':   ['clamp(1.2rem,2vw,1.75rem)',    { lineHeight: '1.05', letterSpacing: '-0.02em' }],
-        'subhead':    ['clamp(0.95rem,1.5vw,1.2rem)',  { lineHeight: '1.15', letterSpacing: '-0.01em' }],
-        'body-fluid': ['clamp(0.8rem,0.9vw,0.95rem)',  { lineHeight: '1.65' }],
+        'display':    ['clamp(1.85rem, 4.5vw, 4.25rem)', { lineHeight: '1.0',  letterSpacing: '-0.03em' }],
+        'headline':   ['clamp(1.25rem, 3vw, 2.75rem)', { lineHeight: '1.05', letterSpacing: '-0.02em' }],
+        'subhead':    ['clamp(1.0rem, 2vw, 1.85rem)',  { lineHeight: '1.15', letterSpacing: '-0.01em' }],
+        'body-fluid': ['clamp(0.85rem, 1.2vw, 1.25rem)',  { lineHeight: '1.65' }],
       },
       keyframes: {
         'ticker-scroll': {
