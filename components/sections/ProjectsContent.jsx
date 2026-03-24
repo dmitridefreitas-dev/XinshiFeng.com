@@ -4,11 +4,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import TextReveal from '@/components/effects/TextReveal';
 import ProjectDetailModal from '@/components/modals/ProjectDetailModal';
 import { allProjects, projectCategories } from '@/data/projects';
-import { useLanguage } from '@/contexts/LanguageContext';
 import { ArrowUpRight, FileText, ExternalLink } from 'lucide-react';
 
 function ProjectRow({ project, index, onOpen }) {
-  const { language, t } = useLanguage();
   return (
     <motion.article
       initial={{ opacity: 0, y: 16 }}
@@ -33,11 +31,11 @@ function ProjectRow({ project, index, onOpen }) {
             {String(index + 1).padStart(2, '0')}
           </span>
           <span className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
-            {project.category[language]}
+            {project.category.en}
           </span>
           {project.isPaper && (
             <span className="font-mono text-[7px] uppercase tracking-[0.15em] text-white bg-accent px-1.5 py-0.5 rounded">
-              {t('research.published')}
+              PUBLISHED
             </span>
           )}
         </div>
@@ -45,7 +43,7 @@ function ProjectRow({ project, index, onOpen }) {
         {/* Content */}
         <div className="flex-1 min-w-0">
           <h3 className="font-serif font-bold text-lg md:text-xl text-foreground group-hover:text-accent transition-colors leading-snug mb-2">
-            {project.title[language]}
+            {project.title.en}
           </h3>
           {project.journal && (
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent mb-2">
@@ -53,7 +51,7 @@ function ProjectRow({ project, index, onOpen }) {
             </p>
           )}
           <p className="text-sm text-muted leading-relaxed max-w-2xl">
-            {project.shortDescription[language]}
+            {project.shortDescription.en}
           </p>
 
           {/* Tech stack tags */}
@@ -78,14 +76,14 @@ function ProjectRow({ project, index, onOpen }) {
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
               className="flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.15em] text-accent hover:text-accent/80 transition-colors"
-              aria-label={t('research.paper')}
+              aria-label="Paper"
             >
               <FileText className="h-3.5 w-3.5" />
-              <span className="hidden sm:inline">{t('research.paper')}</span>
+              <span className="hidden sm:inline">PAPER</span>
             </a>
           )}
           <span className="flex items-center gap-1 font-mono text-xs uppercase tracking-[0.15em] text-muted group-hover:text-accent transition-colors">
-            {t('research.details')} <ArrowUpRight className="h-3 w-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            DETAILS <ArrowUpRight className="h-3 w-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </span>
         </div>
       </div>
@@ -94,7 +92,6 @@ function ProjectRow({ project, index, onOpen }) {
 }
 
 export default function ProjectsContent() {
-  const { language, t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState('All');
   const [selectedProject, setSelectedProject] = useState(null);
 
@@ -119,12 +116,12 @@ export default function ProjectsContent() {
           transition={{ delay: 0.3 }}
           className="font-mono text-xs uppercase tracking-[0.4em] text-accent mb-6 relative z-10"
         >
-          {t('research.subtitle')}
+          RESEARCH & PROJECTS
         </motion.p>
 
         <h1 className="font-serif font-bold text-display text-foreground text-balance will-change-transform relative z-10">
-          <TextReveal key={language} splitBy="word" delay={0.4} staggerDelay={0.1}>
-            {t('research.title')}
+          <TextReveal key="en" splitBy="word" delay={0.4} staggerDelay={0.1}>
+            Research
           </TextReveal>
         </h1>
 
@@ -134,7 +131,7 @@ export default function ProjectsContent() {
           transition={{ delay: 0.9 }}
           className="font-mono text-xs uppercase tracking-[0.3em] text-muted mt-6 relative z-10"
         >
-          {t('research.projectsCount')}
+          EXPLORE ALL {allProjects.length} PROJECTS
         </motion.p>
 
         {/* Published paper highlight */}
@@ -181,7 +178,7 @@ export default function ProjectsContent() {
                 }}
                 data-cursor="expand"
               >
-                {cat[language]}
+                {cat.en}
               </motion.button>
             ))}
           </div>
