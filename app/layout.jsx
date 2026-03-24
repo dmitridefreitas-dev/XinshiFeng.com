@@ -6,6 +6,7 @@ import AtmosphericBlobs from '@/components/effects/AtmosphericBlobs';
 import GrainOverlay from '@/components/effects/GrainOverlay';
 import ClientShell from '@/components/layout/ClientShell';
 import { Toaster } from '@/components/ui/toaster';
+import { ThemeProvider } from 'next-themes';
 import './globals.css';
 
 const inter = Inter({
@@ -94,21 +95,23 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="font-sans antialiased bg-background text-foreground">
-        <GridBackground />
-        <AtmosphericBlobs />
-        <GrainOverlay />
+      <body className="font-sans antialiased bg-background text-foreground transition-colors duration-500">
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+          <GridBackground />
+          <AtmosphericBlobs />
+          <GrainOverlay />
 
-        <ClientShell>
-          <div className="flex flex-col min-h-screen relative" style={{ zIndex: 10 }}>
-            <Header />
-            <main id="main-content" className="flex-grow">
-              {children}
-            </main>
-            <Footer />
-            <Toaster />
-          </div>
-        </ClientShell>
+          <ClientShell>
+            <div className="flex flex-col min-h-screen relative" style={{ zIndex: 10 }}>
+              <Header />
+              <main id="main-content" className="flex-grow">
+                {children}
+              </main>
+              <Footer />
+              <Toaster />
+            </div>
+          </ClientShell>
+        </ThemeProvider>
       </body>
     </html>
   );
