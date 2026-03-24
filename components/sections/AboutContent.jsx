@@ -9,12 +9,10 @@ import { education } from '@/data/education';
 import { experiences } from '@/data/experiences';
 import { skillCategories } from '@/data/skills';
 import { socialLinks } from '@/data/constants';
-import { useLanguage } from '@/contexts/LanguageContext';
 import { ArrowUpRight, Github, Linkedin, FileText, BookOpen, Coffee, Dumbbell, Music } from 'lucide-react';
 
 export default function AboutContent() {
   const [selectedExperience, setSelectedExperience] = useState(null);
-  const { language, t } = useLanguage();
 
   const researchExps = experiences.filter((e) => e.type === 'research');
   const teachingExps = experiences.filter((e) => e.type === 'teaching');
@@ -22,27 +20,31 @@ export default function AboutContent() {
   const personalInterests = [
     {
       icon: BookOpen,
-      title: t('about.interests.math.title'),
-      description: t('about.interests.math.description'),
+      title: "Mathematics & Research",
+      description: "Deep dives into abstract algebra, topology, and differential geometry, with a focus on their applications in theoretical physics and machine learning.",
     },
     {
       icon: Coffee,
-      title: t('about.interests.coffee.title'),
-      description: t('about.interests.coffee.description'),
+      title: "Coffee & Culture",
+      description: "Exploring the nuances of coffee brewing, from pour-overs to espresso, and engaging with diverse cultural narratives through literature and film.",
     },
     {
       icon: Dumbbell,
-      title: t('about.interests.fitness.title'),
-      description: t('about.interests.fitness.description'),
+      title: "Fitness & Well-being",
+      description: "Maintaining a balanced lifestyle through calisthenics, weightlifting, and mindful practices to enhance physical and mental resilience.",
     },
     {
       icon: Music,
-      title: t('about.interests.music.title'),
-      description: t('about.interests.music.description'),
+      title: "Music & Composition",
+      description: "Composing instrumental pieces that blend classical structures with modern electronic elements, exploring harmonic complexity and emotional depth.",
     },
   ];
 
-  const storyParagraphs = t('about.story');
+  const storyParagraphs = [
+    "I am a dedicated student at Washington University in St. Louis, pursuing a double major in Mathematics and Computer Science. My academic journey is driven by a profound curiosity for understanding complex systems and a passion for innovative problem-solving.",
+    "My research experience spans theoretical mathematics, including de Rham cohomology and manifold theory, as well as applied fields like reinforcement learning and machine learning. I have contributed to published works in Physical Review E, demonstrating my ability to conduct rigorous research and disseminate findings.",
+    "Beyond academics, I am actively involved in teaching and leadership roles, where I mentor peers and foster collaborative learning environments. These experiences have honed my communication and teamwork skills, preparing me for impactful contributions in both research and industry."
+  ];
 
   return (
     <>
@@ -80,8 +82,8 @@ export default function AboutContent() {
         </motion.div>
 
         <h1 className="font-serif font-bold text-display text-foreground will-change-transform text-balance">
-          <TextReveal key={language} splitBy="word" delay={0.3} staggerDelay={0.1}>
-            {language === 'en' ? 'Xinshi Feng' : '冯信实'}
+          <TextReveal key="en" splitBy="word" delay={0.3} staggerDelay={0.1}>
+            Xinshi Feng
           </TextReveal>
         </h1>
 
@@ -175,16 +177,16 @@ export default function AboutContent() {
                   style={{ backgroundColor: 'var(--accent-glow-strong)' }}
                 />
                 <p className="font-mono text-xs uppercase tracking-[0.25em] mb-2" style={{ color: 'var(--accent-indigo)' }}>
-                  {exp.date[language]}
+                  {exp.date.en}
                 </p>
                 <h3 className="font-serif font-bold text-base md:text-lg text-foreground mb-1 group-hover:text-accent transition-colors leading-snug">
-                  {exp.title[language]}
+                  {exp.title.en}
                 </h3>
                 <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted mb-2">
-                  {exp.organization[language]}
+                  {exp.organization.en}
                 </p>
                 <p className="text-[12px] text-muted leading-relaxed max-w-sm line-clamp-2">
-                  {exp.shortDescription[language]}
+                  {exp.shortDescription.en}
                 </p>
               </motion.article>
             ))}
@@ -217,25 +219,25 @@ export default function AboutContent() {
                 >
                   <div className="absolute left-[-34px] top-9 w-2.5 h-2.5 rounded-full bg-accent/60 border-2 border-white" />
                   <p className="font-mono text-xs uppercase tracking-[0.25em] text-accent mb-1.5">
-                    {edu.years[language]}
+                    {edu.years.en}
                   </p>
                   <h3 className="font-serif font-bold text-base md:text-lg text-foreground mb-1">
-                    {edu.school[language]}
+                    {edu.school.en}
                   </h3>
                   {edu.department && (
                     <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted mb-1">
-                      {edu.department[language]}
+                      {edu.department.en}
                     </p>
                   )}
                   <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted mb-3">
-                    {edu.degree[language]}
+                    {edu.degree.en}
                   </p>
                   {edu.honors && edu.honors.length > 0 && (
                     <ul className="flex flex-col gap-1">
                       {edu.honors.map((h, hi) => (
                         <li key={hi} className="font-mono text-xs uppercase tracking-[0.15em] text-muted flex items-start gap-2">
                           <span className="text-accent/40 mt-0.5">·</span>
-                          {h[language]}
+                          {h.en}
                         </li>
                       ))}
                     </ul>
@@ -281,16 +283,16 @@ export default function AboutContent() {
                 >
                   <div className="absolute left-[-34px] top-10 w-2.5 h-2.5 rounded-full bg-accent/50 border-2 border-white group-hover:bg-accent transition-colors" />
                   <p className="font-mono text-xs uppercase tracking-[0.25em] text-accent mb-2">
-                    {exp.date[language]}
+                    {exp.date.en}
                   </p>
                   <h3 className="font-serif font-bold text-lg md:text-xl text-foreground mb-1 group-hover:text-accent transition-colors leading-snug">
-                    {exp.title[language]}
+                    {exp.title.en}
                   </h3>
                   <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted mb-3">
-                    {exp.organization[language]}
+                    {exp.organization.en}
                   </p>
                   <p className="text-[13px] text-muted leading-relaxed max-w-md line-clamp-2">
-                    {exp.shortDescription[language]}
+                    {exp.shortDescription.en}
                   </p>
                   {exp.paperLink && (
                     <a
@@ -300,7 +302,7 @@ export default function AboutContent() {
                       onClick={(e) => e.stopPropagation()}
                       className="inline-flex items-center gap-1.5 mt-3 font-mono text-xs uppercase tracking-[0.2em] text-accent border border-accent/25 hover:border-accent/60 rounded px-2 py-1 transition-colors"
                     >
-                      <FileText className="h-3 w-3" /> {t('common.arxivPaper')}
+                      <FileText className="h-3 w-3" /> ARXIV PAPER
                     </a>
                   )}
                 </motion.article>
@@ -330,7 +332,7 @@ export default function AboutContent() {
                 transition={{ duration: 0.6, delay: ci * 0.06 }}
               >
                 <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted mb-3">
-                  {cat.title[language]}
+                  {cat.title.en}
                 </p>
                 <div className="flex flex-col gap-3">
                   {cat.skills.map((skill, si) => (
@@ -437,8 +439,8 @@ export default function AboutContent() {
         aria-label="Connect"
       >
         <h2 className="font-serif font-bold text-headline text-foreground text-balance mb-7 will-change-transform">
-          <TextReveal key={language} splitBy="word" staggerDelay={0.08}>
-            {t('about.letsConnect')}
+          <TextReveal key="en" splitBy="word" staggerDelay={0.08}>
+            LET'S CONNECT
           </TextReveal>
         </h2>
         <motion.div
@@ -449,7 +451,7 @@ export default function AboutContent() {
           className="flex flex-col sm:flex-row items-center gap-4"
         >
           <MagneticButton href="/contact" size="lg" data-cursor="expand">
-            {t('hero.getInTouch')}
+            Get In Touch
             <ArrowUpRight className="h-4 w-4" />
           </MagneticButton>
           <MagneticButton
@@ -461,7 +463,7 @@ export default function AboutContent() {
             data-cursor="expand"
           >
             <Linkedin className="h-4 w-4" />
-            {t('common.linkedIn')}
+            LinkedIn
           </MagneticButton>
           <MagneticButton
             href={socialLinks.github}
@@ -472,7 +474,7 @@ export default function AboutContent() {
             data-cursor="expand"
           >
             <Github className="h-4 w-4" />
-            {t('common.github')}
+            GitHub
           </MagneticButton>
         </motion.div>
       </section>

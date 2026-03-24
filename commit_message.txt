@@ -1,7 +1,3 @@
-feat: Implement infinite image carousel, set blue default theme, remove Chinese switch, and fix light mode graph paper
+fix: Remove language context from AboutContent.jsx
 
-- Added `ImageCarousel.jsx` component for infinite scroll image display on the About page.
-- Configured `ClientShell.jsx` to set blue as the default accent theme on load and ensure theme persistence across page navigations.
-- Removed all traces of the Chinese language switch from `Header.jsx` (desktop and mobile) and deleted `LanguageContext.js`.
-- Updated `globals.css` to render graph paper dots as white in light mode, while preserving accent colors in dark mode.
-- Corrected `devicePixelRatio` scaling for stars in `GalaxyBackground.jsx` to ensure visibility on all desktop screens.
+Removed all references to `useLanguage` and `t()` from `components/sections/AboutContent.jsx` by hardcoding strings.

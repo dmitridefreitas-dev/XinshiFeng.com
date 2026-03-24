@@ -6,10 +6,8 @@ import TextReveal from '@/components/effects/TextReveal';
 import TiltCard from '@/components/effects/TiltCard';
 import { heroProjects } from '@/data/projects';
 import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
-import { useLanguage } from '@/contexts/LanguageContext';
 
 function ProjectCard({ project, index, isActive }) {
-  const { language } = useLanguage();
   return (
     <TiltCard
       className={`relative flex-shrink-0 w-[82vw] md:w-[50vw] lg:w-[36vw] h-[40vh] shimmer-card overflow-hidden ${
@@ -60,13 +58,13 @@ function ProjectCard({ project, index, isActive }) {
         {/* Content */}
         <div className="relative z-10">
           <p className="font-mono text-xs md:text-sm uppercase tracking-[0.3em] mb-3" style={{ color: 'var(--card-accent)' }}>
-            {project.metric[language]}
+            {project.metric.en}
           </p>
           <h3 className="font-serif font-bold text-lg md:text-xl lg:text-2xl leading-tight mb-3" style={{ color: 'var(--card-fg)' }}>
-            {project.title[language]}
+            {project.title.en}
           </h3>
           <p className="text-sm md:text-base max-w-xs leading-relaxed" style={{ color: 'var(--card-muted)' }}>
-            {project.description[language]}
+            {project.description.en}
           </p>
         </div>
 
@@ -87,7 +85,6 @@ function ProjectCard({ project, index, isActive }) {
 export default function ProjectsShowcase() {
   const [current, setCurrent] = useState(0);
   const constraintsRef = useRef(null);
-  const { language, t } = useLanguage();
   const projects = heroProjects;
   const total = projects.length;
 
@@ -117,11 +114,11 @@ export default function ProjectsShowcase() {
               viewport={{ once: true }}
               className="font-mono text-xs uppercase tracking-[0.4em] text-muted mb-4"
             >
-              {t('projects.selectedResearch')}
+              SELECTED RESEARCH
             </motion.p>
             <h2 className="font-serif font-bold text-headline text-foreground will-change-transform">
               <TextReveal key={language} splitBy="word" staggerDelay={0.07} className="pb-2">
-                {t('projects.highlights')}
+                HIGHLIGHTS
               </TextReveal>
             </h2>
           </div>
@@ -134,7 +131,7 @@ export default function ProjectsShowcase() {
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.92 }}
               className="w-10 h-10 flex items-center justify-center border border-border text-muted hover:text-accent hover:border-accent-glow transition-all disabled:opacity-25 rounded-lg"
-              aria-label={t('projects.previous')}
+              aria-label="Previous project"
               data-cursor="expand"
             >
               <ArrowLeft className="h-4 w-4" />
@@ -145,7 +142,7 @@ export default function ProjectsShowcase() {
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.92 }}
               className="w-10 h-10 flex items-center justify-center border border-border text-muted hover:text-accent hover:border-accent-glow transition-all disabled:opacity-25 rounded-lg"
-              aria-label={t('projects.next')}
+              aria-label="Next project"
               data-cursor="expand"
             >
               <ArrowRight className="h-4 w-4" />
@@ -178,7 +175,7 @@ export default function ProjectsShowcase() {
         </motion.div>
       </div>
 
-      {/* Dots + counter */}
+            {/* Dots + counter */}
       <div className="w-full px-6 lg:px-12 mt-10">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex gap-1 items-center">
@@ -210,7 +207,7 @@ export default function ProjectsShowcase() {
             className="group flex items-center gap-2 font-mono text-xs uppercase tracking-[0.3em] text-muted hover:text-accent transition-colors"
             data-cursor="expand"
           >
-            {t('projects.viewAll')}
+            VIEW ALL
             <ArrowUpRight className="h-3 w-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </Link>
         </div>
