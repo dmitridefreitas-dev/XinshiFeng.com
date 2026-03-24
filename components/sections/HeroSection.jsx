@@ -98,16 +98,16 @@ export default function HeroSection() {
 
       <motion.div
         style={{ scale, opacity, y }}
-        className="relative z-10 flex flex-col items-center text-center px-6 gpu"
+        className="relative z-10 flex flex-col items-center text-center px-6 gpu pt-16 md:pt-0"
       >
         {/* Label — mono eyebrow */}
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="font-mono text-xs md:text-sm uppercase tracking-[0.45em] text-accent mb-5"
+          className="font-mono text-[11px] md:text-xs uppercase tracking-[0.35em] text-accent mb-5"
         >
-          AVAILABLE FOR MATH PHD PROGRAMS & RESEARCH INTERNSHIPS, FALL 2027
+          AVAILABLE FALL 2027
         </motion.p>
 
         {/* Name — Playfair serif with glow */}
@@ -137,7 +137,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 1.05 }}
-            className="font-mono text-xs md:text-sm uppercase tracking-[0.3em] max-w-sm"
+            className="font-mono text-[10px] md:text-xs uppercase tracking-[0.12em] sm:tracking-[0.25em] max-w-[240px] sm:max-w-sm"
             style={{
               background: 'linear-gradient(90deg, var(--accent-base), var(--accent-light), var(--accent-indigo), var(--accent-base))',
               backgroundSize: '300% 100%',
@@ -155,7 +155,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.25 }}
-          className="font-mono text-xs md:text-sm uppercase tracking-[0.3em] text-muted mt-3"
+          className="font-mono text-[10px] md:text-xs uppercase tracking-[0.12em] sm:tracking-[0.25em] text-muted mt-3"
         >
           Washington University in St. Louis
         </motion.p>

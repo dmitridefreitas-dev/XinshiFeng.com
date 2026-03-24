@@ -47,7 +47,7 @@ export default function ContactPage() {
       setFormData({ name: '', email: '', message: '' });
     } catch (err) {
       toast({
-        title: t('contact.errorTitle'),
+        title: "Error",
         description: err.message || "Failed to send message. Please try again later.",
       });
     } finally {

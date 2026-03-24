@@ -1,5 +1,4 @@
 import AboutContent from '@/components/sections/AboutContent';
-import ImageCarousel from '@/components/sections/ImageCarousel';
 
 export const metadata = {
   title: 'About Xinshi Feng — Background, Skills & Interests',
@@ -9,10 +8,5 @@ export const metadata = {
 };
 
 export default function AboutPage() {
-  return (
-    <>
-      <ImageCarousel />
-      <AboutContent />
-    </>
-  );
+  return <AboutContent />;
 }

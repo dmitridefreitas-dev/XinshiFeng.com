@@ -117,7 +117,7 @@ export default function ProjectsShowcase() {
               SELECTED RESEARCH
             </motion.p>
             <h2 className="font-serif font-bold text-headline text-foreground will-change-transform">
-              <TextReveal key={language} splitBy="word" staggerDelay={0.07} className="pb-2">
+              <TextReveal key="en" splitBy="word" staggerDelay={0.07} className="pb-2">
                 HIGHLIGHTS
               </TextReveal>
             </h2>

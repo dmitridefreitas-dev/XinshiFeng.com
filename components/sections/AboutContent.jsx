@@ -5,6 +5,7 @@ import Image from 'next/image';
 import TextReveal from '@/components/effects/TextReveal';
 import MagneticButton from '@/components/effects/MagneticButton';
 import ExperienceModal from '@/components/modals/ExperienceModal';
+import ImageCarousel from '@/components/sections/ImageCarousel';
 import { education } from '@/data/education';
 import { experiences } from '@/data/experiences';
 import { skillCategories } from '@/data/skills';
@@ -50,7 +51,7 @@ export default function AboutContent() {
     <>
       {/* ── Hero ── */}
       <section
-        className="section-full flex-col text-center px-6 pt-28"
+        className="flex flex-col items-center justify-center text-center px-6 pt-24 pb-10"
         aria-label="About hero"
       >
         {/* Headshot */}
@@ -91,9 +92,9 @@ export default function AboutContent() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.8 }}
-          className="font-mono text-xs uppercase tracking-[0.4em] text-accent mt-4"
+          className="font-mono text-xs uppercase tracking-[0.05em] sm:tracking-[0.3em] text-accent mt-4 max-w-xs sm:max-w-none text-center"
         >
-          {t('hero.available')}
+          AVAILABLE FOR MATH PHD PROGRAMS & RESEARCH INTERNSHIPS, FALL 2027
         </motion.p>
 
         {/* IBM Certifications */}
@@ -114,6 +115,9 @@ export default function AboutContent() {
         </motion.div>
       </section>
 
+      {/* ── Cinematic Image Strip ── */}
+      <ImageCarousel />
+
       {/* ── Content Grid ── */}
       <div className="lg:grid lg:grid-cols-2 lg:gap-x-16 lg:gap-y-16 lg:max-w-[1400px] lg:mx-auto px-6 lg:px-12 py-12 relative items-start">
 
@@ -127,7 +131,7 @@ export default function AboutContent() {
             viewport={{ once: true }}
             className="font-mono text-xs uppercase tracking-[0.4em] text-muted mb-6 self-start"
           >
-            {t('about.background')}
+            BACKGROUND
           </motion.p>
 
           <div className="flex flex-col gap-8">
@@ -154,7 +158,7 @@ export default function AboutContent() {
             viewport={{ once: true }}
             className="font-mono text-xs uppercase tracking-[0.4em] text-muted mb-6"
           >
-            {t('about.teaching')}
+            TEACHING & LEADERSHIP
           </motion.p>
 
           <div className="relative border-l border-border pl-8 flex flex-col gap-0">
@@ -204,7 +208,7 @@ export default function AboutContent() {
               viewport={{ once: true }}
               className="font-mono text-xs uppercase tracking-[0.4em] text-muted mb-6"
             >
-              {t('about.education')}
+              EDUCATION
             </motion.p>
 
             <div className="relative border-l border-border pl-8 flex flex-col gap-0">
@@ -263,7 +267,7 @@ export default function AboutContent() {
               viewport={{ once: true }}
               className="font-mono text-xs uppercase tracking-[0.4em] text-muted mb-6 mt-8 lg:hidden"
             >
-              {t('about.research')}
+              RESEARCH
             </motion.p>
 
             <div className="relative border-l border-border pl-8 flex flex-col gap-0">
@@ -319,7 +323,7 @@ export default function AboutContent() {
             viewport={{ once: true }}
             className="font-mono text-xs uppercase tracking-[0.4em] text-muted mb-6"
           >
-            {t('about.proficiency')}
+            SKILLS PROFICIENCY
           </motion.p>
 
           <div className="flex flex-col gap-7">
@@ -339,7 +343,7 @@ export default function AboutContent() {
                     <div key={si}>
                       <div className="flex justify-between items-baseline mb-1.5">
                         <span className="font-mono text-xs uppercase tracking-[0.15em] text-foreground/90">
-                          {typeof skill.name === 'string' ? skill.name : skill.name[language]}
+                          {typeof skill.name === 'string' ? skill.name : skill.name.en}
                         </span>
                         <span className="font-mono text-xs text-accent/70">
                           {skill.proficiency}%
@@ -377,7 +381,7 @@ export default function AboutContent() {
             transition={{ duration: 1 }}
             className="font-serif italic text-subhead text-foreground leading-relaxed"
           >
-            &ldquo;{t('about.philosophy')}&rdquo;
+            &ldquo;Mathematics is not about numbers, equations, computations, or algorithms: it is about understanding.&rdquo;
           </motion.p>
           <motion.p
             initial={{ opacity: 0 }}
@@ -400,7 +404,7 @@ export default function AboutContent() {
             viewport={{ once: true }}
             className="font-mono text-xs uppercase tracking-[0.4em] text-muted mb-8 text-center"
           >
-            {t('about.outsideClassroom')}
+            OUTSIDE THE CLASSROOM
           </motion.p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">

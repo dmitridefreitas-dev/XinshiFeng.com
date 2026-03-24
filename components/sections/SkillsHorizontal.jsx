@@ -5,6 +5,10 @@ import SkillDetailModal from '@/components/modals/SkillDetailModal';
 import { skillsData } from '@/data/skills';
 
 function SkillCard({ skill, onClick, className = '' }) {
+  const name = typeof skill.name === 'string' ? skill.name : skill.name.en;
+  const description = typeof skill.description === 'string' ? skill.description : skill.description.en;
+  const category = typeof skill.category === 'string' ? skill.category : skill.category.en;
+
   return (
     <div
       className={`flex-shrink-0 w-[75vw] md:w-[44vw] lg:w-[28vw] h-full flex flex-col justify-center items-center text-center px-8 md:px-10 border-r border-border cursor-pointer group bg-[var(--surface-overlay)] hover:bg-[var(--surface-overlay-solid)] transition-colors duration-200 ${className}`}
@@ -13,13 +17,13 @@ function SkillCard({ skill, onClick, className = '' }) {
       tabIndex={0}
     >
       <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-accent mb-2">
-        {skill.category}
+        {category}
       </p>
       <h3 className="font-serif font-bold text-base md:text-lg text-foreground mb-1 group-hover:text-accent transition-colors duration-300">
-        {skill.name}
+        {name}
       </h3>
       <p className="text-[11px] text-muted max-w-[240px] leading-relaxed">
-        {skill.description}
+        {description}
       </p>
       <div className="mt-3 flex flex-wrap justify-center gap-1.5">
         {(skill.keyFeatures || []).slice(0, 3).map((f, i) => (
@@ -27,7 +31,7 @@ function SkillCard({ skill, onClick, className = '' }) {
             key={i}
             className="font-mono text-[9px] uppercase tracking-widest text-muted/60 border-b border-muted/10 pb-0.5"
           >
-            {f}
+            {typeof f === 'string' ? f : f.en}
           </span>
         ))}
       </div>
@@ -135,7 +139,7 @@ export default function SkillsHorizontal() {
                 key={i}
                 className="font-serif font-bold text-4xl uppercase tracking-tighter text-foreground"
               >
-                {skill.name}
+                {typeof skill.name === 'string' ? skill.name : skill.name.en}
               </span>
             ))}
           </div>
@@ -159,7 +163,7 @@ export default function SkillsHorizontal() {
                 onClick={() => setSelectedSkill(skill)}
               >
                 <span className="w-1 h-1 rounded-full bg-accent/20 mr-4 flex-shrink-0" />
-                {skill.name}
+                {typeof skill.name === 'string' ? skill.name : skill.name.en}
               </span>
           ))}
         </div>

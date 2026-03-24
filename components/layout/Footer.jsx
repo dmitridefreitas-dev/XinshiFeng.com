@@ -108,7 +108,7 @@ export default function Footer() {
           <p className="font-mono text-xs md:text-sm uppercase tracking-[0.3em] text-muted">
             © {year} Xinshi Feng · ST. LOUIS, MO
           </p>
-          <p className="font-mono text-xs md:text-sm uppercase tracking-[0.3em] text-muted">
+          <p className="font-mono text-xs uppercase tracking-[0.05em] sm:tracking-[0.2em] text-muted text-center sm:text-right max-w-xs sm:max-w-none">
             AVAILABLE FOR MATH PHD PROGRAMS & RESEARCH INTERNSHIPS, FALL 2027
           </p>
         </div>

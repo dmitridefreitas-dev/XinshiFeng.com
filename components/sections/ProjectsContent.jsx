@@ -149,9 +149,7 @@ export default function ProjectsContent() {
           <div className="text-left">
             <p className="font-mono text-xs uppercase tracking-[0.25em] text-accent">Published · Physical Review E 112, 054309 (2025)</p>
             <p className="font-serif font-bold text-sm text-foreground group-hover:text-accent transition-colors">
-              {language === 'en' 
-                ? 'Evolution of Cooperation in a Bimodal Mixture of Conditional Cooperators'
-                : '双峰条件合作者混合物中的合作演化'}
+              Evolution of Cooperation in a Bimodal Mixture of Conditional Cooperators
             </p>
           </div>
           <ExternalLink className="h-3.5 w-3.5 text-muted group-hover:text-accent transition-colors flex-shrink-0" />

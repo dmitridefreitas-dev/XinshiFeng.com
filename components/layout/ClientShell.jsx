@@ -35,25 +35,31 @@ function ParallaxBackgroundLayers() {
  *   ScrollParallaxProvider (provides scroll progress)
  *   ParallaxScene (applies 3D tilt to page content)
  */
+function applyAccent(accent) {
+  const html = document.documentElement;
+  html.classList.remove('theme-blue', 'theme-purple');
+  if (accent === 'blue') html.classList.add('theme-blue');
+  else if (accent === 'purple') html.classList.add('theme-purple');
+  // 'red' = no accent class
+}
+
 export default function ClientShell({ children }) {
   useEffect(() => {
-    // Set default accent to blue if not already set (e.g., from local storage or server render)
-    if (!document.documentElement.classList.contains('theme-blue') &&
-        !document.documentElement.classList.contains('theme-purple')) {
-      document.documentElement.classList.add('theme-blue');
-    }
+    // Restore accent from localStorage; default to blue
+    const stored = localStorage.getItem('accent');
+    applyAccent(stored ?? 'blue');
 
     const handleKeyDown = (e) => {
       if (e.shiftKey) {
         if (e.key.toLowerCase() === 'b') {
-          document.documentElement.classList.remove('theme-purple'); // Ensure purple is off
-          document.documentElement.classList.add('theme-blue');
+          applyAccent('blue');
+          localStorage.setItem('accent', 'blue');
         } else if (e.key.toLowerCase() === 'r') {
-          document.documentElement.classList.remove('theme-blue'); // Ensure blue is off
-          document.documentElement.classList.remove('theme-purple'); // Ensure purple is off
+          applyAccent('red');
+          localStorage.setItem('accent', 'red');
         } else if (e.key.toLowerCase() === 'p') {
-          document.documentElement.classList.remove('theme-blue'); // Ensure blue is off
-          document.documentElement.classList.add('theme-purple');
+          applyAccent('purple');
+          localStorage.setItem('accent', 'purple');
         }
       }
     };

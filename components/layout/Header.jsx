@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Github, Linkedin, FileText, Sun, Moon, Languages } from 'lucide-react';
+import { Menu, X, Github, Linkedin, FileText, Sun, Moon } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import MagneticButton from '@/components/effects/MagneticButton';
 import { socialLinks } from '@/data/constants';
@@ -18,23 +18,22 @@ export default function Header() {
 
   useEffect(() => {
     setMounted(true);
-    const checkBlue = () => setIsBlue(document.documentElement.classList.contains('theme-blue'));
-    checkBlue();
-    
-    // Add a simple listener for theme changes if needed, or just let the button handle it.
-    // Since ClientShell.jsx uses keyboard shortcuts, we should listen for them.
-    window.addEventListener('keydown', checkBlue);
-    return () => window.removeEventListener('keydown', checkBlue);
+    // Initialize from localStorage, defaulting to blue
+    const stored = typeof window !== 'undefined' ? localStorage.getItem('accent') : null;
+    setIsBlue((stored ?? 'blue') === 'blue');
+
+    const syncAccent = () => setIsBlue(document.documentElement.classList.contains('theme-blue'));
+    window.addEventListener('keydown', syncAccent);
+    return () => window.removeEventListener('keydown', syncAccent);
   }, []);
 
   const toggleAccent = () => {
     const next = !isBlue;
     setIsBlue(next);
-    if (next) {
-      document.documentElement.classList.add('theme-blue');
-    } else {
-      document.documentElement.classList.remove('theme-blue');
-    }
+    const accent = next ? 'blue' : 'red';
+    document.documentElement.classList.remove('theme-blue', 'theme-purple');
+    if (next) document.documentElement.classList.add('theme-blue');
+    localStorage.setItem('accent', accent);
   };
 
   useEffect(() => {
@@ -44,6 +43,12 @@ export default function Header() {
   }, []);
 
   useEffect(() => { setMenuOpen(false); }, [pathname]);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
 
   const NAV_LINKS = [
     { href: '/',        label: 'Home' },
@@ -110,7 +115,6 @@ export default function Header() {
         {/* Desktop right side — social icons */}
         <div className="hidden md:flex items-center gap-4 relative z-10">
           <div className="flex items-center gap-2 mr-2">
-          <div className="flex items-center gap-2 mr-2">
             <button
               onClick={toggleTheme}
               className="w-8 h-8 flex items-center justify-center text-muted hover:text-accent transition-colors rounded-full hover:bg-accent/5"
@@ -120,7 +124,6 @@ export default function Header() {
             >
               {mounted && resolvedTheme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </button>
-          </div>
           </div>
           <div className="w-px h-4 bg-border mx-1" />
           <a

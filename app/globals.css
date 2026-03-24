@@ -32,18 +32,18 @@
   --dot-grid-light-color: rgba(255,255,255,0.8);
   --dot-grid-light-fine-color: rgba(255,255,255,0.7);
 
-  /* Research Cards Gradients - Red */
-  --card-1-gradient: linear-gradient(135deg, #f87171 0%, #fca5a5 100%);
-  --card-2-gradient: linear-gradient(135deg, #fca5a5 0%, #fecaca 100%);
-  --card-3-gradient: linear-gradient(135deg, #fecaca 0%, #fee2e2 100%);
-  --card-4-gradient: linear-gradient(135deg, #fee2e2 0%, #fef2f2 100%);
-  --card-5-gradient: linear-gradient(135deg, #fef2f2 0%, #ffffff 100%);
+  /* Research Cards Gradients - Red (rich, left=darkest, always readable with white text) */
+  --card-1-gradient: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 100%);
+  --card-2-gradient: linear-gradient(135deg, #991b1b 0%, #dc2626 100%);
+  --card-3-gradient: linear-gradient(135deg, #b91c1c 0%, #ef4444 100%);
+  --card-4-gradient: linear-gradient(135deg, #dc2626 0%, #f87171 100%);
+  --card-5-gradient: linear-gradient(135deg, #ef4444 0%, #fca5a5 100%);
 
-  /* Card watermarks */
-  --watermark-active: rgba(220, 38, 38, 0.4);
-  --watermark-inactive: rgba(220, 38, 38, 0.15);
-  --card-bottom-line-active: rgba(220,38,38,0.6), rgba(153,27,27,0.4);
-  --card-bottom-line-inactive: rgba(220,38,38,0.2), rgba(153,27,27,0.1);
+  /* Card watermarks — white for max contrast on colored backgrounds */
+  --watermark-active: rgba(255, 255, 255, 0.70);
+  --watermark-inactive: rgba(255, 255, 255, 0.42);
+  --card-bottom-line-active: rgba(255,255,255,0.5), rgba(220,38,38,0.2);
+  --card-bottom-line-inactive: rgba(255,255,255,0.2), rgba(220,38,38,0.1);
 
   /* Overlays */
   --surface-overlay: rgba(255, 255, 255, 0.5);
@@ -52,10 +52,10 @@
 
   --kpi-number: var(--fg);
 
-  /* Research Card Content Text */
-  --card-fg: #1A1A2E;
-  --card-muted: rgba(26, 26, 46, 0.75);
-  --card-accent: var(--accent-base);
+  /* Research Card Content Text — white on rich-red backgrounds */
+  --card-fg: #ffffff;
+  --card-muted: rgba(255, 255, 255, 0.85);
+  --card-accent: #fecaca;
 }
 
 .dark {
@@ -74,20 +74,20 @@
 
   --kpi-number: #FFFFFF;
 
-  /* Dark Mode Research Card Gradients - Red (Dark to Light) */
+  /* Dark Mode Research Card Gradients - Red (Deep to Bright) */
   --card-1-gradient: linear-gradient(135deg, #450a0a 0%, #7f1d1d 100%);
   --card-2-gradient: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%);
   --card-3-gradient: linear-gradient(135deg, #991b1b 0%, #b91c1c 100%);
   --card-4-gradient: linear-gradient(135deg, #b91c1c 0%, #dc2626 100%);
   --card-5-gradient: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
 
-  /* Watermark opacities in Dark Mode (more visible) */
-  --watermark-active: rgba(255, 255, 255, 0.3);
-  --watermark-inactive: rgba(255, 255, 255, 0.1);
+  /* Watermark — white for visibility on all dark-red cards */
+  --watermark-active: rgba(255, 255, 255, 0.65);
+  --watermark-inactive: rgba(255, 255, 255, 0.38);
 
-  --card-fg: #FFFFFF;
+  --card-fg: #ffffff;
   --card-muted: rgba(255, 255, 255, 0.85);
-  --card-accent: #FFFFFF;
+  --card-accent: #fca5a5;
 
   /* Note: Accent colors remain the same unless blue theme is active */
 }
@@ -102,26 +102,37 @@
   --accent-glow-strong: rgba(14, 165, 233, 0.4);
   --accent-glow-subtle: rgba(14, 165, 233, 0.08);
   
-  /* Research Cards Gradients - Sky Blue */
-  --card-1-gradient: linear-gradient(135deg, #38bdf8 0%, #7dd3fc 100%);
-  --card-2-gradient: linear-gradient(135deg, #7dd3fc 0%, #bae6fd 100%);
-  --card-3-gradient: linear-gradient(135deg, #bae6fd 0%, #e0f2fe 100%);
-  --card-4-gradient: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
-  --card-5-gradient: linear-gradient(135deg, #f0f9ff 0%, #ffffff 100%);
+  /* Research Cards Gradients - Deep Blue (always readable with white text, left=darkest) */
+  --card-1-gradient: linear-gradient(135deg, #082f49 0%, #0c4a6e 100%);
+  --card-2-gradient: linear-gradient(135deg, #0c4a6e 0%, #0369a1 100%);
+  --card-3-gradient: linear-gradient(135deg, #075985 0%, #0284c7 100%);
+  --card-4-gradient: linear-gradient(135deg, #0369a1 0%, #0ea5e9 100%);
+  --card-5-gradient: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
 
-  --watermark-active: rgba(14,165,233,0.40);
-  --watermark-inactive: rgba(14,165,233,0.25);
-  --card-bottom-line-active: rgba(14,165,233,0.6), rgba(7,89,133,0.4);
-  --card-bottom-line-inactive: rgba(14,165,233,0.2), rgba(7,89,133,0.1);
+  /* Watermark — white for max contrast on all blue cards */
+  --watermark-active: rgba(255, 255, 255, 0.75);
+  --watermark-inactive: rgba(255, 255, 255, 0.48);
+  --card-bottom-line-active: rgba(255,255,255,0.5), rgba(14,165,233,0.2);
+  --card-bottom-line-inactive: rgba(255,255,255,0.2), rgba(14,165,233,0.1);
+
+  /* Card text — white on deep blue backgrounds */
+  --card-fg: #ffffff;
+  --card-muted: rgba(255, 255, 255, 0.85);
+  --card-accent: #bae6fd;
 }
 
 .theme-blue.dark {
-  /* Dark Mode Research Card Gradients - Blue (Dark to Light) */
-  --card-1-gradient: linear-gradient(135deg, #082f49 0%, #0c4a6e 100%);
-  --card-2-gradient: linear-gradient(135deg, #0c4a6e 0%, #075985 100%);
-  --card-3-gradient: linear-gradient(135deg, #075985 0%, #0369a1 100%);
-  --card-4-gradient: linear-gradient(135deg, #0369a1 0%, #0284c7 100%);
-  --card-5-gradient: linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);
+  /* Dark Mode Blue gradients — slightly deeper than light */
+  --card-1-gradient: linear-gradient(135deg, #040f1a 0%, #082f49 100%);
+  --card-2-gradient: linear-gradient(135deg, #082f49 0%, #0c4a6e 100%);
+  --card-3-gradient: linear-gradient(135deg, #0c4a6e 0%, #075985 100%);
+  --card-4-gradient: linear-gradient(135deg, #075985 0%, #0369a1 100%);
+  --card-5-gradient: linear-gradient(135deg, #0369a1 0%, #0284c7 100%);
+  --watermark-active: rgba(255, 255, 255, 0.72);
+  --watermark-inactive: rgba(255, 255, 255, 0.45);
+  --card-fg: #ffffff;
+  --card-muted: rgba(255, 255, 255, 0.85);
+  --card-accent: #7dd3fc;
 }
 
 .theme-purple {
@@ -141,10 +152,13 @@
   --card-4-gradient: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 100%);
   --card-5-gradient: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);
 
-  --watermark-active: rgba(139, 92, 246, 0.40);
-  --watermark-inactive: rgba(139, 92, 246, 0.25);
-  --card-bottom-line-active: rgba(139, 92, 246, 0.6), rgba(93, 46, 172, 0.4);
-  --card-bottom-line-inactive: rgba(139, 92, 246, 0.2), rgba(93, 46, 172, 0.1);
+  --watermark-active: rgba(255, 255, 255, 0.72);
+  --watermark-inactive: rgba(255, 255, 255, 0.52);
+  --card-bottom-line-active: rgba(255,255,255,0.5), rgba(139,92,246,0.2);
+  --card-bottom-line-inactive: rgba(255,255,255,0.2), rgba(139,92,246,0.1);
+  --card-fg: #ffffff;
+  --card-muted: rgba(255, 255, 255, 0.85);
+  --card-accent: #ddd6fe;
 }
 
 .theme-purple.dark {
@@ -411,6 +425,22 @@
 @keyframes scroll-left {
   0%   { transform: translate3d(0, 0, 0); }
   100% { transform: translate3d(-33.3333%, 0, 0); }
+}
+
+/* Cinema carousel — horizontal (3× duplication, 33.3% scroll) */
+@keyframes cinema-scroll {
+  0%   { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-33.3333%, 0, 0); }
+}
+
+/* Desktop 2×2 grid vertical columns — 2× duplication, 50% scroll */
+@keyframes cinema-scroll-up {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+@keyframes cinema-scroll-down {
+  0%   { transform: translateY(-50%); }
+  100% { transform: translateY(0); }
 }
 @keyframes scroll-right {
   0%   { transform: translate3d(-33.3333%, 0, 0); }

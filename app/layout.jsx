@@ -1,4 +1,4 @@
-import { Inter, Playfair_Display, JetBrains_Mono } from 'next/font/google';
+import { Inter, Playfair_Display, JetBrains_Mono, Dancing_Script } from 'next/font/google';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import GridBackground from '@/components/effects/CosmicBackground';
@@ -26,6 +26,13 @@ const playfair = Playfair_Display({
 const jetbrains = JetBrains_Mono({
   subsets: ['latin'],
   variable: '--font-jetbrains',
+  display: 'swap',
+});
+
+const dancing = Dancing_Script({
+  subsets: ['latin'],
+  variable: '--font-dancing',
+  weight: ['400', '600'],
   display: 'swap',
 });
 
@@ -89,7 +96,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${playfair.variable} ${jetbrains.variable}`}
+      className={`${inter.variable} ${playfair.variable} ${jetbrains.variable} ${dancing.variable}`}
       suppressHydrationWarning
     >
       <head>
