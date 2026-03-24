@@ -1,9 +1,7 @@
 'use client';
 import { tickerTerms } from '@/data/constants';
-import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function AcademicTicker() {
-  const { language } = useLanguage();
   const tripled = [...tickerTerms, ...tickerTerms, ...tickerTerms];
 
   return (
@@ -15,7 +13,7 @@ export default function AcademicTicker() {
             className="inline-flex items-center text-xs font-mono uppercase tracking-[0.2em] text-muted mx-6"
           >
             <span className="w-1 h-1 rounded-full bg-accent/30 mr-4 flex-shrink-0" />
-            {term[language]}
+            {term.en}
           </span>
         ))}
       </div>
