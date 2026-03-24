@@ -11,15 +11,12 @@ import { Badge } from '@/components/ui/badge';
 import MagneticButton from '@/components/effects/MagneticButton';
 import { ExternalLink, Code, FileText } from 'lucide-react';
 
-import { useLanguage } from '@/contexts/LanguageContext';
-
 export default function ProjectDetailModal({ project, isOpen, onClose }) {
-  const { language, t } = useLanguage();
   if (!project) return null;
 
-  const description = (project.technicalDescription && project.technicalDescription[language]) || 
-                      (project.simpleDescription && project.simpleDescription[language]) || 
-                      (project.shortDescription && project.shortDescription[language]);
+  const description = (project.technicalDescription && project.technicalDescription.en) || 
+                      (project.simpleDescription && project.simpleDescription.en) || 
+                      (project.shortDescription && project.shortDescription.en);
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -28,10 +25,10 @@ export default function ProjectDetailModal({ project, isOpen, onClose }) {
           <div className="flex items-start gap-3 mb-1">
             {project.isPaper && (
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-white bg-accent px-2 py-1 rounded flex-shrink-0 mt-0.5">
-                {t('research.published')}
+                PUBLISHED
               </span>
             )}
-            <DialogTitle className="text-xl font-serif leading-tight">{project.title[language]}</DialogTitle>
+            <DialogTitle className="text-xl font-serif leading-tight">{project.title.en}</DialogTitle>
           </div>
           {project.journal && (
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent mt-1">
@@ -47,7 +44,7 @@ export default function ProjectDetailModal({ project, isOpen, onClose }) {
           {/* Tech Stack */}
           <div>
             <h4 className="text-xs font-mono uppercase tracking-[0.2em] text-accent mb-2">
-              {language === 'en' ? 'Methods & Tools' : '方法与工具'}
+              Methods & Tools
             </h4>
             <div className="flex flex-wrap gap-1.5">
               {(project.techStack || []).map((tech, i) => (
@@ -62,7 +59,7 @@ export default function ProjectDetailModal({ project, isOpen, onClose }) {
           {project.metrics && (
             <div>
               <h4 className="text-xs font-mono uppercase tracking-[0.2em] text-accent mb-2">
-                {language === 'en' ? 'Key Findings' : '核心成果'}
+                Key Findings
               </h4>
               <ul className="space-y-2">
                 {project.metrics.map((metric, i) => (
@@ -74,7 +71,7 @@ export default function ProjectDetailModal({ project, isOpen, onClose }) {
                     className="flex items-start gap-2"
                   >
                     <span className="w-1 h-1 rounded-full bg-accent mt-2 shrink-0" />
-                    <span className="text-sm text-muted">{metric[language]}</span>
+                    <span className="text-sm text-muted">{metric.en}</span>
                   </motion.li>
                 ))}
               </ul>
@@ -85,13 +82,13 @@ export default function ProjectDetailModal({ project, isOpen, onClose }) {
           {project.dataSources && (
             <div>
               <h4 className="text-xs font-mono uppercase tracking-[0.2em] text-accent mb-2">
-                {language === 'en' ? 'Context & Data' : '背景与数据'}
+                Context & Data
               </h4>
               <ul className="space-y-1.5">
                 {project.dataSources.map((source, i) => (
                   <li key={i} className="flex items-start gap-2">
                     <span className="w-1 h-1 rounded-full bg-muted/40 mt-2 shrink-0" />
-                    <span className="text-xs text-muted">{source[language]}</span>
+                    <span className="text-xs text-muted">{source.en}</span>
                   </li>
                 ))}
               </ul>
@@ -109,7 +106,7 @@ export default function ProjectDetailModal({ project, isOpen, onClose }) {
                 rel="noopener noreferrer"
               >
                 <FileText className="h-3.5 w-3.5" />
-                {project.isPaper ? t('common.arxiv') : (language === 'en' ? 'View Report' : '查看报告')}
+                {project.isPaper ? "ARXIV" : "View Report"}
               </MagneticButton>
             )}
             {project.pdfLink && (
@@ -121,7 +118,7 @@ export default function ProjectDetailModal({ project, isOpen, onClose }) {
                 rel="noopener noreferrer"
               >
                 <ExternalLink className="h-3.5 w-3.5" />
-                {language === 'en' ? 'View PDF' : '查看 PDF'}
+                View PDF
               </MagneticButton>
             )}
             {project.codeLink && project.codeLink !== '#' && (
@@ -133,7 +130,7 @@ export default function ProjectDetailModal({ project, isOpen, onClose }) {
                 rel="noopener noreferrer"
               >
                 <Code className="h-3.5 w-3.5" />
-                {t('common.github')}
+                GITHUB
               </MagneticButton>
             )}
           </div>
