@@ -67,15 +67,26 @@ export const timeline = [
 export const opportunityGroups = [
   {
     category: 'Graduate Research',
-    roles: ['Mathematics PhD', 'Applied Mathematics PhD', 'Computer Science PhD'],
+    roles: [
+      'Mathematics PhD',
+      'Applied Mathematics PhD',
+      'Computer Science PhD',
+    ],
   },
   {
     category: 'Research Internships',
-    roles: ['ML Research Intern', 'Applied Math Research', 'Computational Science'],
+    roles: [
+      'ML Research Intern',
+      'Applied Math Research',
+      'Computational Science',
+    ],
   },
   {
     category: 'Industry',
-    roles: ['Software Engineering Intern', 'Data Science Intern'],
+    roles: [
+      'Software Engineering Intern',
+      'Data Science Intern',
+    ],
   },
 ];
 

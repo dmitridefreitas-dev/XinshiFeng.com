@@ -27,12 +27,12 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata = {
-  title: 'Xinshi Feng — Computer Science & Mathematics',
+  title: 'Xinshi Feng — Mathematics & Computer Science',
   description:
-    'Portfolio of Xinshi Feng, double major in Computer Science and Mathematics at Washington University in St. Louis. Researcher in manifold theory, reinforcement learning, and machine learning. Available for Math PhD programs and research internships, Fall 2027.',
+    'Portfolio of Xinshi Feng, double major in Mathematics and Computer Science at Washington University in St. Louis. Researcher in manifold theory, reinforcement learning, and machine learning. Available for Math PhD programs and research internships, Fall 2027.',
   openGraph: {
-    title: 'Xinshi Feng — Computer Science & Mathematics',
-    description: 'Portfolio of Xinshi Feng, double major in Computer Science and Mathematics at Washington University in St. Louis.',
+    title: 'Xinshi Feng — Mathematics & Computer Science',
+    description: 'Portfolio of Xinshi Feng, double major in Mathematics and Computer Science at Washington University in St. Louis.',
     url: 'https://xinshifeng.com',
     siteName: 'Xinshi Feng',
     images: [
@@ -47,8 +47,8 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Xinshi Feng — Computer Science & Mathematics',
-    description: 'Portfolio of Xinshi Feng, double major in Computer Science and Mathematics at Washington University in St. Louis.',
+    title: 'Xinshi Feng — Mathematics & Computer Science',
+    description: 'Portfolio of Xinshi Feng, double major in Mathematics and Computer Science at Washington University in St. Louis.',
   },
 };
 
@@ -56,7 +56,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Xinshi Feng',
-  jobTitle: 'Computer Science & Mathematics Student Researcher',
+  jobTitle: 'Mathematics & Computer Science Student Researcher',
   alumniOf: [
     { '@type': 'CollegeOrUniversity', name: 'Washington University in St. Louis' },
     { '@type': 'HighSchool', name: 'Culver Academies' },
@@ -86,6 +86,7 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       className={`${inter.variable} ${playfair.variable} ${jetbrains.variable}`}
+      suppressHydrationWarning
     >
       <head>
         <script

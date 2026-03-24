@@ -2,8 +2,10 @@
 import { motion } from 'framer-motion';
 import CounterDisplay from '@/components/effects/CounterDisplay';
 import { kpiMetrics } from '@/data/constants';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function KPIFullscreen() {
+  const { language, t } = useLanguage();
   return (
     <section
       className="section-full"
@@ -18,14 +20,14 @@ export default function KPIFullscreen() {
           transition={{ duration: 0.6 }}
           className="font-mono text-xs uppercase tracking-[0.35em] text-accent text-center mb-10"
         >
-          By The Numbers
+          {language === 'en' ? 'By The Numbers' : '数据统计'}
         </motion.p>
 
         {/* 2×2 metrics grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-8 justify-items-center">
           {kpiMetrics.map((metric, i) => (
             <motion.div
-              key={metric.label}
+              key={i}
               initial={{ opacity: 0, y: 40, scale: 0.9 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
@@ -36,7 +38,7 @@ export default function KPIFullscreen() {
               }}
               className="relative"
             >
-              <CounterDisplay value={metric.value} label={metric.label} delay={i * 0.1} />
+              <CounterDisplay value={metric.value} label={metric.label[language]} delay={i * 0.1} />
             </motion.div>
           ))}
         </div>

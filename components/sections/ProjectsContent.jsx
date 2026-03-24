@@ -4,16 +4,18 @@ import { motion, AnimatePresence } from 'framer-motion';
 import TextReveal from '@/components/effects/TextReveal';
 import ProjectDetailModal from '@/components/modals/ProjectDetailModal';
 import { allProjects, projectCategories } from '@/data/projects';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { ArrowUpRight, FileText, ExternalLink } from 'lucide-react';
 
 function ProjectRow({ project, index, onOpen }) {
+  const { language, t } = useLanguage();
   return (
     <motion.article
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -8 }}
       transition={{ duration: 0.5, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
-      className="group relative border-b border-gray-200/80 py-5 cursor-pointer hover:bg-red-50 transition-all rounded-lg px-4 -mx-4"
+      className="group relative border-b border-border py-5 cursor-pointer hover:bg-[var(--surface-hover)] transition-all rounded-lg px-4 -mx-4"
       onClick={() => onOpen(project)}
       role="button"
       tabIndex={0}
@@ -26,16 +28,16 @@ function ProjectRow({ project, index, onOpen }) {
         <div className="flex md:flex-col items-center md:items-start gap-3 md:gap-1 md:w-24 flex-shrink-0">
           <span
             className="font-serif font-bold text-3xl leading-none group-hover:text-accent transition-colors"
-            style={{ color: 'rgba(220,38,38,0.12)' }}
+            style={{ color: 'var(--accent-glow)' }}
           >
             {String(index + 1).padStart(2, '0')}
           </span>
           <span className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
-            {project.category}
+            {project.category[language]}
           </span>
           {project.isPaper && (
             <span className="font-mono text-[7px] uppercase tracking-[0.15em] text-white bg-accent px-1.5 py-0.5 rounded">
-              Published
+              {t('research.published')}
             </span>
           )}
         </div>
@@ -43,7 +45,7 @@ function ProjectRow({ project, index, onOpen }) {
         {/* Content */}
         <div className="flex-1 min-w-0">
           <h3 className="font-serif font-bold text-lg md:text-xl text-foreground group-hover:text-accent transition-colors leading-snug mb-2">
-            {project.title}
+            {project.title[language]}
           </h3>
           {project.journal && (
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent mb-2">
@@ -51,7 +53,7 @@ function ProjectRow({ project, index, onOpen }) {
             </p>
           )}
           <p className="text-sm text-muted leading-relaxed max-w-2xl">
-            {project.shortDescription}
+            {project.shortDescription[language]}
           </p>
 
           {/* Tech stack tags */}
@@ -59,7 +61,7 @@ function ProjectRow({ project, index, onOpen }) {
             {project.techStack.slice(0, 4).map((tech) => (
               <span
                 key={tech}
-                className="font-mono text-xs uppercase tracking-[0.15em] text-muted border border-gray-200 rounded px-2 py-0.5"
+                className="font-mono text-xs uppercase tracking-[0.15em] text-muted border border-border rounded px-2 py-0.5"
               >
                 {tech}
               </span>
@@ -76,14 +78,14 @@ function ProjectRow({ project, index, onOpen }) {
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
               className="flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.15em] text-accent hover:text-accent/80 transition-colors"
-              aria-label="View paper"
+              aria-label={t('research.paper')}
             >
               <FileText className="h-3.5 w-3.5" />
-              <span className="hidden sm:inline">Paper</span>
+              <span className="hidden sm:inline">{t('research.paper')}</span>
             </a>
           )}
           <span className="flex items-center gap-1 font-mono text-xs uppercase tracking-[0.15em] text-muted group-hover:text-accent transition-colors">
-            Details <ArrowUpRight className="h-3 w-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            {t('research.details')} <ArrowUpRight className="h-3 w-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </span>
         </div>
       </div>
@@ -92,13 +94,14 @@ function ProjectRow({ project, index, onOpen }) {
 }
 
 export default function ProjectsContent() {
+  const { language, t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState('All');
   const [selectedProject, setSelectedProject] = useState(null);
 
   const filtered = useMemo(
     () => activeCategory === 'All'
       ? allProjects
-      : allProjects.filter((p) => p.category === activeCategory),
+      : allProjects.filter((p) => p.category.en === activeCategory),
     [activeCategory]
   );
 
@@ -114,7 +117,7 @@ export default function ProjectsContent() {
           className="absolute font-serif font-bold select-none pointer-events-none"
           style={{
             fontSize: 'clamp(2.5rem, 8vw, 7rem)',
-            color: 'rgba(220,38,38,0.03)',
+            color: 'var(--accent-glow)',
             letterSpacing: '-0.06em',
             lineHeight: 1,
             top: '50%',
@@ -124,7 +127,7 @@ export default function ProjectsContent() {
           }}
           aria-hidden="true"
         >
-          Research
+          {language === 'en' ? 'Research' : '科研项目'}
         </p>
 
         <motion.p
@@ -133,12 +136,12 @@ export default function ProjectsContent() {
           transition={{ delay: 0.3 }}
           className="font-mono text-xs uppercase tracking-[0.4em] text-accent mb-6 relative z-10"
         >
-          Work &amp; Publications
+          {t('research.subtitle')}
         </motion.p>
 
         <h1 className="font-serif font-bold text-display text-foreground text-balance will-change-transform relative z-10">
-          <TextReveal splitBy="word" delay={0.4} staggerDelay={0.1}>
-            Research &amp; Projects
+          <TextReveal key={language} splitBy="word" delay={0.4} staggerDelay={0.1}>
+            {t('research.title')}
           </TextReveal>
         </h1>
 
@@ -148,7 +151,7 @@ export default function ProjectsContent() {
           transition={{ delay: 0.9 }}
           className="font-mono text-xs uppercase tracking-[0.3em] text-muted mt-6 relative z-10"
         >
-          {allProjects.length} Projects · 1 Published Paper
+          {t('research.projectsCount')}
         </motion.p>
 
         {/* Published paper highlight */}
@@ -166,7 +169,9 @@ export default function ProjectsContent() {
           <div className="text-left">
             <p className="font-mono text-xs uppercase tracking-[0.25em] text-accent">Published · Physical Review E 112, 054309 (2025)</p>
             <p className="font-serif font-bold text-sm text-foreground group-hover:text-accent transition-colors">
-              Evolution of Cooperation in a Bimodal Mixture of Conditional Cooperators
+              {language === 'en' 
+                ? 'Evolution of Cooperation in a Bimodal Mixture of Conditional Cooperators'
+                : '双峰条件合作者混合物中的合作演化'}
             </p>
           </div>
           <ExternalLink className="h-3.5 w-3.5 text-muted group-hover:text-accent transition-colors flex-shrink-0" />
@@ -181,19 +186,19 @@ export default function ProjectsContent() {
           <div className="flex flex-wrap gap-3 mb-8">
             {projectCategories.map((cat) => (
               <motion.button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
+                key={cat.en}
+                onClick={() => setActiveCategory(cat.en)}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 className="font-mono text-xs uppercase tracking-[0.25em] px-4 py-2 rounded-lg border transition-all"
                 style={{
-                  background: activeCategory === cat ? '#DC2626' : 'transparent',
-                  color: activeCategory === cat ? '#FFFFFF' : '#6B7280',
-                  borderColor: activeCategory === cat ? '#DC2626' : '#E5E7EB',
+                  background: activeCategory === cat.en ? '#DC2626' : 'transparent',
+                  color: activeCategory === cat.en ? '#FFFFFF' : '#6B7280',
+                  borderColor: activeCategory === cat.en ? '#DC2626' : '#E5E7EB',
                 }}
                 data-cursor="expand"
               >
-                {cat}
+                {cat[language]}
               </motion.button>
             ))}
           </div>

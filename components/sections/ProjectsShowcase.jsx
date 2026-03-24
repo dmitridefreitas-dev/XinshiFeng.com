@@ -6,8 +6,10 @@ import TextReveal from '@/components/effects/TextReveal';
 import TiltCard from '@/components/effects/TiltCard';
 import { heroProjects } from '@/data/projects';
 import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 function ProjectCard({ project, index, isActive }) {
+  const { language } = useLanguage();
   return (
     <TiltCard
       className={`relative flex-shrink-0 w-[82vw] md:w-[50vw] lg:w-[36vw] h-[40vh] shimmer-card overflow-hidden ${
@@ -35,7 +37,7 @@ function ProjectCard({ project, index, isActive }) {
           className="absolute top-6 right-8 font-serif font-bold select-none pointer-events-none"
           style={{
             fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)',
-            color: isActive ? 'rgba(220,38,38,0.20)' : 'rgba(220,38,38,0.13)',
+            color: isActive ? 'var(--watermark-active)' : 'var(--watermark-inactive)',
             lineHeight: 1,
             letterSpacing: '-0.04em',
           }}
@@ -48,7 +50,7 @@ function ProjectCard({ project, index, isActive }) {
         {isActive && (
           <motion.div
             className="absolute top-6 left-7 w-1.5 h-1.5 rounded-full dot-pulse"
-            style={{ backgroundColor: '#DC2626' }}
+            style={{ backgroundColor: 'var(--accent-base)' }}
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3 }}
@@ -58,13 +60,13 @@ function ProjectCard({ project, index, isActive }) {
         {/* Content */}
         <div className="relative z-10">
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent mb-3">
-            {project.metric}
+            {project.metric[language]}
           </p>
           <h3 className="font-serif font-bold text-lg md:text-xl text-foreground leading-tight mb-3">
-            {project.title}
+            {project.title[language]}
           </h3>
           <p className="text-sm text-muted/80 max-w-xs leading-relaxed">
-            {project.description}
+            {project.description[language]}
           </p>
         </div>
 
@@ -73,8 +75,8 @@ function ProjectCard({ project, index, isActive }) {
           className="absolute bottom-0 left-0 right-0 h-px"
           style={{
             background: isActive
-              ? 'linear-gradient(90deg, rgba(220,38,38,0.6), rgba(153,27,27,0.4), transparent)'
-              : 'linear-gradient(90deg, rgba(220,38,38,0.2), rgba(153,27,27,0.1), transparent)',
+              ? 'linear-gradient(90deg, var(--card-bottom-line-active), transparent)'
+              : 'linear-gradient(90deg, var(--card-bottom-line-inactive), transparent)',
           }}
         />
       </motion.div>
@@ -85,6 +87,7 @@ function ProjectCard({ project, index, isActive }) {
 export default function ProjectsShowcase() {
   const [current, setCurrent] = useState(0);
   const constraintsRef = useRef(null);
+  const { language, t } = useLanguage();
   const projects = heroProjects;
   const total = projects.length;
 
@@ -114,11 +117,11 @@ export default function ProjectsShowcase() {
               viewport={{ once: true }}
               className="font-mono text-xs uppercase tracking-[0.4em] text-muted mb-4"
             >
-              Selected Research
+              {t('projects.selectedResearch')}
             </motion.p>
             <h2 className="font-serif font-bold text-headline text-foreground will-change-transform">
-              <TextReveal splitBy="word" staggerDelay={0.07}>
-                Research Highlights
+              <TextReveal key={language} splitBy="word" staggerDelay={0.07} className="pb-2">
+                {t('projects.highlights')}
               </TextReveal>
             </h2>
           </div>
@@ -130,8 +133,8 @@ export default function ProjectsShowcase() {
               disabled={current === 0}
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.92 }}
-              className="w-10 h-10 flex items-center justify-center border border-gray-200 text-muted hover:text-accent hover:border-accent/40 transition-all disabled:opacity-25 rounded-lg"
-              aria-label="Previous project"
+              className="w-10 h-10 flex items-center justify-center border border-border text-muted hover:text-accent hover:border-accent-glow transition-all disabled:opacity-25 rounded-lg"
+              aria-label={t('projects.previous')}
               data-cursor="expand"
             >
               <ArrowLeft className="h-4 w-4" />
@@ -141,8 +144,8 @@ export default function ProjectsShowcase() {
               disabled={current === total - 1}
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.92 }}
-              className="w-10 h-10 flex items-center justify-center border border-gray-200 text-muted hover:text-accent hover:border-accent/40 transition-all disabled:opacity-25 rounded-lg"
-              aria-label="Next project"
+              className="w-10 h-10 flex items-center justify-center border border-border text-muted hover:text-accent hover:border-accent-glow transition-all disabled:opacity-25 rounded-lg"
+              aria-label={t('projects.next')}
               data-cursor="expand"
             >
               <ArrowRight className="h-4 w-4" />
@@ -152,13 +155,13 @@ export default function ProjectsShowcase() {
       </div>
 
       {/* Carousel track */}
-      <div ref={constraintsRef} className="w-full overflow-hidden pl-6 lg:pl-12">
+      <div ref={constraintsRef} className="w-full overflow-hidden pl-6 lg:pl-12 contain-paint">
         <motion.div
-          className="flex gap-6 cursor-grab active:cursor-grabbing"
+          className="flex gap-6 cursor-grab active:cursor-grabbing will-change-transform"
           drag="x"
           dragConstraints={constraintsRef}
           animate={{ x: -(current * cardStep) }}
-          transition={{ type: 'spring', stiffness: 300, damping: 40 }}
+          transition={{ type: 'spring', stiffness: 200, damping: 30 }}
           onDragEnd={(e, { offset }) => {
             if (offset.x < -50 && current < total - 1) next();
             if (offset.x > 50 && current > 0) prev();
@@ -166,7 +169,7 @@ export default function ProjectsShowcase() {
         >
           {projects.map((project, i) => (
             <ProjectCard
-              key={project.title}
+              key={i}
               project={project}
               index={i}
               isActive={i === current}
@@ -192,8 +195,8 @@ export default function ProjectsShowcase() {
                     width: i === current ? 24 : 6,
                     height: 2,
                     background: i === current
-                      ? 'linear-gradient(90deg, #DC2626, #991B1B)'
-                      : 'rgba(220,38,38,0.2)',
+                      ? 'linear-gradient(90deg, var(--accent-base), var(--accent-indigo))'
+                      : 'var(--accent-glow)',
                     borderRadius: 2,
                     transition: 'width 0.3s ease, background 0.3s ease',
                   }}
@@ -207,7 +210,7 @@ export default function ProjectsShowcase() {
             className="group flex items-center gap-2 font-mono text-xs uppercase tracking-[0.3em] text-muted hover:text-accent transition-colors"
             data-cursor="expand"
           >
-            View All Research
+            {t('projects.viewAll')}
             <ArrowUpRight className="h-3 w-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </Link>
         </div>

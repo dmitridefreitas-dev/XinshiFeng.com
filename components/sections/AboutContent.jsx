@@ -9,43 +9,40 @@ import { education } from '@/data/education';
 import { experiences } from '@/data/experiences';
 import { skillCategories } from '@/data/skills';
 import { socialLinks } from '@/data/constants';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { ArrowUpRight, Github, Linkedin, FileText, BookOpen, Coffee, Dumbbell, Music } from 'lucide-react';
-
-const storyParagraphs = [
-  "I'm a double major in Computer Science and Mathematics at Washington University in St. Louis (McKelvey School of Engineering), graduating May 2026.",
-  "My current research focus is de Rham cohomology and smooth manifolds, working under the supervision of Professor Yanli Song. I find beauty in how abstract topology and differential geometry describe the shape of spaces.",
-  "I also have published work in evolutionary game theory — applying Q-learning to model how conditional cooperation emerges and evolves in populations, published in Physical Review E.",
-  "I'm looking for Math PhD programs and research internships starting Fall 2027, in pure mathematics, applied math, or theoretical machine learning.",
-];
-
-const researchExps = experiences.filter((e) => e.type === 'research');
-const teachingExps = experiences.filter((e) => e.type === 'teaching');
-
-const personalInterests = [
-  {
-    icon: BookOpen,
-    title: 'Mathematics',
-    description: 'Fascinated by pure mathematics — topology, analysis, and abstract algebra outside of coursework.',
-  },
-  {
-    icon: Coffee,
-    title: 'Coffee & Study Culture',
-    description: 'A firm believer in good coffee and deep focus sessions. Always on the lookout for the best study spots.',
-  },
-  {
-    icon: Dumbbell,
-    title: 'Fitness',
-    description: 'Regular gym-goer who believes physical discipline and mental discipline are closely connected.',
-  },
-  {
-    icon: Music,
-    title: 'Music',
-    description: 'Enjoys listening to and exploring music across genres as a way to decompress after intense study sessions.',
-  },
-];
 
 export default function AboutContent() {
   const [selectedExperience, setSelectedExperience] = useState(null);
+  const { language, t } = useLanguage();
+
+  const researchExps = experiences.filter((e) => e.type === 'research');
+  const teachingExps = experiences.filter((e) => e.type === 'teaching');
+
+  const personalInterests = [
+    {
+      icon: BookOpen,
+      title: t('about.interests.math.title'),
+      description: t('about.interests.math.description'),
+    },
+    {
+      icon: Coffee,
+      title: t('about.interests.coffee.title'),
+      description: t('about.interests.coffee.description'),
+    },
+    {
+      icon: Dumbbell,
+      title: t('about.interests.fitness.title'),
+      description: t('about.interests.fitness.description'),
+    },
+    {
+      icon: Music,
+      title: t('about.interests.music.title'),
+      description: t('about.interests.music.description'),
+    },
+  ];
+
+  const storyParagraphs = t('about.story');
 
   return (
     <>
@@ -69,8 +66,8 @@ export default function AboutContent() {
           <motion.div
             whileHover={{ scale: 1.04 }}
             transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-            className="relative w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden ring-1 ring-gray-200 headshot-container"
-            style={{ boxShadow: '0 0 50px rgba(220,38,38,0.18)' }}
+            className="relative w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden ring-1 ring-border headshot-container"
+            style={{ boxShadow: '0 0 50px var(--accent-glow)' }}
           >
             <Image
               src="/images/headshot.jpeg"
@@ -83,8 +80,8 @@ export default function AboutContent() {
         </motion.div>
 
         <h1 className="font-serif font-bold text-display text-foreground will-change-transform text-balance">
-          <TextReveal splitBy="word" delay={0.3} staggerDelay={0.1}>
-            Xinshi Feng
+          <TextReveal key={language} splitBy="word" delay={0.3} staggerDelay={0.1}>
+            {language === 'en' ? 'Xinshi Feng' : '冯信实'}
           </TextReveal>
         </h1>
 
@@ -94,7 +91,7 @@ export default function AboutContent() {
           transition={{ duration: 0.7, delay: 0.8 }}
           className="font-mono text-xs uppercase tracking-[0.4em] text-accent mt-4"
         >
-          CS &amp; Math · WashU · Available Fall 2027
+          {t('hero.available')}
         </motion.p>
 
         {/* IBM Certifications */}
@@ -107,7 +104,7 @@ export default function AboutContent() {
           {['Git & GitHub', 'HTML/CSS/JS', 'Cloud Computing', 'Software Engineering'].map((cert) => (
             <span
               key={cert}
-              className="font-mono text-xs uppercase tracking-[0.2em] text-muted bg-gray-50 border border-gray-200 rounded px-2 py-1"
+              className="font-mono text-xs uppercase tracking-[0.2em] text-muted bg-[var(--surface-hover)] border border-border rounded px-2 py-1"
             >
               IBM · {cert}
             </span>
@@ -128,7 +125,7 @@ export default function AboutContent() {
             viewport={{ once: true }}
             className="font-mono text-xs uppercase tracking-[0.4em] text-muted mb-6 self-start"
           >
-            Background
+            {t('about.background')}
           </motion.p>
 
           <div className="flex flex-col gap-8">
@@ -155,10 +152,10 @@ export default function AboutContent() {
             viewport={{ once: true }}
             className="font-mono text-xs uppercase tracking-[0.4em] text-muted mb-6"
           >
-            Teaching &amp; Leadership
+            {t('about.teaching')}
           </motion.p>
 
-          <div className="relative border-l border-gray-200 pl-8 flex flex-col gap-0">
+          <div className="relative border-l border-border pl-8 flex flex-col gap-0">
             {teachingExps.map((exp, i) => (
               <motion.article
                 key={exp.id}
@@ -166,7 +163,7 @@ export default function AboutContent() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: i * 0.06 }}
-                className="py-7 relative group cursor-pointer bg-transparent hover:bg-red-50 transition-colors rounded-xl px-5 -mx-5"
+                className="py-7 relative group cursor-pointer bg-transparent hover:bg-[var(--surface-hover)] transition-colors rounded-xl px-5 -mx-5"
                 role="button"
                 tabIndex={0}
                 data-cursor="expand"
@@ -175,19 +172,19 @@ export default function AboutContent() {
               >
                 <div
                   className="absolute left-[-34px] top-9 w-2.5 h-2.5 rounded-full border-2 border-white group-hover:opacity-100 transition-all"
-                  style={{ backgroundColor: 'rgba(153,27,27,0.5)' }}
+                  style={{ backgroundColor: 'var(--accent-glow-strong)' }}
                 />
                 <p className="font-mono text-xs uppercase tracking-[0.25em] mb-2" style={{ color: '#991B1B' }}>
-                  {exp.date}
+                  {exp.date[language]}
                 </p>
-                <h3 className="font-serif font-bold text-base md:text-lg text-foreground mb-1 group-hover:text-red-700 transition-colors leading-snug">
-                  {exp.title}
+                <h3 className="font-serif font-bold text-base md:text-lg text-foreground mb-1 group-hover:text-accent transition-colors leading-snug">
+                  {exp.title[language]}
                 </h3>
                 <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted mb-2">
-                  {exp.organization}
+                  {exp.organization[language]}
                 </p>
                 <p className="text-[12px] text-muted leading-relaxed max-w-sm line-clamp-2">
-                  {exp.shortDescription}
+                  {exp.shortDescription[language]}
                 </p>
               </motion.article>
             ))}
@@ -205,13 +202,13 @@ export default function AboutContent() {
               viewport={{ once: true }}
               className="font-mono text-xs uppercase tracking-[0.4em] text-muted mb-6"
             >
-              Education
+              {t('about.education')}
             </motion.p>
 
-            <div className="relative border-l border-gray-200 pl-8 flex flex-col gap-0">
+            <div className="relative border-l border-border pl-8 flex flex-col gap-0">
               {education.map((edu, i) => (
                 <motion.article
-                  key={edu.school}
+                  key={edu.school.en}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -223,22 +220,22 @@ export default function AboutContent() {
                     {edu.years}
                   </p>
                   <h3 className="font-serif font-bold text-base md:text-lg text-foreground mb-1">
-                    {edu.school}
+                    {edu.school[language]}
                   </h3>
                   {edu.department && (
                     <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted mb-1">
-                      {edu.department}
+                      {edu.department[language]}
                     </p>
                   )}
                   <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted mb-3">
-                    {edu.degree}
+                    {edu.degree[language]}
                   </p>
                   {edu.honors && edu.honors.length > 0 && (
                     <ul className="flex flex-col gap-1">
-                      {edu.honors.map((h) => (
-                        <li key={h} className="font-mono text-xs uppercase tracking-[0.15em] text-muted flex items-start gap-2">
+                      {edu.honors.map((h, hi) => (
+                        <li key={hi} className="font-mono text-xs uppercase tracking-[0.15em] text-muted flex items-start gap-2">
                           <span className="text-accent/40 mt-0.5">·</span>
-                          {h}
+                          {h[language]}
                         </li>
                       ))}
                     </ul>
@@ -264,10 +261,10 @@ export default function AboutContent() {
               viewport={{ once: true }}
               className="font-mono text-xs uppercase tracking-[0.4em] text-muted mb-6 mt-8 lg:hidden"
             >
-              Research
+              {t('about.research')}
             </motion.p>
 
-            <div className="relative border-l border-gray-200 pl-8 flex flex-col gap-0">
+            <div className="relative border-l border-border pl-8 flex flex-col gap-0">
               {researchExps.map((exp, i) => (
                 <motion.article
                   key={exp.id}
@@ -275,7 +272,7 @@ export default function AboutContent() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.7, delay: i * 0.07 }}
-                  className="py-8 relative group cursor-pointer bg-transparent hover:bg-red-50 transition-colors rounded-xl px-5 -mx-5"
+                  className="py-8 relative group cursor-pointer bg-transparent hover:bg-[var(--surface-hover)] transition-colors rounded-xl px-5 -mx-5"
                   role="button"
                   tabIndex={0}
                   data-cursor="expand"
@@ -284,16 +281,16 @@ export default function AboutContent() {
                 >
                   <div className="absolute left-[-34px] top-10 w-2.5 h-2.5 rounded-full bg-accent/50 border-2 border-white group-hover:bg-accent transition-colors" />
                   <p className="font-mono text-xs uppercase tracking-[0.25em] text-accent mb-2">
-                    {exp.date}
+                    {exp.date[language]}
                   </p>
                   <h3 className="font-serif font-bold text-lg md:text-xl text-foreground mb-1 group-hover:text-accent transition-colors leading-snug">
-                    {exp.title}
+                    {exp.title[language]}
                   </h3>
                   <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted mb-3">
-                    {exp.organization}
+                    {exp.organization[language]}
                   </p>
                   <p className="text-[13px] text-muted leading-relaxed max-w-md line-clamp-2">
-                    {exp.shortDescription}
+                    {exp.shortDescription[language]}
                   </p>
                   {exp.paperLink && (
                     <a
@@ -320,33 +317,33 @@ export default function AboutContent() {
             viewport={{ once: true }}
             className="font-mono text-xs uppercase tracking-[0.4em] text-muted mb-6"
           >
-            Proficiency
+            {t('about.proficiency')}
           </motion.p>
 
           <div className="flex flex-col gap-7">
             {skillCategories.map((cat, ci) => (
               <motion.div
-                key={cat.title}
+                key={ci}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: ci * 0.06 }}
               >
                 <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted mb-3">
-                  {cat.title}
+                  {cat.title[language]}
                 </p>
                 <div className="flex flex-col gap-3">
                   {cat.skills.map((skill, si) => (
-                    <div key={skill.name}>
+                    <div key={si}>
                       <div className="flex justify-between items-baseline mb-1.5">
                         <span className="font-mono text-xs uppercase tracking-[0.15em] text-foreground/90">
-                          {skill.name}
+                          {typeof skill.name === 'string' ? skill.name : skill.name[language]}
                         </span>
                         <span className="font-mono text-xs text-accent/70">
                           {skill.proficiency}%
                         </span>
                       </div>
-                      <div className="h-[2px] bg-gray-100 rounded">
+                      <div className="h-[2px] bg-surface-hover rounded">
                         <motion.div
                           className="h-full rounded"
                           style={{ background: 'linear-gradient(90deg, #DC2626, #991B1B)' }}
@@ -378,8 +375,7 @@ export default function AboutContent() {
             transition={{ duration: 1 }}
             className="font-serif italic text-subhead text-foreground leading-relaxed"
           >
-            &ldquo;Mathematics is not about numbers, equations, computations, or algorithms: 
-            it is about understanding.&rdquo;
+            &ldquo;{t('about.philosophy')}&rdquo;
           </motion.p>
           <motion.p
             initial={{ opacity: 0 }}
@@ -402,7 +398,7 @@ export default function AboutContent() {
             viewport={{ once: true }}
             className="font-mono text-xs uppercase tracking-[0.4em] text-muted mb-8 text-center"
           >
-            Outside the Classroom
+            {t('about.outsideClassroom')}
           </motion.p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -410,14 +406,14 @@ export default function AboutContent() {
               const Icon = interest.icon;
               return (
                 <motion.div
-                  key={interest.title}
+                  key={i}
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
                   className="academic-card p-7 rounded-xl flex gap-5 items-start"
                 >
-                  <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[var(--accent-glow-subtle)] flex items-center justify-center">
                     <Icon className="h-5 w-5 text-accent" strokeWidth={1.5} />
                   </div>
                   <div>
@@ -441,8 +437,8 @@ export default function AboutContent() {
         aria-label="Connect"
       >
         <h2 className="font-serif font-bold text-headline text-foreground text-balance mb-7 will-change-transform">
-          <TextReveal splitBy="word" staggerDelay={0.08}>
-            Let&apos;s Connect
+          <TextReveal key={language} splitBy="word" staggerDelay={0.08}>
+            {t('about.letsConnect')}
           </TextReveal>
         </h2>
         <motion.div
@@ -453,7 +449,7 @@ export default function AboutContent() {
           className="flex flex-col sm:flex-row items-center gap-4"
         >
           <MagneticButton href="/contact" size="lg" data-cursor="expand">
-            Get in Touch
+            {t('hero.getInTouch')}
             <ArrowUpRight className="h-4 w-4" />
           </MagneticButton>
           <MagneticButton
@@ -465,7 +461,7 @@ export default function AboutContent() {
             data-cursor="expand"
           >
             <Linkedin className="h-4 w-4" />
-            LinkedIn
+            {t('common.linkedIn')}
           </MagneticButton>
           <MagneticButton
             href={socialLinks.github}
@@ -476,7 +472,7 @@ export default function AboutContent() {
             data-cursor="expand"
           >
             <Github className="h-4 w-4" />
-            GitHub
+            {t('common.github')}
           </MagneticButton>
         </motion.div>
       </section>

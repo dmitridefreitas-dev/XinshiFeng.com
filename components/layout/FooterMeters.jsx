@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 const METERS = [
-  { label: 'Research Hours', baseVal: 74, unit: '%', color: '#DC2626' },
-  { label: 'Coffee Consumed', baseVal: 88, unit: '%', color: '#991B1B' },
+  { label: 'Research Hours', baseVal: 74, unit: '%', color: 'var(--accent-base)' },
+  { label: 'Coffee Consumed', baseVal: 88, unit: '%', color: 'var(--accent-indigo)' },
 ];
 
 function SineWave() {
@@ -29,7 +29,7 @@ function SineWave() {
     >
       <motion.polyline
         points={points}
-        stroke="rgba(220,38,38,0.55)"
+        stroke="var(--accent-glow-strong)"
         strokeWidth="1"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -67,7 +67,7 @@ export default function FooterMeters() {
               {Math.round(values[i])} {meter.unit}
             </span>
           </div>
-          <div className="h-[2px] bg-gray-100 rounded-full overflow-hidden">
+          <div className="h-[2px] bg-surface-hover rounded-full overflow-hidden">
             <motion.div
               className="h-full rounded-full"
               style={{ background: meter.color, opacity: 0.5 }}

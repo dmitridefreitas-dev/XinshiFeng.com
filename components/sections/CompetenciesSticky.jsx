@@ -2,8 +2,10 @@
 import { motion } from 'framer-motion';
 import TiltCard from '@/components/effects/TiltCard';
 import { competencies } from '@/data/constants';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function CompetenciesSticky() {
+  const { language } = useLanguage();
   return (
     <section
       className="section-full flex-col px-6 lg:px-12"
@@ -15,7 +17,7 @@ export default function CompetenciesSticky() {
         viewport={{ once: true }}
         className="font-mono text-xs uppercase tracking-[0.4em] text-muted text-center mb-10"
       >
-        Core Competencies
+        {language === 'en' ? 'Core Competencies' : '核心能力'}
       </motion.p>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 max-w-5xl mx-auto w-full">
@@ -23,7 +25,7 @@ export default function CompetenciesSticky() {
           const Icon = comp.icon;
           return (
             <motion.div
-              key={comp.title}
+              key={i}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -54,11 +56,11 @@ export default function CompetenciesSticky() {
                 </div>
 
                 <h3 className="font-serif font-bold text-subhead text-foreground mb-3 will-change-transform">
-                  {comp.title}
+                  {comp.title[language]}
                 </h3>
 
                 <p className="text-body-fluid text-muted max-w-xs leading-relaxed">
-                  {comp.description}
+                  {comp.description[language]}
                 </p>
 
                 {/* Animated accent underline */}

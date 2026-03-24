@@ -1,5 +1,8 @@
 'use client';
+import { ThemeProvider } from 'next-themes';
+import { useEffect } from 'react';
 import { ScrollParallaxProvider, useScrollParallax } from '@/contexts/ScrollParallaxContext';
+import { LanguageProvider } from '@/contexts/LanguageContext';
 import ParallaxScene from '@/components/effects/ParallaxScene';
 import { motion } from 'framer-motion';
 
@@ -35,11 +38,29 @@ function ParallaxBackgroundLayers() {
  *   ParallaxScene (applies 3D tilt to page content)
  */
 export default function ClientShell({ children }) {
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.shiftKey) {
+        if (e.key.toLowerCase() === 'b') {
+          document.documentElement.classList.add('theme-blue');
+        } else if (e.key.toLowerCase() === 'r') {
+          document.documentElement.classList.remove('theme-blue');
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   return (
-    <ScrollParallaxProvider>
-      <ParallaxScene>
-        {children}
-      </ParallaxScene>
-    </ScrollParallaxProvider>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+      <LanguageProvider>
+        <ScrollParallaxProvider>
+          <ParallaxScene>
+            {children}
+          </ParallaxScene>
+        </ScrollParallaxProvider>
+      </LanguageProvider>
+    </ThemeProvider>
   );
 }

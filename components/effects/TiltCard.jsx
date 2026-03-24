@@ -53,6 +53,7 @@ export default function TiltCard({ children, className = '', style = {}, disable
         rotateY,
         transformStyle: 'preserve-3d',
         perspective: '800px',
+        willChange: isHovered ? 'transform' : 'auto',
         ...style,
       }}
       className={className}
@@ -65,8 +66,8 @@ export default function TiltCard({ children, className = '', style = {}, disable
           style={{
             background: `radial-gradient(
               circle 200px at ${lightPos.x}% ${lightPos.y}%,
-              rgba(220,38,38,0.05) 0%,
-              rgba(153,27,27,0.03) 40%,
+              var(--accent-glow-subtle) 0%,
+              var(--accent-glow-subtle) 40%,
               transparent 70%
             )`,
             opacity: 1,

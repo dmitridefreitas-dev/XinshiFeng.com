@@ -6,11 +6,11 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-red-50 text-accent border border-red-200/70',
-        secondary: 'bg-gray-50 text-muted border border-gray-200',
-        outline: 'border border-gray-200 text-muted',
-        destructive: 'bg-red-50 text-destructive border border-red-200',
-        award: 'bg-amber-50 text-amber-700 border border-amber-200',
+        default: 'bg-[var(--accent-glow-subtle)] text-accent border border-[var(--accent-glow-strong)]',
+        secondary: 'bg-surface-hover text-muted border border-border',
+        outline: 'border border-border text-muted',
+        destructive: 'bg-[var(--accent-glow-subtle)] text-destructive border border-[var(--accent-glow-strong)]',
+        award: 'bg-[var(--accent-glow-subtle)] text-[var(--accent-indigo)] border border-[var(--accent-glow-strong)]',
       },
     },
     defaultVariants: {

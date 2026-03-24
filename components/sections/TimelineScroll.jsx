@@ -2,6 +2,7 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { timeline } from '@/data/constants';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const TYPE_COLORS = {
   research: '#DC2626',
@@ -12,6 +13,7 @@ const TYPE_COLORS = {
 
 export default function TimelineScroll() {
   const sectionRef = useRef(null);
+  const { language } = useLanguage();
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start 0.8', 'end 0.2'],
@@ -27,7 +29,7 @@ export default function TimelineScroll() {
         viewport={{ once: true }}
         className="font-mono text-xs uppercase tracking-[0.4em] text-muted text-center mb-12"
       >
-        Journey
+        {language === 'en' ? 'Journey' : '成长历程'}
       </motion.p>
 
       <div className="relative max-w-3xl mx-auto">
@@ -49,6 +51,7 @@ export default function TimelineScroll() {
         <div className="flex flex-col gap-0">
           {timeline.map((entry, i) => {
             const dotColor = TYPE_COLORS[entry.type] || '#DC2626';
+            const yearStr = typeof entry.year === 'string' ? entry.year : entry.year[language];
             return (
               <motion.article
                 key={i}
@@ -83,7 +86,7 @@ export default function TimelineScroll() {
                   }}
                   aria-hidden="true"
                 >
-                  {entry.year.split(' – ')[0]}
+                  {yearStr.split(' – ')[0]}
                 </p>
 
                 <div className="mt-2">
@@ -91,13 +94,13 @@ export default function TimelineScroll() {
                     className="font-mono text-xs uppercase tracking-[0.25em]"
                     style={{ color: dotColor }}
                   >
-                    {entry.year} — {entry.type}
+                    {yearStr} — {entry.type}
                   </span>
                   <h3 className="font-serif font-bold text-base md:text-lg text-foreground mt-1 mb-1.5">
-                    {entry.title}
+                    {entry.title[language]}
                   </h3>
                   <p className="text-body-fluid text-muted max-w-md">
-                    {entry.description}
+                    {entry.description[language]}
                   </p>
                 </div>
               </motion.article>

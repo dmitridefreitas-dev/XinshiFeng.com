@@ -4,7 +4,11 @@ export const skillsData = [
     name: 'Python',
     category: 'Programming',
     description: 'Primary research language — used for ML models, RL simulations, and data processing.',
-    usedFor: ['Reinforcement learning research', 'ML model development', 'Data analysis'],
+    usedFor: [
+      'Reinforcement learning research',
+      'ML model development',
+      'Data analysis',
+    ],
     keyFeatures: ['NumPy / Pandas', 'Scikit-learn', 'TensorFlow / PyTorch', 'Q-learning simulations'],
   },
   {
@@ -12,7 +16,11 @@ export const skillsData = [
     name: 'Java',
     category: 'Programming',
     description: 'Object-oriented programming; used extensively in Data Structures coursework and TA roles.',
-    usedFor: ['Data structures implementation', 'Algorithm design', 'Course TA support'],
+    usedFor: [
+      'Data structures implementation',
+      'Algorithm design',
+      'Course TA support',
+    ],
     keyFeatures: ['OOP design patterns', 'Collections framework', 'JUnit testing'],
   },
   {
@@ -20,7 +28,11 @@ export const skillsData = [
     name: 'C / C++',
     category: 'Programming',
     description: 'Low-level systems programming learned in CS coursework.',
-    usedFor: ['Systems programming', 'Performance-critical algorithms', 'CS coursework'],
+    usedFor: [
+      'Systems programming',
+      'Performance-critical algorithms',
+      'CS coursework',
+    ],
     keyFeatures: ['Memory management', 'Pointer arithmetic', 'Standard libraries'],
   },
   {
@@ -28,7 +40,11 @@ export const skillsData = [
     name: 'JavaScript',
     category: 'Programming',
     description: 'Web development; IBM-certified in HTML, CSS & JavaScript.',
-    usedFor: ['Web development', 'Frontend interfaces', 'Interactive applications'],
+    usedFor: [
+      'Web development',
+      'Frontend interfaces',
+      'Interactive applications',
+    ],
     keyFeatures: ['ES6+', 'DOM manipulation', 'Async/await', 'React basics'],
   },
   {
@@ -36,7 +52,10 @@ export const skillsData = [
     name: 'Swift',
     category: 'Programming',
     description: 'iOS development language learned in coursework.',
-    usedFor: ['iOS application development', 'Apple ecosystem tooling'],
+    usedFor: [
+      'iOS application development',
+      'Apple ecosystem tooling',
+    ],
     keyFeatures: ['SwiftUI', 'Xcode', 'UIKit'],
   },
   {
@@ -44,7 +63,11 @@ export const skillsData = [
     name: 'Reinforcement Learning',
     category: 'Machine Learning',
     description: 'Core research tool — Q-learning applied to game theory and cooperation dynamics.',
-    usedFor: ['Cooperation research', 'Power dynamics study', 'Agent strategy modeling'],
+    usedFor: [
+      'Cooperation research',
+      'Power dynamics study',
+      'Agent strategy modeling',
+    ],
     keyFeatures: ['Q-Table methods', 'Q-learning algorithm', 'Multi-agent environments', 'Reward shaping'],
   },
   {
@@ -52,7 +75,11 @@ export const skillsData = [
     name: 'Classical ML',
     category: 'Machine Learning',
     description: 'SVM, Random Forest, and ensemble methods applied to classification tasks.',
-    usedFor: ['Letter recognition', 'Character classification', 'Document digitization'],
+    usedFor: [
+      'Letter recognition',
+      'Character classification',
+      'Document digitization',
+    ],
     keyFeatures: ['Support Vector Classification', 'Random Forest', 'Cross-validation', 'Feature engineering'],
   },
   {
@@ -60,7 +87,11 @@ export const skillsData = [
     name: 'Deep Learning / CNNs',
     category: 'Machine Learning',
     description: 'Convolutional Neural Networks for image and character recognition tasks.',
-    usedFor: ['Letter & digit recognition', 'Computer vision (Robomaster)', 'Historical document processing'],
+    usedFor: [
+      'Letter & digit recognition',
+      'Computer vision (Robomaster)',
+      'Historical document processing',
+    ],
     keyFeatures: ['CNN architecture', 'Model training / fine-tuning', 'Data augmentation', 'TensorFlow'],
   },
   {
@@ -68,7 +99,11 @@ export const skillsData = [
     name: 'Differential Topology',
     category: 'Mathematics',
     description: 'Current research focus: smooth manifolds and de Rham cohomology under Prof. Yanli Song.',
-    usedFor: ['Research at WashU', 'Cohomology computation', 'Topological classification'],
+    usedFor: [
+      'Research at WashU',
+      'Cohomology computation',
+      'Topological classification',
+    ],
     keyFeatures: ['Smooth manifolds', 'Differential forms', 'Mayer–Vietoris sequences', 'de Rham theorem'],
   },
   {
@@ -76,7 +111,11 @@ export const skillsData = [
     name: 'Optimization',
     category: 'Mathematics',
     description: 'Theoretical and applied optimization; also graded ESE415 Optimization at WashU.',
-    usedFor: ['Graduate coursework grading', 'Algorithm design', 'ML model tuning'],
+    usedFor: [
+      'Graduate coursework grading',
+      'Algorithm design',
+      'ML model tuning',
+    ],
     keyFeatures: ['Convex optimization', 'Gradient methods', 'Duality', 'Linear programming'],
   },
   {
@@ -84,7 +123,11 @@ export const skillsData = [
     name: 'Statistics & Probability',
     category: 'Mathematics',
     description: 'Foundational for all research — statistical testing, distributions, and inference.',
-    usedFor: ['Research analysis', 'Phase transition modeling', 'Evolutionary dynamics'],
+    usedFor: [
+      'Research analysis',
+      'Phase transition modeling',
+      'Evolutionary dynamics',
+    ],
     keyFeatures: ['Hypothesis testing', 'Statistical inference', 'Probability theory', 'Stochastic processes'],
   },
   {
@@ -92,7 +135,11 @@ export const skillsData = [
     name: 'Git & GitHub',
     category: 'Tools',
     description: 'Version control for research code and projects. IBM-certified.',
-    usedFor: ['Research code management', 'Collaborative projects', 'Robotics club work'],
+    usedFor: [
+      'Research code management',
+      'Collaborative projects',
+      'Robotics club work',
+    ],
     keyFeatures: ['Branching strategies', 'Pull requests', 'Collaborative workflows'],
   },
   {
@@ -100,7 +147,11 @@ export const skillsData = [
     name: 'Microsoft Office',
     category: 'Tools',
     description: 'Professional productivity tools used for research documentation and teaching.',
-    usedFor: ['Research documentation', 'Course material preparation', 'Grading'],
+    usedFor: [
+      'Research documentation',
+      'Course material preparation',
+      'Grading',
+    ],
     keyFeatures: ['Word', 'Excel', 'PowerPoint'],
   },
   {
@@ -108,7 +159,11 @@ export const skillsData = [
     name: 'Computer Vision',
     category: 'Machine Learning',
     description: 'Applied in Robomaster robotics club for object detection and autonomous navigation.',
-    usedFor: ['Robomaster competition', 'Robot target detection', 'Video dataset labeling'],
+    usedFor: [
+      'Robomaster competition',
+      'Robot target detection',
+      'Video dataset labeling',
+    ],
     keyFeatures: ['Object detection', 'Video processing', 'Dataset labeling', 'Model training'],
   },
 ];

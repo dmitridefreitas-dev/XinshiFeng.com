@@ -2,20 +2,23 @@
 import Link from 'next/link';
 import { Github, Linkedin, FileText, Mail } from 'lucide-react';
 import { socialLinks, contactInfo } from '@/data/constants';
+import { useLanguage } from '@/contexts/LanguageContext';
 import FooterMeters from './FooterMeters';
-
-const NAV_LINKS = [
-  { href: '/',        label: 'Home' },
-  { href: '/about',   label: 'About' },
-  { href: '/projects', label: 'Research' },
-  { href: '/contact', label: 'Contact' },
-];
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const { language, t } = useLanguage();
+
+  const NAV_LINKS = [
+    { href: '/',        label: t('nav.home') },
+    { href: '/about',   label: t('nav.about') },
+    { href: '/projects', label: t('nav.research') },
+    { href: '/contact', label: t('nav.contact') },
+    { href: 'https://drive.google.com/file/d/1K6AhFHorjonEPDpiJxP-X-GpC_9k4x67/view?usp=drive_link', label: t('nav.resume'), external: true },
+  ];
 
   return (
-    <footer className="relative border-t border-gray-200 bg-white/50 backdrop-blur-sm">
+    <footer className="relative border-t border-border bg-[var(--surface-overlay)] backdrop-blur-sm">
       <div className="max-w-6xl mx-auto px-6 py-12">
 
         {/* Top row */}
@@ -23,22 +26,36 @@ export default function Footer() {
 
           {/* Branding */}
           <div>
-            <p className="font-serif text-lg font-bold text-foreground">Xinshi Feng</p>
+            <p className="font-serif text-lg font-bold text-foreground">
+              {language === 'en' ? 'Xinshi Feng' : '冯信实'}
+            </p>
             <p className="font-mono text-xs uppercase tracking-[0.35em] text-muted mt-1">
-              Computer Science &amp; Mathematics · WashU
+              {t('footer.tagline')}
             </p>
           </div>
 
           {/* Nav — py-2 for adequate touch height */}
-          <nav className="flex-1 flex justify-center flex-wrap gap-4" aria-label="Footer navigation">
+          <nav className="flex-1 grid grid-cols-2 gap-x-12 gap-y-2 justify-items-start w-fit mx-auto" aria-label="Footer navigation">
             {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="font-mono text-xs uppercase tracking-[0.25em] text-muted hover:text-accent transition-colors py-2 min-h-[44px] flex items-center"
-              >
-                {link.label}
-              </Link>
+              link.external ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono text-xs uppercase tracking-[0.25em] text-muted hover:text-accent transition-colors py-2 min-h-[44px] flex items-center"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="font-mono text-xs uppercase tracking-[0.25em] text-muted hover:text-accent transition-colors py-2 min-h-[44px] flex items-center"
+                >
+                  {link.label}
+                </Link>
+              )
             ))}
           </nav>
 
@@ -89,12 +106,12 @@ export default function Footer() {
         <FooterMeters />
 
         {/* Bottom row */}
-        <div className="mt-10 pt-6 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="mt-10 pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted">
-            © {year} Xinshi Feng · St. Louis, MO
+            © {year} {language === 'en' ? 'Xinshi Feng' : '冯信实'} · {t('footer.stLouis')}
           </p>
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted">
-            Available for Math PhD &amp; Internship · Fall 2027
+            {t('footer.available')}
           </p>
         </div>
       </div>

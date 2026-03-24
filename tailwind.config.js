@@ -8,31 +8,31 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: '#FAFAF8',
-        foreground: '#1A1A2E',
+        background: 'var(--bg)',
+        foreground: 'var(--fg)',
         muted: {
-          DEFAULT: '#6B7280',
-          foreground: '#6B7280',
+          DEFAULT: 'var(--muted)',
+          foreground: 'var(--muted)',
         },
         accent: {
-          DEFAULT: '#DC2626',
-          blue: '#DC2626',
-          indigo: '#991B1B',
-          violet: '#7F1D1D',
-          foreground: '#FFFFFF',
-          glow: 'rgba(220,38,38,0.15)',
+          DEFAULT: 'var(--accent-base)',
+          blue: 'var(--accent-base)',
+          indigo: 'var(--accent-indigo)',
+          violet: 'var(--accent-violet)',
+          foreground: 'var(--bg)',
+          glow: 'var(--accent-glow)',
         },
         surface: {
-          DEFAULT: '#FFFFFF',
-          hover: '#F3F4F6',
+          DEFAULT: 'var(--surface)',
+          hover: 'var(--surface-hover)',
         },
         border: {
-          DEFAULT: '#E5E7EB',
-          strong: '#D1D5DB',
+          DEFAULT: 'var(--border)',
+          strong: 'var(--border-strong)',
         },
         destructive: {
-          DEFAULT: '#DC2626',
-          foreground: '#FFFFFF',
+          DEFAULT: 'var(--accent-base)',
+          foreground: 'var(--surface)',
         },
       },
       fontFamily: {
@@ -52,8 +52,8 @@ module.exports = {
           '100%': { transform: 'translateX(-33.333%)' },
         },
         'pulse-glow': {
-          '0%, 100%': { boxShadow: '0 0 20px rgba(220,38,38,0.2), 0 0 40px rgba(220,38,38,0.08)' },
-          '50%':      { boxShadow: '0 0 35px rgba(220,38,38,0.35), 0 0 70px rgba(220,38,38,0.15)' },
+          '0%, 100%': { boxShadow: '0 0 20px var(--accent-glow), 0 0 40px var(--accent-glow-subtle)' },
+          '50%':      { boxShadow: '0 0 35px var(--accent-glow-strong), 0 0 70px var(--accent-glow)' },
         },
         'grid-breathe': {
           '0%, 100%': { opacity: '1' },

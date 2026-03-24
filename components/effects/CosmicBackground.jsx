@@ -67,14 +67,14 @@ function MathBackground() {
     >
       <path
         id="sine-path"
-        stroke="rgba(220,38,38,0.045)"
+        stroke="var(--accent-glow-subtle)"
         strokeWidth="1.5"
         fill="none"
         strokeLinecap="round"
       />
       <path
         id="cosine-path"
-        stroke="rgba(153,27,27,0.035)"
+        stroke="var(--accent-glow-subtle)"
         strokeWidth="1"
         fill="none"
         strokeLinecap="round"
@@ -82,7 +82,8 @@ function MathBackground() {
       />
       <path
         id="integral-path"
-        stroke="rgba(26,26,46,0.028)"
+        stroke="var(--muted)"
+        style={{ opacity: 0.15 }}
         strokeWidth="1"
         fill="none"
         strokeLinecap="round"

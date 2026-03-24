@@ -4,49 +4,52 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import TextReveal from '@/components/effects/TextReveal';
 import MagneticButton from '@/components/effects/MagneticButton';
 import { ArrowDown } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { contactInfo } from '@/data/constants';
 
 // Math symbols — faint, academic, slow-drifting
 const MATH_SHAPES = [
   {
     label: '∂',
     className: 'float-geo-slow font-serif select-none pointer-events-none absolute',
-    style: { fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', top: '16%', left: '5%', color: 'rgba(26,26,46,0.055)', animationDuration: '11s' },
+    style: { fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', top: '16%', left: '5%', color: 'var(--muted)', opacity: 0.15, animationDuration: '11s' },
   },
   {
     label: '∑',
     className: 'float-geo font-serif select-none pointer-events-none absolute',
-    style: { fontSize: 'clamp(1.25rem, 2.5vw, 2.25rem)', top: '20%', right: '6%', color: 'rgba(220,38,38,0.055)', animationDelay: '1.5s', animationDuration: '9s' },
+    style: { fontSize: 'clamp(1.25rem, 2.5vw, 2.25rem)', top: '20%', right: '6%', color: 'var(--accent-base)', opacity: 0.055, animationDelay: '1.5s', animationDuration: '9s' },
   },
   {
     label: '∇',
     className: 'float-geo-reverse font-serif select-none pointer-events-none absolute',
-    style: { fontSize: 'clamp(1.1rem, 2.2vw, 1.9rem)', bottom: '28%', left: '4%', color: 'rgba(153,27,27,0.05)', animationDelay: '0.8s', animationDuration: '12s' },
+    style: { fontSize: 'clamp(1.1rem, 2.2vw, 1.9rem)', bottom: '28%', left: '4%', color: 'var(--accent-indigo)', opacity: 0.05, animationDelay: '0.8s', animationDuration: '12s' },
   },
   {
     label: 'ℝ',
     className: 'float-geo font-serif select-none pointer-events-none absolute',
-    style: { fontSize: 'clamp(1rem, 1.8vw, 1.6rem)', bottom: '22%', right: '5%', color: 'rgba(26,26,46,0.045)', animationDelay: '2s', animationDuration: '8s' },
+    style: { fontSize: 'clamp(1rem, 1.8vw, 1.6rem)', bottom: '22%', right: '5%', color: 'var(--muted)', opacity: 0.1, animationDelay: '2s', animationDuration: '8s' },
   },
   {
     label: '∫',
     className: 'float-geo-slow font-serif select-none pointer-events-none absolute',
-    style: { fontSize: 'clamp(1.2rem, 2.2vw, 2rem)', top: '52%', right: '9%', color: 'rgba(239,68,68,0.048)', animationDelay: '3s', animationDuration: '13s' },
+    style: { fontSize: 'clamp(1.2rem, 2.2vw, 2rem)', top: '52%', right: '9%', color: 'var(--accent-light)', opacity: 0.05, animationDelay: '3s', animationDuration: '13s' },
   },
   {
     label: '∈',
     className: 'float-geo-reverse font-serif select-none pointer-events-none absolute',
-    style: { fontSize: 'clamp(0.85rem, 1.4vw, 1.35rem)', top: '62%', left: '8%', color: 'rgba(220,38,38,0.04)', animationDelay: '1.2s', animationDuration: '10s' },
+    style: { fontSize: 'clamp(0.85rem, 1.4vw, 1.35rem)', top: '62%', left: '8%', color: 'var(--accent-base)', opacity: 0.04, animationDelay: '1.2s', animationDuration: '10s' },
   },
   {
     label: '⊂',
     className: 'float-geo font-serif select-none pointer-events-none absolute',
-    style: { fontSize: 'clamp(0.75rem, 1.2vw, 1.2rem)', top: '35%', left: '3%', color: 'rgba(26,26,46,0.035)', animationDelay: '4s', animationDuration: '14s' },
+    style: { fontSize: 'clamp(0.75rem, 1.2vw, 1.2rem)', top: '35%', left: '3%', color: 'var(--muted)', opacity: 0.1, animationDelay: '4s', animationDuration: '14s' },
   },
 ];
 
 export default function HeroSection() {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
+  const { language, t } = useLanguage();
 
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.88]);
   const opacity = useTransform(scrollYProgress, [0, 0.55], [1, 0]);
@@ -69,7 +72,7 @@ export default function HeroSection() {
           width: '140%',
           height: '80%',
           background:
-            'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(220,38,38,0.07) 0%, rgba(239,68,68,0.04) 40%, rgba(153,27,27,0.02) 65%, transparent 85%)',
+            'radial-gradient(ellipse 80% 60% at 50% 0%, var(--accent-glow-subtle) 0%, var(--accent-glow) 40%, transparent 85%)',
           transformOrigin: 'center top',
         }}
         aria-hidden="true"
@@ -106,16 +109,16 @@ export default function HeroSection() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="font-mono text-xs uppercase tracking-[0.45em] text-accent mb-5"
         >
-          Portfolio — Available Fall 2027
+          {t('hero.available')}
         </motion.p>
 
         {/* Name — Playfair serif with glow */}
         <h1
           className="font-serif font-bold text-display text-foreground text-balance will-change-transform"
-          style={{ animation: 'glow-text-pulse 5s ease-in-out infinite' }}
+          style={{ animation: 'glow-text-pulse 5s ease-in-out infinite', lineHeight: '1.2' }}
         >
-          <TextReveal splitBy="word" delay={0.4} staggerDelay={0.1}>
-            Xinshi Feng
+          <TextReveal key={language} splitBy="word" delay={0.4} staggerDelay={0.1} className="pb-4">
+            {language === 'en' ? 'Xinshi Feng' : '冯信实'}
           </TextReveal>
         </h1>
 
@@ -146,7 +149,7 @@ export default function HeroSection() {
             animation: 'gradient-shift-subtitle 6s ease infinite',
           }}
         >
-          Computer Science &amp; Mathematics
+          {t('hero.subtitle')}
         </motion.p>
 
         {/* Institution */}
@@ -156,7 +159,7 @@ export default function HeroSection() {
           transition={{ duration: 0.6, delay: 1.25 }}
           className="font-mono text-xs uppercase tracking-[0.3em] text-muted mt-3"
         >
-          Washington University in St. Louis
+          {contactInfo.location[language]}
         </motion.p>
 
         {/* CTA */}
@@ -164,13 +167,18 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 1.45 }}
-          className="mt-7 flex flex-col sm:flex-row items-center gap-4"
+          className="mt-7 flex flex-col items-center gap-4"
         >
-          <MagneticButton href="/projects" data-cursor="expand">
-            View Research
-          </MagneticButton>
-          <MagneticButton href="/contact" variant="ghost" data-cursor="expand">
-            Get in Touch
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            <MagneticButton href="/projects" data-cursor="expand">
+              {t('hero.viewResearch')}
+            </MagneticButton>
+            <MagneticButton href="/contact" variant="ghost" data-cursor="expand">
+              {t('hero.getInTouch')}
+            </MagneticButton>
+          </div>
+          <MagneticButton href="https://drive.google.com/file/d/1K6AhFHorjonEPDpiJxP-X-GpC_9k4x67/view?usp=drive_link" variant="ghost" external={true} data-cursor="expand">
+            {t('nav.resume')}
           </MagneticButton>
         </motion.div>
       </motion.div>
@@ -191,7 +199,7 @@ export default function HeroSection() {
         >
           <ArrowDown className="h-4 w-4" />
         </motion.div>
-        <span className="font-mono text-xs uppercase tracking-[0.3em]">Scroll</span>
+        <span className="font-mono text-xs uppercase tracking-[0.3em]">{t('hero.scroll')}</span>
       </motion.button>
     </section>
   );
