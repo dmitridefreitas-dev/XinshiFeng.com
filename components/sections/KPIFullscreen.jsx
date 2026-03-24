@@ -20,7 +20,7 @@ export default function KPIFullscreen() {
           transition={{ duration: 0.6 }}
           className="font-mono text-xs uppercase tracking-[0.35em] text-accent text-center mb-10"
         >
-          {language === 'en' ? 'By The Numbers' : '数据统计'}
+          {t('metrics.byTheNumbers')}
         </motion.p>
 
         {/* 2×2 metrics grid */}

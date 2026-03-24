@@ -15,7 +15,7 @@ function ProjectRow({ project, index, onOpen }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -8 }}
       transition={{ duration: 0.5, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
-      className="group relative border-b border-border py-5 cursor-pointer hover:bg-[var(--surface-hover)] transition-all rounded-lg px-4 -mx-4"
+      className="group relative border border-border py-5 cursor-pointer hover:bg-[var(--surface-hover)] hover:border-accent/40 transition-all rounded-lg px-4 -mx-4"
       onClick={() => onOpen(project)}
       role="button"
       tabIndex={0}
@@ -28,7 +28,7 @@ function ProjectRow({ project, index, onOpen }) {
         <div className="flex md:flex-col items-center md:items-start gap-3 md:gap-1 md:w-24 flex-shrink-0">
           <span
             className="font-serif font-bold text-3xl leading-none group-hover:text-accent transition-colors"
-            style={{ color: 'var(--accent-glow)' }}
+            style={{ color: 'var(--accent-base)', opacity: 0.2 }}
           >
             {String(index + 1).padStart(2, '0')}
           </span>
@@ -112,23 +112,6 @@ export default function ProjectsContent() {
         className="section-full flex-col text-center px-6 overflow-hidden pt-28"
         aria-label="Research hero"
       >
-        {/* Ghost background text */}
-        <p
-          className="absolute font-serif font-bold select-none pointer-events-none"
-          style={{
-            fontSize: 'clamp(2.5rem, 8vw, 7rem)',
-            color: 'var(--accent-glow)',
-            letterSpacing: '-0.06em',
-            lineHeight: 1,
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            whiteSpace: 'nowrap',
-          }}
-          aria-hidden="true"
-        >
-          {language === 'en' ? 'Research' : '科研项目'}
-        </p>
 
         <motion.p
           initial={{ opacity: 0 }}
@@ -192,9 +175,9 @@ export default function ProjectsContent() {
                 whileTap={{ scale: 0.97 }}
                 className="font-mono text-xs uppercase tracking-[0.25em] px-4 py-2 rounded-lg border transition-all"
                 style={{
-                  background: activeCategory === cat.en ? '#DC2626' : 'transparent',
-                  color: activeCategory === cat.en ? '#FFFFFF' : '#6B7280',
-                  borderColor: activeCategory === cat.en ? '#DC2626' : '#E5E7EB',
+                  background: activeCategory === cat.en ? 'var(--accent-base)' : 'transparent',
+                  color: activeCategory === cat.en ? 'var(--surface)' : 'var(--muted)',
+                  borderColor: activeCategory === cat.en ? 'var(--accent-base)' : 'var(--border)',
                 }}
                 data-cursor="expand"
               >

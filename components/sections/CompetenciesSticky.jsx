@@ -5,7 +5,7 @@ import { competencies } from '@/data/constants';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function CompetenciesSticky() {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   return (
     <section
       className="section-full flex-col px-6 lg:px-12"
@@ -17,7 +17,7 @@ export default function CompetenciesSticky() {
         viewport={{ once: true }}
         className="font-mono text-xs uppercase tracking-[0.4em] text-muted text-center mb-10"
       >
-        {language === 'en' ? 'Core Competencies' : '核心能力'}
+        {t('metrics.coreCompetencies')}
       </motion.p>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 max-w-5xl mx-auto w-full">
@@ -40,7 +40,7 @@ export default function CompetenciesSticky() {
                   <motion.div
                     className="absolute inset-0 rounded-full"
                     style={{
-                      background: 'conic-gradient(from 0deg, transparent 60%, rgba(220,38,38,0.5) 80%, transparent 100%)',
+                      background: 'conic-gradient(from 0deg, transparent 60%, var(--accent-glow-strong) 80%, transparent 100%)',
                     }}
                     animate={{ rotate: 360 }}
                     transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
@@ -49,7 +49,7 @@ export default function CompetenciesSticky() {
                   {/* Inner glow */}
                   <div
                     className="absolute inset-1 rounded-full"
-                    style={{ background: 'radial-gradient(circle, rgba(220,38,38,0.1) 0%, transparent 70%)' }}
+                    style={{ background: 'radial-gradient(circle, var(--accent-glow-subtle) 0%, transparent 70%)' }}
                     aria-hidden="true"
                   />
                   <Icon className="w-5 h-5 text-accent relative z-10" strokeWidth={1.5} />
@@ -66,7 +66,7 @@ export default function CompetenciesSticky() {
                 {/* Animated accent underline */}
                 <motion.div
                   className="mt-5 h-px origin-left"
-                  style={{ background: 'linear-gradient(90deg, rgba(220,38,38,0.6), transparent)' }}
+                  style={{ background: 'linear-gradient(90deg, var(--accent-glow-strong), transparent)' }}
                   initial={{ width: 0 }}
                   whileInView={{ width: 48 }}
                   viewport={{ once: true }}

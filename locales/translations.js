@@ -24,12 +24,24 @@ export const translations = {
       linkedIn: 'LinkedIn',
       github: 'GitHub',
       arxiv: 'Published Paper · arXiv',
+      arxivPaper: 'arXiv Paper',
       letsTalk: "Let's Talk",
     },
     footer: {
-      tagline: 'Computer Science & Mathematics · WashU',
+      tagline: 'Mathematics & Computer Science · WashU',
       stLouis: 'St. Louis, MO',
       available: 'Available for Math PhD & Internship · Fall 2027',
+    },
+    metrics: {
+      byTheNumbers: 'By The Numbers',
+      coreCompetencies: 'Core Competencies',
+      journey: 'Journey',
+      types: {
+        research: 'Research',
+        teaching: 'Teaching',
+        education: 'Education',
+        activity: 'Activity',
+      },
     },
     cta: {
       title: 'Seeking Research Opportunities',
@@ -127,12 +139,24 @@ export const translations = {
       linkedIn: 'LinkedIn',
       github: 'GitHub',
       arxiv: '已发表论文 · arXiv',
+      arxivPaper: 'arXiv 论文',
       letsTalk: '随时沟通',
     },
     footer: {
-      tagline: '计算机科学与数学 · 圣路易斯华盛顿大学',
+      tagline: '数学与计算机科学 · 圣路易斯华盛顿大学',
       stLouis: '密苏里州 圣路易斯',
       available: '可入读数学博士项目或参与科研实习 · 2027秋季',
+    },
+    metrics: {
+      byTheNumbers: '数据统计',
+      coreCompetencies: '核心能力',
+      journey: '成长历程',
+      types: {
+        research: '科研项目',
+        teaching: '教学工作',
+        education: '教育经历',
+        activity: '学生活动',
+      },
     },
     cta: {
       title: '寻求科研机会',

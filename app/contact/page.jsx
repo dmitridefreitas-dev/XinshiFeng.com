@@ -58,12 +58,6 @@ export default function ContactPage() {
   };
 
   // Floating math symbols for contact hero
-  const CONTACT_SHAPES = [
-    { label: '∀', style: { fontSize: 'clamp(1.75rem, 3.5vw, 3rem)', top: '16%', left: '5%', color: 'var(--accent-base)', opacity: 0.06 } },
-    { label: '∃', style: { fontSize: 'clamp(1.25rem, 2.5vw, 2.25rem)', top: '22%', right: '7%', color: 'var(--accent-indigo)', opacity: 0.05 } },
-    { label: '⊃', style: { fontSize: 'clamp(1.5rem, 3vw, 2.75rem)', bottom: '24%', left: '6%', color: 'var(--accent-base)', opacity: 0.05 } },
-    { label: '∴', style: { fontSize: 'clamp(1rem, 2vw, 1.75rem)', bottom: '28%', right: '5%', color: 'var(--accent-light)', opacity: 0.05 } },
-  ];
 
   return (
     <>
@@ -72,20 +66,6 @@ export default function ContactPage() {
         className="section-full flex-col text-center px-6 overflow-hidden pt-28"
         aria-label="Contact hero"
       >
-        {/* Floating math symbols */}
-        {CONTACT_SHAPES.map((shape, i) => (
-          <motion.span
-            key={i}
-            className="float-geo font-serif absolute select-none pointer-events-none"
-            style={{ ...shape.style, animationDelay: `${i * 0.8}s` }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1 + i * 0.2, duration: 1 }}
-            aria-hidden="true"
-          >
-            {shape.label}
-          </motion.span>
-        ))}
 
         <motion.p
           initial={{ opacity: 0 }}

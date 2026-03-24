@@ -19,6 +19,7 @@ export default function CTASection() {
         style={{
           fontSize: 'clamp(2rem, 6vw, 5.5rem)',
           color: 'var(--accent-glow)',
+          opacity: 0.075,
           letterSpacing: '-0.05em',
           lineHeight: 1,
           top: '50%',

@@ -174,7 +174,7 @@ export default function AboutContent() {
                   className="absolute left-[-34px] top-9 w-2.5 h-2.5 rounded-full border-2 border-white group-hover:opacity-100 transition-all"
                   style={{ backgroundColor: 'var(--accent-glow-strong)' }}
                 />
-                <p className="font-mono text-xs uppercase tracking-[0.25em] mb-2" style={{ color: '#991B1B' }}>
+                <p className="font-mono text-xs uppercase tracking-[0.25em] mb-2" style={{ color: 'var(--accent-indigo)' }}>
                   {exp.date[language]}
                 </p>
                 <h3 className="font-serif font-bold text-base md:text-lg text-foreground mb-1 group-hover:text-accent transition-colors leading-snug">
@@ -208,7 +208,7 @@ export default function AboutContent() {
             <div className="relative border-l border-border pl-8 flex flex-col gap-0">
               {education.map((edu, i) => (
                 <motion.article
-                  key={edu.school.en}
+                  key={i}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -217,7 +217,7 @@ export default function AboutContent() {
                 >
                   <div className="absolute left-[-34px] top-9 w-2.5 h-2.5 rounded-full bg-accent/60 border-2 border-white" />
                   <p className="font-mono text-xs uppercase tracking-[0.25em] text-accent mb-1.5">
-                    {edu.years}
+                    {edu.years[language]}
                   </p>
                   <h3 className="font-serif font-bold text-base md:text-lg text-foreground mb-1">
                     {edu.school[language]}
@@ -300,7 +300,7 @@ export default function AboutContent() {
                       onClick={(e) => e.stopPropagation()}
                       className="inline-flex items-center gap-1.5 mt-3 font-mono text-xs uppercase tracking-[0.2em] text-accent border border-accent/25 hover:border-accent/60 rounded px-2 py-1 transition-colors"
                     >
-                      <FileText className="h-3 w-3" /> arXiv Paper
+                      <FileText className="h-3 w-3" /> {t('common.arxivPaper')}
                     </a>
                   )}
                 </motion.article>
@@ -346,7 +346,7 @@ export default function AboutContent() {
                       <div className="h-[2px] bg-surface-hover rounded">
                         <motion.div
                           className="h-full rounded"
-                          style={{ background: 'linear-gradient(90deg, #DC2626, #991B1B)' }}
+                          style={{ background: 'linear-gradient(90deg, var(--accent-base), var(--accent-indigo))' }}
                           initial={{ width: 0 }}
                           whileInView={{ width: `${skill.proficiency}%` }}
                           viewport={{ once: true }}

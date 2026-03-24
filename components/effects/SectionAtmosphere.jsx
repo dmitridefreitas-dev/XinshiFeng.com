@@ -17,28 +17,28 @@ import { useInView } from 'framer-motion';
 
 const ATMOSPHERE_MAP = {
   hero: {
-    '--atm-primary':   'rgba(220,38,38,0.08)',
-    '--atm-secondary': 'rgba(153,27,27,0.05)',
+    '--atm-primary':   'var(--accent-glow-subtle)',
+    '--atm-secondary': 'var(--accent-glow-subtle)',
     '--atm-intensity': '1',
   },
   work: {
-    '--atm-primary':   'rgba(239,68,68,0.07)',
-    '--atm-secondary': 'rgba(220,38,38,0.05)',
+    '--atm-primary':   'var(--accent-glow-subtle)',
+    '--atm-secondary': 'var(--accent-glow-subtle)',
     '--atm-intensity': '0.85',
   },
   skills: {
-    '--atm-primary':   'rgba(220,38,38,0.06)',
-    '--atm-secondary': 'rgba(239,68,68,0.04)',
+    '--atm-primary':   'var(--accent-glow-subtle)',
+    '--atm-secondary': 'var(--accent-glow-subtle)',
     '--atm-intensity': '0.75',
   },
   timeline: {
-    '--atm-primary':   'rgba(153,27,27,0.06)',
-    '--atm-secondary': 'rgba(239,68,68,0.04)',
+    '--atm-primary':   'var(--accent-glow-subtle)',
+    '--atm-secondary': 'var(--accent-glow-subtle)',
     '--atm-intensity': '0.8',
   },
   cta: {
-    '--atm-primary':   'rgba(220,38,38,0.09)',
-    '--atm-secondary': 'rgba(153,27,27,0.06)',
+    '--atm-primary':   'var(--accent-glow-subtle)',
+    '--atm-secondary': 'var(--accent-glow-subtle)',
     '--atm-intensity': '1',
   },
 };

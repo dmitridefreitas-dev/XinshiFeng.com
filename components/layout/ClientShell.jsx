@@ -1,5 +1,4 @@
 'use client';
-import { ThemeProvider } from 'next-themes';
 import { useEffect } from 'react';
 import { ScrollParallaxProvider, useScrollParallax } from '@/contexts/ScrollParallaxContext';
 import { LanguageProvider } from '@/contexts/LanguageContext';
@@ -53,14 +52,12 @@ export default function ClientShell({ children }) {
   }, []);
 
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-      <LanguageProvider>
-        <ScrollParallaxProvider>
-          <ParallaxScene>
-            {children}
-          </ParallaxScene>
-        </ScrollParallaxProvider>
-      </LanguageProvider>
-    </ThemeProvider>
+    <LanguageProvider>
+      <ScrollParallaxProvider>
+        <ParallaxScene>
+          {children}
+        </ParallaxScene>
+      </ScrollParallaxProvider>
+    </LanguageProvider>
   );
 }

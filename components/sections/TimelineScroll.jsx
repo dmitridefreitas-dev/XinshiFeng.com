@@ -5,15 +5,15 @@ import { timeline } from '@/data/constants';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const TYPE_COLORS = {
-  research: '#DC2626',
-  teaching: '#991B1B',
-  education: '#DC2626',
-  activity: '#7F1D1D',
+  research: 'var(--accent-base)',
+  teaching: 'var(--accent-indigo)',
+  education: 'var(--accent-base)',
+  activity: 'var(--accent-violet)',
 };
 
 export default function TimelineScroll() {
   const sectionRef = useRef(null);
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start 0.8', 'end 0.2'],
@@ -29,28 +29,28 @@ export default function TimelineScroll() {
         viewport={{ once: true }}
         className="font-mono text-xs uppercase tracking-[0.4em] text-muted text-center mb-12"
       >
-        {language === 'en' ? 'Journey' : '成长历程'}
+        {t('metrics.journey')}
       </motion.p>
 
       <div className="relative max-w-3xl mx-auto">
         {/* Background track line */}
         <div
           className="absolute left-0 top-0 bottom-0 w-px"
-          style={{ background: 'rgba(220,38,38,0.1)', top: 0 }}
+          style={{ background: 'var(--accent-glow-subtle)', top: 0 }}
         />
         {/* Animated fill line */}
         <motion.div
           className="absolute left-0 top-0 bottom-0 w-px origin-top"
           style={{
-            background: 'linear-gradient(to bottom, rgba(220,38,38,0.6), rgba(153,27,27,0.4), rgba(220,38,38,0.2))',
+            background: `linear-gradient(to bottom, var(--accent-base), var(--accent-indigo), var(--accent-glow-subtle))`,
             scaleY: lineScaleY,
-            boxShadow: '0 0 6px rgba(220,38,38,0.25)',
+            boxShadow: `0 0 6px var(--accent-glow)`,
           }}
         />
 
         <div className="flex flex-col gap-0">
           {timeline.map((entry, i) => {
-            const dotColor = TYPE_COLORS[entry.type] || '#DC2626';
+            const dotColor = TYPE_COLORS[entry.type] || 'var(--accent-base)';
             const yearStr = typeof entry.year === 'string' ? entry.year : entry.year[language];
             return (
               <motion.article
@@ -81,7 +81,7 @@ export default function TimelineScroll() {
                   style={{
                     fontSize: 'clamp(1.5rem, 4vw, 2.75rem)',
                     lineHeight: 0.9,
-                    color: 'rgba(220,38,38,0.14)',
+                    color: 'var(--accent-glow)',
                     letterSpacing: '-0.04em',
                   }}
                   aria-hidden="true"
@@ -94,7 +94,7 @@ export default function TimelineScroll() {
                     className="font-mono text-xs uppercase tracking-[0.25em]"
                     style={{ color: dotColor }}
                   >
-                    {yearStr} — {entry.type}
+                    {yearStr} — {t(`metrics.types.${entry.type}`)}
                   </span>
                   <h3 className="font-serif font-bold text-base md:text-lg text-foreground mt-1 mb-1.5">
                     {entry.title[language]}

@@ -76,7 +76,7 @@ export default function SkillsHorizontal() {
   const mobileSetWidth = skillsData.length * 75;
 
   return (
-    <section aria-label="Skills" className="overflow-hidden bg-[#FAFAF8]">
+    <section aria-label="Skills" className="overflow-hidden bg-background">
       {/* ── Desktop: 3 auto-scrolling infinite rows (Slow & Smooth) ────────── */}
       <div className="hidden lg:flex flex-col" style={{ height: '88vh' }}>
         <div className="flex items-center px-12 border-b border-border flex-shrink-0" style={{ height: '3.5rem' }}>
@@ -114,7 +114,7 @@ export default function SkillsHorizontal() {
           >
             {[...skillsData, ...skillsData].map((skill, i) => (
               <SkillCard
-                key={`mob-${skill.name}-${i}`}
+                key={`mob-${i}`}
                 skill={skill}
                 className="!h-full !w-[75vw] !px-8 border-border"
                 onClick={() => setSelectedSkill(skill)}
@@ -135,10 +135,10 @@ export default function SkillsHorizontal() {
           >
             {[...skillsData, ...skillsData].map((skill, i) => (
               <span
-                key={`${skill.name}-${i}`}
-                className="font-serif font-bold text-4xl uppercase tracking-tighter text-[#1A1A2E]"
+                key={i}
+                className="font-serif font-bold text-4xl uppercase tracking-tighter text-foreground"
               >
-                {skill.name}
+                {typeof skill.name === 'string' ? skill.name : skill.name[language]}
               </span>
             ))}
           </div>
@@ -157,12 +157,12 @@ export default function SkillsHorizontal() {
         >
           {allSkillsTripled.map((skill, i) => (
             <span
-              key={`marquee-${skill.name}-${i}`}
+              key={`marquee-${i}`}
               className="inline-flex items-center font-mono text-[9px] uppercase tracking-[0.4em] text-muted/60 hover:text-accent transition-colors duration-300 cursor-pointer"
               onClick={() => setSelectedSkill(skill)}
             >
               <span className="w-1 h-1 rounded-full bg-accent/20 mr-4 flex-shrink-0" />
-              {skill.name}
+              {typeof skill.name === 'string' ? skill.name : skill.name[language]}
             </span>
           ))}
         </div>
