@@ -41,9 +41,14 @@ export default function ClientShell({ children }) {
     const handleKeyDown = (e) => {
       if (e.shiftKey) {
         if (e.key.toLowerCase() === 'b') {
+          document.documentElement.classList.remove('theme-purple'); // Ensure purple is off
           document.documentElement.classList.add('theme-blue');
         } else if (e.key.toLowerCase() === 'r') {
-          document.documentElement.classList.remove('theme-blue');
+          document.documentElement.classList.remove('theme-blue'); // Ensure blue is off
+          document.documentElement.classList.remove('theme-purple'); // Ensure purple is off
+        } else if (e.key.toLowerCase() === 'p') {
+          document.documentElement.classList.remove('theme-blue'); // Ensure blue is off
+          document.documentElement.classList.add('theme-purple');
         }
       }
     };

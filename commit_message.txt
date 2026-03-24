@@ -1,10 +1,11 @@
-Fix: Implement all requested UI/UX and theming enhancements
+feat: Add hidden Purple Galaxy Mode (Shift+P)
 
-This commit includes all the UI/UX improvements and theming fixes as per user requests, addressing:
-- Light mode inversion and consistency across desktop.
-- Elimination of color bleeding between red and blue themes by ensuring all accent colors and gradients are dynamically sourced from CSS variables.
-- Removed a hardcoded light-blue gradient fallback in `ProjectsShowcase.jsx`, replacing it with theme-aware CSS variables.
-- Updated outdated comments in `app/globals.css` and `components/sections/HeroSection.jsx` to reflect dynamic accent colors.
-- Desktop header alignment, width, and text size adjustments.
-- Research Highlights card gradients for dark mode.
-- Other minor styling and content display corrections.
+- Add .theme-purple CSS variables with deep space dark background, violet accent palette, and research card gradients for both light and dark sub-modes.
+- Create GalaxyBackground.jsx: canvas-based twinkling star field with milky way band, animated nebula pulse glows, and planet orbit rings.
+- Create GalaxyWrapper.jsx: thin client wrapper that watches document classList for theme-purple and dynamically renders the galaxy effects.
+- Wire GalaxyWrapper into app/layout.jsx so galaxy renders globally when active.
+- Extend ClientShell.jsx Shift+P shortcut to toggle theme-purple (removing theme-blue if active).
+- Hide regular dot-grid and paper-wash layers in purple mode so stars take over cleanly.
+- Add SEO improvements: keywords metadata on all pages, updated titles and descriptions.
+- Add Google Analytics via @next/third-parties/google (GA ID placeholder).
+- Fix: remove hardcoded fallback gradient in ProjectsShowcase.jsx.

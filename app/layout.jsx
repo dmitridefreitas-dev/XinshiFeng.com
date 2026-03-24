@@ -7,6 +7,8 @@ import GrainOverlay from '@/components/effects/GrainOverlay';
 import ClientShell from '@/components/layout/ClientShell';
 import { Toaster } from '@/components/ui/toaster';
 import { ThemeProvider } from 'next-themes';
+import { GoogleAnalytics } from '@next/third-parties/google';
+import GalaxyWrapper from '@/components/effects/GalaxyWrapper';
 import './globals.css';
 
 const inter = Inter({
@@ -28,9 +30,10 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata = {
-  title: 'Xinshi Feng — Mathematics & Computer Science',
+  title: 'Xinshi Feng — Mathematics & Computer Science Student Researcher',
   description:
-    'Portfolio of Xinshi Feng, double major in Mathematics and Computer Science at Washington University in St. Louis. Researcher in manifold theory, reinforcement learning, and machine learning. Available for Math PhD programs and research internships, Fall 2027.',
+    'Portfolio of Xinshi Feng, double major in Mathematics and Computer Science at Washington University in St. Louis (WashU). Researcher in manifold theory, reinforcement learning, and machine learning. Available for Math PhD programs and research internships, Fall 2027.',
+  keywords: ['Xinshi Feng', 'Mathematics', 'Computer Science', 'Washington University in St. Louis', 'WashU', 'Researcher', 'Machine Learning', 'Reinforcement Learning', 'Manifold Theory', 'Portfolio'],
   openGraph: {
     title: 'Xinshi Feng — Mathematics & Computer Science',
     description: 'Portfolio of Xinshi Feng, double major in Mathematics and Computer Science at Washington University in St. Louis.',
@@ -100,6 +103,7 @@ export default function RootLayout({ children }) {
           <GridBackground />
           <AtmosphericBlobs />
           <GrainOverlay />
+          <GalaxyWrapper />
 
           <ClientShell>
             <div className="flex flex-col min-h-screen relative" style={{ zIndex: 10 }}>
@@ -113,6 +117,7 @@ export default function RootLayout({ children }) {
           </ClientShell>
         </ThemeProvider>
       </body>
+      <GoogleAnalytics gaId="G-YOUR_GA_MEASUREMENT_ID" />
     </html>
   );
 }

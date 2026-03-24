@@ -9,9 +9,10 @@ import CTASection from '@/components/sections/CTASection';
 import SectionAtmosphere from '@/components/effects/SectionAtmosphere';
 
 export const metadata = {
-  title: 'Xinshi Feng — Mathematics & Computer Science',
+  title: 'Home — Xinshi Feng | Math & CS Double Major',
   description:
-    'Portfolio of Xinshi Feng — Math and CS double major at WashU, researcher in manifold theory and reinforcement learning. Available Fall 2027.',
+    'Portfolio of Xinshi Feng — Mathematics and Computer Science double major at Washington University in St. Louis. Researcher specializing in manifold theory, reinforcement learning, and game theory.',
+  keywords: ['Xinshi Feng', 'Portfolio', 'Washington University in St. Louis', 'WashU Math', 'CS Double Major', 'Research Assistant'],
 };
 
 export default function Home() {
