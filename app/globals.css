@@ -31,8 +31,7 @@
   /* Light mode dot grid colors (white) */
   --dot-grid-light-color: rgba(255,255,255,0.8);
   --dot-grid-light-fine-color: rgba(255,255,255,0.7);
-}
-  
+
   /* Research Cards Gradients - Red */
   --card-1-gradient: linear-gradient(135deg, #f87171 0%, #fca5a5 100%);
   --card-2-gradient: linear-gradient(135deg, #fca5a5 0%, #fecaca 100%);
