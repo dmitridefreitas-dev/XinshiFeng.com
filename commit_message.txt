@@ -1,0 +1,10 @@
+Fix: Implement all requested UI/UX and theming enhancements
+
+This commit includes all the UI/UX improvements and theming fixes as per user requests, addressing:
+- Light mode inversion and consistency across desktop.
+- Elimination of color bleeding between red and blue themes by ensuring all accent colors and gradients are dynamically sourced from CSS variables.
+- Removed a hardcoded light-blue gradient fallback in `ProjectsShowcase.jsx`, replacing it with theme-aware CSS variables.
+- Updated outdated comments in `app/globals.css` and `components/sections/HeroSection.jsx` to reflect dynamic accent colors.
+- Desktop header alignment, width, and text size adjustments.
+- Research Highlights card gradients for dark mode.
+- Other minor styling and content display corrections.
