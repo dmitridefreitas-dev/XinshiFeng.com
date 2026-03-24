@@ -6,11 +6,9 @@ import TextReveal from '@/components/effects/TextReveal';
 import MagneticButton from '@/components/effects/MagneticButton';
 import { useToast } from '@/hooks/use-toast';
 import { contactInfo, opportunityGroups, socialLinks } from '@/data/constants';
-import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function ContactPage() {
   const { toast } = useToast();
-  const { language, t } = useLanguage();
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [sendSuccess, setSendSuccess] = useState(false);
@@ -25,7 +23,7 @@ export default function ContactPage() {
     setIsSubmitting(true);
 
     if (!formData.name || !formData.email || !formData.message) {
-      toast({ title: t('contact.errorTitle'), description: t('contact.errorFillFields') });
+      toast({ title: "Error", description: "Please fill in all fields." });
       setIsSubmitting(false);
       return;
     }
@@ -38,19 +36,19 @@ export default function ContactPage() {
       });
       if (!response.ok) {
         const err = await response.json();
-        throw new Error(err.error || t('contact.errorFailedSend'));
+        throw new Error(err.error || "Failed to send message. Please try again later.");
       }
       setSendSuccess(true);
       setTimeout(() => setSendSuccess(false), 2500);
       toast({
-        title: t('contact.messageSent'),
-        description: t('contact.thankYou'),
+        title: "Message Sent!",
+        description: "Thank you for reaching out. I'll get back to you as soon as possible.",
       });
       setFormData({ name: '', email: '', message: '' });
     } catch (err) {
       toast({
         title: t('contact.errorTitle'),
-        description: err.message || t('contact.errorFailedSend'),
+        description: err.message || "Failed to send message. Please try again later.",
       });
     } finally {
       setIsSubmitting(false);
@@ -73,12 +71,12 @@ export default function ContactPage() {
           transition={{ delay: 0.3 }}
           className="font-mono text-xs uppercase tracking-[0.4em] text-accent mb-5 relative z-10"
         >
-          {t('common.letsTalk')}
+          LET'S TALK
         </motion.p>
 
         <h1 className="font-serif font-bold text-display text-foreground text-balance will-change-transform relative z-10">
-          <TextReveal key={language} splitBy="word" delay={0.4} staggerDelay={0.1}>
-            {t('contact.title')}
+          <TextReveal key="en" splitBy="word" delay={0.4} staggerDelay={0.1}>
+            Contact
           </TextReveal>
         </h1>
 
@@ -88,7 +86,7 @@ export default function ContactPage() {
           transition={{ delay: 0.9 }}
           className="font-mono text-xs uppercase tracking-[0.3em] text-muted mt-5 relative z-10 break-all"
         >
-          {t('hero.available')} &nbsp;·&nbsp; {contactInfo.email}
+          AVAILABLE FOR MATH PHD PROGRAMS & RESEARCH INTERNSHIPS, FALL 2027 &nbsp;·&nbsp; {contactInfo.email}
         </motion.p>
       </section>
 
@@ -111,13 +109,13 @@ export default function ContactPage() {
             {/* Contact details */}
             <div>
               <p className="font-mono text-xs uppercase tracking-[0.35em] text-muted mb-10">
-                {t('nav.contact')}
+                CONTACT
               </p>
               <div className="flex flex-col gap-8">
                 {[
-                  { Icon: Mail, label: t('common.email'), content: contactInfo.email, href: `mailto:${contactInfo.email}` },
-                  { Icon: Phone, label: t('common.phone'), content: contactInfo.phone, href: `tel:${contactInfo.phone.replace(/[^+\d]/g, '')}` },
-                  { Icon: MapPin, label: t('common.location'), content: contactInfo.location[language], sub: contactInfo.locationNote[language] },
+                  { Icon: Mail, label: "Email", content: contactInfo.email, href: `mailto:${contactInfo.email}` },
+                  { Icon: Phone, label: "Phone", content: contactInfo.phone, href: `tel:${contactInfo.phone.replace(/[^+\d]/g, '')}` },
+                  { Icon: MapPin, label: "Location", content: contactInfo.location.en, sub: contactInfo.locationNote.en },
                 ].map(({ Icon, label, content, href, sub }) => (
                   <motion.div
                     key={label}
@@ -147,7 +145,7 @@ export default function ContactPage() {
             {/* Seeking */}
             <div>
               <p className="font-mono text-xs uppercase tracking-[0.35em] text-muted mb-10">
-                {t('contact.openTo')}
+                OPEN TO
               </p>
               <div className="flex flex-col gap-8">
                 {opportunityGroups.map((group, i) => (
@@ -159,12 +157,12 @@ export default function ContactPage() {
                     transition={{ duration: 0.5, delay: i * 0.07 }}
                   >
                     <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent mb-2">
-                      {group.category[language]}
+                      {group.category.en}
                     </p>
                     <div className="flex flex-col gap-1.5">
                       {group.roles.map((role, j) => (
                         <span key={j} className="font-mono text-xs uppercase tracking-widest text-muted">
-                          · {role[language]}
+                          · {role.en}
                         </span>
                       ))}
                     </div>
@@ -183,7 +181,7 @@ export default function ContactPage() {
                 whileHover={{ x: 4 }}
                 data-cursor="expand"
               >
-                <Linkedin className="h-3.5 w-3.5" /> {t('common.linkedIn')}
+                <Linkedin className="h-3.5 w-3.5" /> LINKEDIN
               </motion.a>
               <motion.a
                 href={socialLinks.github}
@@ -193,7 +191,7 @@ export default function ContactPage() {
                 whileHover={{ x: 4 }}
                 data-cursor="expand"
               >
-                <Github className="h-3.5 w-3.5" /> {t('common.github')}
+                <Github className="h-3.5 w-3.5" /> GITHUB
               </motion.a>
               <motion.a
                 href={socialLinks.arxiv}
@@ -203,7 +201,7 @@ export default function ContactPage() {
                 whileHover={{ x: 4 }}
                 data-cursor="expand"
               >
-                <FileText className="h-3.5 w-3.5" /> {t('common.arxiv')}
+                <FileText className="h-3.5 w-3.5" /> ARXIV
               </motion.a>
             </div>
           </motion.div>
@@ -217,12 +215,12 @@ export default function ContactPage() {
             className="md:sticky md:top-28"
           >
             <p className="font-mono text-xs uppercase tracking-[0.35em] text-muted mb-10">
-              {t('contact.sendMessage')}
+              SEND MESSAGE
             </p>
             <form onSubmit={handleSubmit} className="flex flex-col gap-10" noValidate>
               {[
-                { id: 'name', label: t('contact.name'), type: 'text', placeholder: t('contact.placeholderName') },
-                { id: 'email', label: t('contact.email'), type: 'email', placeholder: t('contact.placeholderEmail') },
+                { id: 'name', label: "Your Name", type: 'text', placeholder: "John Doe" },
+                { id: 'email', label: "Your Email", type: 'email', placeholder: "john.doe@example.com" },
               ].map(({ id, label, type, placeholder }) => (
                 <div key={id}>
                   <label htmlFor={id} className="block font-mono text-xs uppercase tracking-[0.25em] text-muted mb-2">
@@ -242,12 +240,12 @@ export default function ContactPage() {
               ))}
               <div>
                 <label htmlFor="message" className="block font-mono text-xs uppercase tracking-[0.25em] text-muted mb-2">
-                  {t('contact.message')}
+                  YOUR MESSAGE
                 </label>
                 <textarea
                   id="message"
                   name="message"
-                  placeholder={t('contact.placeholderMessage')}
+                  placeholder="I'd love to chat about..."
                   value={formData.message}
                   onChange={handleChange}
                   required
@@ -272,11 +270,11 @@ export default function ContactPage() {
                 </AnimatePresence>
                 <MagneticButton type="submit" disabled={isSubmitting} size="lg" data-cursor="expand">
                   {isSubmitting ? (
-                    t('common.sending')
+                    "SENDING..."
                   ) : (
                     <>
                       <Send className="h-4 w-4" />
-                      {t('contact.sendMessage')}
+                      SEND MESSAGE
                     </>
                   )}
                 </MagneticButton>
@@ -299,9 +297,7 @@ export default function ContactPage() {
           transition={{ duration: 1 }}
           className="font-serif italic text-subhead text-muted max-w-2xl leading-relaxed"
         >
-          {language === 'en' 
-            ? "Whether you're a faculty member, a fellow researcher, or an industry professional — I'm always happy to connect and discuss mathematics, machine learning, or research opportunities."
-            : "无论您是教职人员、同行研究员还是行业专家——我都很高兴能与您建立联系，共同探讨数学、机器学习或科研机会。"}
+          Whether you're a faculty member, a fellow researcher, or an industry professional — I'm always happy to connect and discuss mathematics, machine learning, or research opportunities.
         </motion.p>
       </section>
     </>
