@@ -126,12 +126,12 @@
   --accent-glow-strong: rgba(139, 92, 246, 0.4);
   --accent-glow-subtle: rgba(139, 92, 246, 0.08);
   
-  /* Research Cards Gradients - Purple */
-  --card-1-gradient: linear-gradient(135deg, #a78bfa 0%, #c4b5fd 100%);
-  --card-2-gradient: linear-gradient(135deg, #c4b5fd 0%, #ddd6fe 100%);
-  --card-3-gradient: linear-gradient(135deg, #ddd6fe 0%, #ede9fe 100%);
-  --card-4-gradient: linear-gradient(135deg, #ede9fe 0%, #f5f3ff 100%);
-  --card-5-gradient: linear-gradient(135deg, #f5f3ff 0%, #ffffff 100%);
+  /* Research Cards Gradients - Purple (dark-enough for light text in all modes) */
+  --card-1-gradient: linear-gradient(135deg, #3b0764 0%, #5b21b6 100%);
+  --card-2-gradient: linear-gradient(135deg, #4c1d95 0%, #6d28d9 100%);
+  --card-3-gradient: linear-gradient(135deg, #5b21b6 0%, #7c3aed 100%);
+  --card-4-gradient: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 100%);
+  --card-5-gradient: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);
 
   --watermark-active: rgba(139, 92, 246, 0.40);
   --watermark-inactive: rgba(139, 92, 246, 0.25);
@@ -196,6 +196,13 @@
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* Eliminate 300ms tap delay globally on mobile */
+    touch-action: manipulation;
+  }
+
+  /* Ensure all interactive elements respond instantly on touch */
+  a, button, [role="button"] {
+    touch-action: manipulation;
   }
 
   ::selection {
@@ -488,6 +495,8 @@
   animation: blob-drift-0 var(--blob-dur, 28s) ease-in-out infinite;
   pointer-events: none;
   filter: blur(60px);
+  will-change: transform;
+  contain: paint;
 }
 .atm-blob-1 {
   position: fixed;
@@ -497,6 +506,8 @@
   animation: blob-drift-1 var(--blob-dur, 34s) ease-in-out infinite;
   pointer-events: none;
   filter: blur(80px);
+  will-change: transform;
+  contain: paint;
 }
 .atm-blob-2 {
   position: fixed;
@@ -506,6 +517,8 @@
   animation: blob-drift-2 var(--blob-dur, 42s) ease-in-out infinite;
   pointer-events: none;
   filter: blur(100px);
+  will-change: transform;
+  contain: paint;
 }
 .atm-blob-3 {
   position: fixed;
@@ -515,6 +528,8 @@
   animation: blob-drift-3 var(--blob-dur, 22s) ease-in-out infinite;
   pointer-events: none;
   filter: blur(70px);
+  will-change: transform;
+  contain: paint;
 }
 .atm-blob-4 {
   position: fixed;
@@ -524,6 +539,8 @@
   animation: blob-drift-4 var(--blob-dur, 38s) ease-in-out infinite;
   pointer-events: none;
   filter: blur(90px);
+  will-change: transform;
+  contain: paint;
 }
 
 /* Grain overlay — very subtle on light */
@@ -548,6 +565,7 @@
   pointer-events: none;
   opacity: 0.018;
   mix-blend-mode: multiply;
+  will-change: transform;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 200px 200px;
   animation: grain-shift 8s steps(10) infinite;
@@ -577,6 +595,7 @@
   z-index: 0;
   animation: rotate-gradient 8s linear infinite;
   opacity: 0.6;
+  will-change: transform;
 }
 .headshot-glow-pulse {
   position: absolute;
@@ -607,16 +626,19 @@
   position: absolute;
   animation: float-anim 7s ease-in-out infinite;
   pointer-events: none;
+  will-change: transform;
 }
 .float-geo-slow {
   position: absolute;
   animation: float-slow 9s ease-in-out infinite;
   pointer-events: none;
+  will-change: transform;
 }
 .float-geo-reverse {
   position: absolute;
   animation: float-reverse 8s ease-in-out infinite;
   pointer-events: none;
+  will-change: transform;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────

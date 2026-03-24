@@ -52,17 +52,17 @@ export default function AtmosphericBlobs() {
       s.mouseY = e.clientY / window.innerHeight;
     };
 
+    // Pre-compute blob center fractions once — never parse strings inside rAF
+    const blobCenters = BLOBS.map(([x, y]) => ({
+      cx: parseFloat(x) / 100,
+      cy: parseFloat(y) / 100,
+    }));
+
     const loop = () => {
       if (!s.reduced) {
         blobEls.forEach((el, i) => {
           const off = s.blobOffsets[i];
-          // Each blob has a different "gravity" toward mouse — distance from blob center matters
-          const blobCx = BLOBS[i][0].includes('%')
-            ? parseFloat(BLOBS[i][0]) / 100
-            : 0.5;
-          const blobCy = BLOBS[i][1].includes('%')
-            ? parseFloat(BLOBS[i][1]) / 100
-            : 0.5;
+          const { cx: blobCx, cy: blobCy } = blobCenters[i];
 
           // Vector from blob center to mouse (normalized), then scale to px
           const dx = (s.mouseX - blobCx) * maxShift;

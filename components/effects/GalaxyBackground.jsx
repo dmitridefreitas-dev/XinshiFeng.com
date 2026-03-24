@@ -9,24 +9,28 @@ function StarField() {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
 
+    // Scale canvas for devicePixelRatio so dots are visible on all screens
+    const dpr = window.devicePixelRatio || 1;
     let W = window.innerWidth;
     let H = window.innerHeight;
-    canvas.width = W;
-    canvas.height = H;
+    canvas.width  = W * dpr;
+    canvas.height = H * dpr;
+    canvas.style.width  = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.scale(dpr, dpr);
 
-    // Generate stars with random positions, sizes and twinkle phases
-    const NUM_STARS = 280;
+    // Stars: 0.5–1px CSS radius — visible single-dot on every screen
+    const NUM_STARS = 220;
     const stars = Array.from({ length: NUM_STARS }, () => ({
       x: Math.random() * W,
       y: Math.random() * H,
-      r: Math.random() * 1.4 + 0.2,
+      r: Math.random() * 0.5 + 0.5,   // 0.5–1.0px CSS
       phase: Math.random() * Math.PI * 2,
       speed: 0.003 + Math.random() * 0.006,
-      // Some stars are slightly blue/purple tinted
-      hue: Math.random() > 0.75 ? `rgba(220,200,255,` : `rgba(255,255,255,`,
+      hue: Math.random() < 0.3 ? `rgba(255,255,255,` : `rgba(220,200,255,`,
     }));
 
-    // Milky way band — scattered bright cluster in the center diagonal
+    // Milky way band — slightly smaller dots, densely packed
     const CLUSTER_STARS = 180;
     const clusterStars = Array.from({ length: CLUSTER_STARS }, () => {
       const t = Math.random();
@@ -35,7 +39,7 @@ function StarField() {
       return {
         x: bandX,
         y: bandY,
-        r: Math.random() * 0.9 + 0.1,
+        r: Math.random() * 0.35 + 0.35,  // 0.35–0.7px CSS
         phase: Math.random() * Math.PI * 2,
         speed: 0.002 + Math.random() * 0.004,
         hue: `rgba(210,180,255,`,
@@ -44,42 +48,31 @@ function StarField() {
 
     const allStars = [...stars, ...clusterStars];
     let animId;
-    let frame = 0;
 
-    const draw = () => {
+    // Pre-build milky way gradient once — never recreate it per frame
+    let bandGrad = ctx.createLinearGradient(W * 0.1, H * 0.8, W * 0.9, H * 0.1);
+    bandGrad.addColorStop(0,   'rgba(100,60,180,0)');
+    bandGrad.addColorStop(0.3, 'rgba(120,60,200,0.06)');
+    bandGrad.addColorStop(0.5, 'rgba(160,80,255,0.09)');
+    bandGrad.addColorStop(0.7, 'rgba(120,60,200,0.06)');
+    bandGrad.addColorStop(1,   'rgba(100,60,180,0)');
+
+    const draw = (now) => {
+      // Use time in seconds for smooth, overflow-safe animation
+      const t = now * 0.001;
       ctx.clearRect(0, 0, W, H);
 
-      // Draw milky way soft band glow
-      const bandGrad = ctx.createLinearGradient(W * 0.1, H * 0.8, W * 0.9, H * 0.1);
-      bandGrad.addColorStop(0, 'rgba(100,60,180,0)');
-      bandGrad.addColorStop(0.3, 'rgba(120,60,200,0.06)');
-      bandGrad.addColorStop(0.5, 'rgba(160,80,255,0.09)');
-      bandGrad.addColorStop(0.7, 'rgba(120,60,200,0.06)');
-      bandGrad.addColorStop(1, 'rgba(100,60,180,0)');
       ctx.fillStyle = bandGrad;
       ctx.fillRect(0, 0, W, H);
 
-      // Draw all stars
       allStars.forEach((s) => {
-        const twinkle = 0.4 + 0.6 * Math.abs(Math.sin(s.phase + frame * s.speed));
+        const twinkle = 0.45 + 0.55 * Math.abs(Math.sin(s.phase + t * s.speed));
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
         ctx.fillStyle = `${s.hue}${twinkle})`;
         ctx.fill();
-
-        // Glow for brighter stars
-        if (s.r > 1.0) {
-          const glow = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r * 5);
-          glow.addColorStop(0, `${s.hue}${twinkle * 0.4})`);
-          glow.addColorStop(1, `${s.hue}0)`);
-          ctx.beginPath();
-          ctx.arc(s.x, s.y, s.r * 5, 0, Math.PI * 2);
-          ctx.fillStyle = glow;
-          ctx.fill();
-        }
       });
 
-      frame++;
       animId = requestAnimationFrame(draw);
     };
 
@@ -88,8 +81,18 @@ function StarField() {
     const onResize = () => {
       W = window.innerWidth;
       H = window.innerHeight;
-      canvas.width = W;
-      canvas.height = H;
+      canvas.width  = W * dpr;
+      canvas.height = H * dpr;
+      canvas.style.width  = W + 'px';
+      canvas.style.height = H + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      // Rebuild gradient for new dimensions
+      bandGrad = ctx.createLinearGradient(W * 0.1, H * 0.8, W * 0.9, H * 0.1);
+      bandGrad.addColorStop(0,   'rgba(100,60,180,0)');
+      bandGrad.addColorStop(0.3, 'rgba(120,60,200,0.06)');
+      bandGrad.addColorStop(0.5, 'rgba(160,80,255,0.09)');
+      bandGrad.addColorStop(0.7, 'rgba(120,60,200,0.06)');
+      bandGrad.addColorStop(1,   'rgba(100,60,180,0)');
     };
     window.addEventListener('resize', onResize);
 
@@ -109,6 +112,7 @@ function StarField() {
         height: '100%',
         pointerEvents: 'none',
         zIndex: 0,
+        willChange: 'contents',
       }}
       aria-hidden="true"
     />
@@ -220,6 +224,8 @@ function NebulaPulse() {
           borderRadius: '50%',
           pointerEvents: 'none',
           zIndex: 0,
+          willChange: 'transform',
+          contain: 'paint',
           animation: 'galaxy-orbit 55s ease-in-out infinite alternate',
         }}
       />
@@ -234,6 +240,8 @@ function NebulaPulse() {
           borderRadius: '50%',
           pointerEvents: 'none',
           zIndex: 0,
+          willChange: 'transform',
+          contain: 'paint',
           animation: 'galaxy-orbit 70s ease-in-out infinite alternate-reverse',
         }}
       />
@@ -248,6 +256,8 @@ function NebulaPulse() {
           borderRadius: '50%',
           pointerEvents: 'none',
           zIndex: 0,
+          willChange: 'transform',
+          contain: 'paint',
           animation: 'galaxy-orbit 42s ease-in-out infinite alternate',
         }}
       />

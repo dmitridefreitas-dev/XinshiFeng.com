@@ -66,11 +66,12 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 ${
         scrolled
           ? 'bg-[var(--surface-overlay-strong)] backdrop-blur-md border-b border-border shadow-sm'
           : 'bg-transparent'
       }`}
+      style={{ willChange: 'background-color' }}
     >
       <div className="max-w-[1400px] xl:max-w-[1600px] mx-auto px-6 md:px-10 h-16 flex items-center justify-between relative">
 
@@ -113,7 +114,7 @@ export default function Header() {
           <div className="flex items-center gap-2 mr-2">
             <button
               onClick={toggleLanguage}
-              className="flex items-center gap-1.5 px-2 py-1 rounded border border-border/50 hover:border-accent/40 transition-all group"
+              className="flex items-center gap-1.5 px-2 py-1 rounded border border-border/50 hover:border-accent/40 transition-[border-color] group"
               aria-label="Toggle Language"
               data-cursor="expand"
             >
@@ -173,6 +174,7 @@ export default function Header() {
             className="w-10 h-10 flex items-center justify-center text-muted hover:text-accent transition-colors"
             aria-label="Toggle Language"
             data-cursor="expand"
+            style={{ touchAction: 'manipulation' }}
           >
             <span className="font-mono text-[10px] font-bold uppercase tracking-wider">
               {language === 'en' ? 'EN' : 'CN'}
@@ -183,16 +185,18 @@ export default function Header() {
             className="min-w-[44px] min-h-[44px] flex items-center justify-center text-muted hover:text-accent transition-colors"
             aria-label="Toggle Dark Mode"
             data-cursor="expand"
+            style={{ touchAction: 'manipulation' }}
           >
             {mounted && resolvedTheme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
           </button>
-          
+
           {/* Mobile menu toggle — min 44×44 touch target */}
           <button
             className="min-w-[44px] min-h-[44px] flex items-center justify-center text-muted hover:text-foreground transition-colors"
             onClick={() => setMenuOpen((o) => !o)}
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             data-cursor="expand"
+            style={{ touchAction: 'manipulation' }}
           >
             {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -203,10 +207,11 @@ export default function Header() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -8 }}
+            initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.18, ease: [0.25, 0.46, 0.45, 0.94] }}
+            style={{ willChange: 'transform, opacity' }}
             className="md:hidden bg-[var(--surface-overlay-solid)] backdrop-blur-md border-b border-border px-6 py-8 flex flex-col gap-6"
           >
             {MOBILE_NAV_LINKS.map((link) => {
@@ -248,8 +253,9 @@ export default function Header() {
               {/* Red / Blue Accent Switch */}
               <button
                 onClick={toggleAccent}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-border/50 hover:border-accent/40 transition-all group"
+                className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-border/50 hover:border-accent/40 transition-[border-color] group"
                 aria-label="Toggle Accent Color"
+                style={{ touchAction: 'manipulation' }}
               >
                 <div className={`w-3 h-3 rounded-full ${isBlue ? 'bg-[#0ea5e9]' : 'bg-[#DC2626]'}`} />
                 <span className="font-mono text-[10px] font-bold text-muted group-hover:text-accent uppercase tracking-wider">
