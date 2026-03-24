@@ -4,7 +4,6 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import TextReveal from '@/components/effects/TextReveal';
 import MagneticButton from '@/components/effects/MagneticButton';
 import { ArrowDown } from 'lucide-react';
-import { useLanguage } from '@/contexts/LanguageContext';
 import { contactInfo } from '@/data/constants';
 
 // Math symbols — faint, academic, slow-drifting
@@ -49,7 +48,6 @@ const MATH_SHAPES = [
 export default function HeroSection() {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
-  const { language, t } = useLanguage();
 
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.88]);
   const opacity = useTransform(scrollYProgress, [0, 0.55], [1, 0]);
@@ -109,7 +107,7 @@ export default function HeroSection() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="font-mono text-xs md:text-sm uppercase tracking-[0.45em] text-accent mb-5"
         >
-          {t('hero.available')}
+          AVAILABLE FOR MATH PHD PROGRAMS & RESEARCH INTERNSHIPS, FALL 2027
         </motion.p>
 
         {/* Name — Playfair serif with glow */}
@@ -117,8 +115,8 @@ export default function HeroSection() {
           className="font-serif font-bold text-display text-foreground text-balance will-change-transform"
           style={{ animation: 'glow-text-pulse 5s ease-in-out infinite', lineHeight: '1.2' }}
         >
-          <TextReveal key={language} splitBy="word" delay={0.4} staggerDelay={0.1} className="pb-4">
-            {language === 'en' ? 'Xinshi Feng' : '冯信实'}
+          <TextReveal key="en" splitBy="word" delay={0.4} staggerDelay={0.1} className="pb-4">
+            Xinshi Feng
           </TextReveal>
         </h1>
 
@@ -135,22 +133,22 @@ export default function HeroSection() {
         />
 
         {/* Subtitle — blue gradient shift */}
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 1.05 }}
-          className="font-mono text-xs md:text-sm uppercase tracking-[0.3em] max-w-sm"
-          style={{
-            background: 'linear-gradient(90deg, var(--accent-base), var(--accent-light), var(--accent-indigo), var(--accent-base))',
-            backgroundSize: '300% 100%',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            animation: 'gradient-shift-subtitle 6s ease infinite',
-          }}
-        >
-          {t('hero.subtitle')}
-        </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 1.05 }}
+            className="font-mono text-xs md:text-sm uppercase tracking-[0.3em] max-w-sm"
+            style={{
+              background: 'linear-gradient(90deg, var(--accent-base), var(--accent-light), var(--accent-indigo), var(--accent-base))',
+              backgroundSize: '300% 100%',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              animation: 'gradient-shift-subtitle 6s ease infinite',
+            }}
+          >
+            Mathematics and Computer Science Student Researcher
+          </motion.p>
 
         {/* Institution */}
         <motion.p
@@ -159,7 +157,7 @@ export default function HeroSection() {
           transition={{ duration: 0.6, delay: 1.25 }}
           className="font-mono text-xs md:text-sm uppercase tracking-[0.3em] text-muted mt-3"
         >
-          {contactInfo.location[language]}
+          Washington University in St. Louis
         </motion.p>
 
         {/* CTA */}
@@ -171,14 +169,14 @@ export default function HeroSection() {
         >
           <div className="flex flex-col sm:flex-row items-center gap-4">
             <MagneticButton href="/projects" data-cursor="expand">
-              {t('hero.viewResearch')}
+              VIEW RESEARCH
             </MagneticButton>
             <MagneticButton href="/contact" variant="ghost" data-cursor="expand">
-              {t('hero.getInTouch')}
+              GET IN TOUCH
             </MagneticButton>
           </div>
           <MagneticButton href="https://drive.google.com/file/d/1K6AhFHorjonEPDpiJxP-X-GpC_9k4x67/view?usp=drive_link" variant="ghost" external={true} data-cursor="expand">
-            {t('nav.resume')}
+            RESUME
           </MagneticButton>
         </motion.div>
       </motion.div>
@@ -199,7 +197,7 @@ export default function HeroSection() {
         >
           <ArrowDown className="h-4 w-4" />
         </motion.div>
-        <span className="font-mono text-xs uppercase tracking-[0.3em]">{t('hero.scroll')}</span>
+        <span className="font-mono text-xs uppercase tracking-[0.3em]">SCROLL</span>
       </motion.button>
     </section>
   );
