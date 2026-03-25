@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -14,33 +14,56 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const [isBlue, setIsBlue] = useState(false);
+  const [currentMode, setCurrentMode] = useState('light');
 
   useEffect(() => {
     setMounted(true);
-    // Initialize from localStorage, defaulting to blue
-    const stored = typeof window !== 'undefined' ? localStorage.getItem('accent') : null;
-    setIsBlue((stored ?? 'blue') === 'blue');
+    // Initialize from next-themes and localStorage
+    const isPurple = document.documentElement.classList.contains('theme-purple');
+    if (isPurple) {
+      setCurrentMode('galaxy');
+    } else {
+      setCurrentMode(resolvedTheme || 'light');
+    }
+  }, [resolvedTheme]);
 
-    const syncAccent = () => setIsBlue(document.documentElement.classList.contains('theme-blue'));
-    window.addEventListener('keydown', syncAccent);
-    return () => window.removeEventListener('keydown', syncAccent);
-  }, []);
-
-  const toggleAccent = () => {
-    const next = !isBlue;
-    setIsBlue(next);
-    const accent = next ? 'blue' : 'red';
-    document.documentElement.classList.remove('theme-blue', 'theme-purple');
-    if (next) document.documentElement.classList.add('theme-blue');
-    localStorage.setItem('accent', accent);
-  };
+  const handleModeChange = useCallback((mode) => {
+    setCurrentMode(mode);
+    if (mode === 'light') {
+      setTheme('light');
+      document.documentElement.classList.remove('theme-purple');
+      localStorage.setItem('accent', 'blue');
+    } else if (mode === 'dark') {
+      setTheme('dark');
+      document.documentElement.classList.remove('theme-purple');
+      localStorage.setItem('accent', 'blue');
+    } else if (mode === 'galaxy') {
+      setTheme('dark');
+      document.documentElement.classList.add('theme-purple');
+      localStorage.setItem('accent', 'purple');
+    }
+  }, [setTheme]);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+
+    const handleKeyDown = (e) => {
+      if (e.shiftKey) {
+        if (e.key.toLowerCase() === 'b') {
+          handleModeChange('light'); // 'blue' mode is basically light mode with blue accent
+        } else if (e.key.toLowerCase() === 'p') {
+          handleModeChange('galaxy'); // 'purple' mode is galaxy mode
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleModeChange]);
 
   useEffect(() => { setMenuOpen(false); }, [pathname]);
 
@@ -63,8 +86,11 @@ export default function Header() {
   ];
 
   const toggleTheme = () => {
-    const newTheme = resolvedTheme === 'dark' ? 'light' : 'dark';
-    setTheme(newTheme);
+    if (currentMode === 'light') {
+      handleModeChange('dark');
+    } else {
+      handleModeChange('light');
+    }
   };
 
   return (
@@ -219,31 +245,41 @@ export default function Header() {
                 </Link>
               );
             })}
-            <div className="flex items-center justify-between pt-4 border-t border-border">
-              <div className="flex items-center gap-2">
-                <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="min-w-[44px] min-h-[44px] flex items-center justify-center text-muted hover:text-accent transition-colors">
-                  <Linkedin className="h-4 w-4" />
-                </a>
-                <a href={socialLinks.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="min-w-[44px] min-h-[44px] flex items-center justify-center text-muted hover:text-accent transition-colors">
-                  <Github className="h-4 w-4" />
-                </a>
-                <a href={socialLinks.arxiv} target="_blank" rel="noopener noreferrer" aria-label="arXiv paper" className="min-w-[44px] min-h-[44px] flex items-center justify-center text-muted hover:text-accent transition-colors">
-                  <FileText className="h-4 w-4" />
-                </a>
+            <div className="flex flex-col gap-6 pt-4 border-t border-border">
+              {/* 3-Way Mode Switch */}
+              <div className="flex bg-[var(--surface-hover)] rounded-lg p-1 border border-border w-full">
+                {[
+                  { id: 'light', label: 'Light', icon: Sun },
+                  { id: 'dark', label: 'Dark', icon: Moon },
+                  { id: 'galaxy', label: 'Galaxy', icon: null }
+                ].map(({ id, label, icon: Icon }) => (
+                  <button
+                    key={id}
+                    onClick={() => handleModeChange(id)}
+                    className={`flex-1 flex items-center justify-center gap-1.5 py-2 text-xs font-mono tracking-widest rounded-md transition-all ${
+                      currentMode === id
+                        ? 'bg-[var(--surface)] text-accent shadow-sm border border-border'
+                        : 'text-muted hover:text-foreground'
+                    }`}
+                    style={{ touchAction: 'manipulation' }}
+                  >
+                    {Icon ? <Icon className="h-3 w-3" /> : <div className="w-2 h-2 rounded-full bg-purple-500" />}
+                    {label}
+                  </button>
+                ))}
               </div>
 
-              {/* Red / Blue Accent Switch */}
-              <button
-                onClick={toggleAccent}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-border/50 hover:border-accent/40 transition-[border-color] group"
-                aria-label="Toggle Accent Color"
-                style={{ touchAction: 'manipulation' }}
-              >
-                <div className={`w-3 h-3 rounded-full ${isBlue ? 'bg-[#0ea5e9]' : 'bg-[#DC2626]'}`} />
-                <span className="font-mono text-[10px] font-bold text-muted group-hover:text-accent uppercase tracking-wider">
-                  {isBlue ? 'Blue' : 'Red'}
-                </span>
-              </button>
+              <div className="flex items-center justify-center gap-6">
+                <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-muted hover:text-accent transition-colors">
+                  <Linkedin className="h-5 w-5" />
+                </a>
+                <a href={socialLinks.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="text-muted hover:text-accent transition-colors">
+                  <Github className="h-5 w-5" />
+                </a>
+                <a href={socialLinks.arxiv} target="_blank" rel="noopener noreferrer" aria-label="arXiv paper" className="text-muted hover:text-accent transition-colors">
+                  <FileText className="h-5 w-5" />
+                </a>
+              </div>
             </div>
           </motion.div>
         )}

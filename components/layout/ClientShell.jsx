@@ -40,7 +40,6 @@ function applyAccent(accent) {
   html.classList.remove('theme-blue', 'theme-purple');
   if (accent === 'blue') html.classList.add('theme-blue');
   else if (accent === 'purple') html.classList.add('theme-purple');
-  // 'red' = no accent class
 }
 
 export default function ClientShell({ children }) {
@@ -48,23 +47,6 @@ export default function ClientShell({ children }) {
     // Restore accent from localStorage; default to blue
     const stored = localStorage.getItem('accent');
     applyAccent(stored ?? 'blue');
-
-    const handleKeyDown = (e) => {
-      if (e.shiftKey) {
-        if (e.key.toLowerCase() === 'b') {
-          applyAccent('blue');
-          localStorage.setItem('accent', 'blue');
-        } else if (e.key.toLowerCase() === 'r') {
-          applyAccent('red');
-          localStorage.setItem('accent', 'red');
-        } else if (e.key.toLowerCase() === 'p') {
-          applyAccent('purple');
-          localStorage.setItem('accent', 'purple');
-        }
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
   return (

@@ -5,7 +5,7 @@ import Image from 'next/image';
 import TextReveal from '@/components/effects/TextReveal';
 import MagneticButton from '@/components/effects/MagneticButton';
 import ExperienceModal from '@/components/modals/ExperienceModal';
-import ImageCarousel from '@/components/sections/ImageCarousel';
+import ImageGrid from '@/components/sections/ImageCarousel';
 import { education } from '@/data/education';
 import { experiences } from '@/data/experiences';
 import { skillCategories } from '@/data/skills';
@@ -70,7 +70,7 @@ export default function AboutContent() {
             whileHover={{ scale: 1.04 }}
             transition={{ type: 'spring', stiffness: 300, damping: 25 }}
             className="relative w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden ring-1 ring-border headshot-container"
-            style={{ boxShadow: '0 0 50px var(--accent-glow)' }}
+            style={{ boxShadow: '0 0 5px var(--accent-glow-subtle)' }}
           >
             <Image
               src="/images/headshot.jpeg"
@@ -115,8 +115,8 @@ export default function AboutContent() {
         </motion.div>
       </section>
 
-      {/* ── Cinematic Image Strip ── */}
-      <ImageCarousel />
+      {/* ── Static Image Grid ── */}
+      <ImageGrid />
 
       {/* ── Content Grid ── */}
       <div className="lg:grid lg:grid-cols-2 lg:gap-x-16 lg:gap-y-16 lg:max-w-[1400px] lg:mx-auto px-6 lg:px-12 py-12 relative items-start">

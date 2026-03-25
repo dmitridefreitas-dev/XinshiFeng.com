@@ -49,12 +49,12 @@ function StarField() {
     const allStars = [...stars, ...clusterStars];
     let animId;
 
-    // Pre-build milky way gradient once — never recreate it per frame
-    let bandGrad = ctx.createLinearGradient(W * 0.1, H * 0.8, W * 0.9, H * 0.1);
+    // Pre-build milky way gradient once — subtle centered band
+    let bandGrad = ctx.createLinearGradient(W * 0.25, H * 0.75, W * 0.75, H * 0.25);
     bandGrad.addColorStop(0,   'rgba(100,60,180,0)');
-    bandGrad.addColorStop(0.3, 'rgba(120,60,200,0.06)');
-    bandGrad.addColorStop(0.5, 'rgba(160,80,255,0.09)');
-    bandGrad.addColorStop(0.7, 'rgba(120,60,200,0.06)');
+    bandGrad.addColorStop(0.3, 'rgba(120,60,200,0.02)');
+    bandGrad.addColorStop(0.5, 'rgba(160,80,255,0.04)');
+    bandGrad.addColorStop(0.7, 'rgba(120,60,200,0.02)');
     bandGrad.addColorStop(1,   'rgba(100,60,180,0)');
 
     const draw = (now) => {
@@ -86,12 +86,12 @@ function StarField() {
       canvas.style.width  = W + 'px';
       canvas.style.height = H + 'px';
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      // Rebuild gradient for new dimensions
-      bandGrad = ctx.createLinearGradient(W * 0.1, H * 0.8, W * 0.9, H * 0.1);
+      // Rebuild gradient for new dimensions — subtle centered band
+      bandGrad = ctx.createLinearGradient(W * 0.25, H * 0.75, W * 0.75, H * 0.25);
       bandGrad.addColorStop(0,   'rgba(100,60,180,0)');
-      bandGrad.addColorStop(0.3, 'rgba(120,60,200,0.06)');
-      bandGrad.addColorStop(0.5, 'rgba(160,80,255,0.09)');
-      bandGrad.addColorStop(0.7, 'rgba(120,60,200,0.06)');
+      bandGrad.addColorStop(0.3, 'rgba(120,60,200,0.02)');
+      bandGrad.addColorStop(0.5, 'rgba(160,80,255,0.04)');
+      bandGrad.addColorStop(0.7, 'rgba(120,60,200,0.02)');
       bandGrad.addColorStop(1,   'rgba(100,60,180,0)');
     };
     window.addEventListener('resize', onResize);
@@ -219,7 +219,7 @@ function NebulaPulse() {
           position: 'fixed',
           top: '-10%', left: '30%',
           width: '70vw', height: '70vw',
-          background: 'radial-gradient(ellipse at center, rgba(109,40,217,0.18) 0%, rgba(139,92,246,0.08) 40%, transparent 70%)',
+          background: 'radial-gradient(ellipse at center, rgba(109,40,217,0.04) 0%, rgba(139,92,246,0.02) 40%, transparent 70%)',
           filter: 'blur(80px)',
           borderRadius: '50%',
           pointerEvents: 'none',
@@ -229,29 +229,14 @@ function NebulaPulse() {
           animation: 'galaxy-orbit 55s ease-in-out infinite alternate',
         }}
       />
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'fixed',
-          bottom: '-15%', right: '-10%',
-          width: '60vw', height: '60vw',
-          background: 'radial-gradient(ellipse at center, rgba(76,29,149,0.22) 0%, rgba(139,92,246,0.1) 45%, transparent 70%)',
-          filter: 'blur(100px)',
-          borderRadius: '50%',
-          pointerEvents: 'none',
-          zIndex: 0,
-          willChange: 'transform',
-          contain: 'paint',
-          animation: 'galaxy-orbit 70s ease-in-out infinite alternate-reverse',
-        }}
-      />
+      {/* Right nebula removed to prevent obstructing stars */}
       <div
         aria-hidden="true"
         style={{
           position: 'fixed',
           top: '40%', left: '-5%',
           width: '40vw', height: '40vw',
-          background: 'radial-gradient(ellipse at center, rgba(167,139,250,0.12) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse at center, rgba(167,139,250,0.03) 0%, transparent 70%)',
           filter: 'blur(70px)',
           borderRadius: '50%',
           pointerEvents: 'none',

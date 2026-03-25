@@ -79,7 +79,8 @@ export default function TimelineScroll() {
                   style={{
                     fontSize: 'clamp(1.5rem, 4vw, 2.75rem)',
                     lineHeight: 0.9,
-                    color: 'var(--accent-glow)',
+                    color: 'var(--accent-base)',
+                    opacity: 0.32,
                     letterSpacing: '-0.04em',
                   }}
                   aria-hidden="true"

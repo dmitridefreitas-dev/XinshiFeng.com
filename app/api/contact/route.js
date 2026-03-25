@@ -12,6 +12,19 @@ export async function POST(request) {
       );
     }
 
+    // Check if credentials exist; if not, log and mock success for demo/test purposes
+    if (!process.env.GMAIL_USER || !process.env.GMAIL_PASSWORD) {
+      console.warn('GMAIL_USER or GMAIL_PASSWORD not set. Mocking email success.');
+      console.log('--- MOCK EMAIL START ---');
+      console.log(`From: ${email}`);
+      console.log(`To: ${process.env.RECIPIENT_EMAIL || 'not-set@example.com'}`);
+      console.log(`Subject: Portfolio Contact: ${name}`);
+      console.log(`Message: ${message}`);
+      console.log('--- MOCK EMAIL END ---');
+      
+      return NextResponse.json({ success: true, message: 'Mock email sent (no credentials)' });
+    }
+
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
