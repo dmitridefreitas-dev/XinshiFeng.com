@@ -1,13 +1,18 @@
+/**
+ * Deploy script for Hostinger.
+ * 
+ * Run: npm run deploy
+ * Then drag the contents of the "deploy" folder into public_html.
+ */
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
 const ROOT = __dirname;
 const OUT = path.join(ROOT, 'out');
-const ASSETS_DIR = 'next-assets';
+const DEPLOY = path.join(ROOT, 'deploy');
 
 function copyRecursive(src, dest) {
-  if (!fs.existsSync(src)) return;
   const stat = fs.statSync(src);
   if (stat.isDirectory()) {
     fs.mkdirSync(dest, { recursive: true });
@@ -20,49 +25,52 @@ function copyRecursive(src, dest) {
   }
 }
 
-function removeIfExists(p) {
-  if (fs.existsSync(p)) fs.rmSync(p, { recursive: true, force: true });
-}
-
-function replaceInFile(filePath, search, replace) {
-  const content = fs.readFileSync(filePath, 'utf8');
-  if (content.includes(search)) {
-    fs.writeFileSync(filePath, content.split(search).join(replace), 'utf8');
-  }
-}
-
 function replaceInAllFiles(dir, search, replace) {
-  if (!fs.existsSync(dir)) return;
   for (const entry of fs.readdirSync(dir)) {
     const full = path.join(dir, entry);
-    const stat = fs.statSync(full);
-    if (stat.isDirectory()) {
+    if (fs.statSync(full).isDirectory()) {
       replaceInAllFiles(full, search, replace);
-    } else if (/\.(html|js|css|txt|json)$/.test(entry)) {
-      replaceInFile(full, search, replace);
+    } else if (/\.(html|js|css|txt|json)$/i.test(entry)) {
+      const content = fs.readFileSync(full, 'utf8');
+      if (content.includes(search)) {
+        fs.writeFileSync(full, content.split(search).join(replace), 'utf8');
+      }
     }
   }
 }
 
-console.log('1. Building...');
+// 1. Build
+console.log('\n=== Building site ===\n');
 execSync('npx next build', { stdio: 'inherit', cwd: ROOT });
 
-console.log('2. Cleaning old deploy files...');
-for (const name of [ASSETS_DIR, 'static-assets', '_next', '404', '404.html', 'about', 'contact', 'projects', 'images', 'api', 'index.html', 'index.txt', 'icon.svg', 'favicon.ico']) {
-  removeIfExists(path.join(ROOT, name));
+// 2. Clean old deploy folder
+if (fs.existsSync(DEPLOY)) fs.rmSync(DEPLOY, { recursive: true, force: true });
+
+// 3. Copy entire out/ to deploy/
+console.log('\n=== Creating deploy folder ===\n');
+copyRecursive(OUT, DEPLOY);
+
+// 4. Rename _next → assets (Hostinger blocks _next on custom domains)
+const oldDir = path.join(DEPLOY, '_next');
+const newDir = path.join(DEPLOY, 'assets');
+if (fs.existsSync(oldDir)) {
+  fs.renameSync(oldDir, newDir);
+  console.log('Renamed _next → assets');
 }
 
-console.log('3. Copying HTML pages and assets to root...');
-for (const item of fs.readdirSync(OUT)) {
-  if (item === '_next') continue;
-  copyRecursive(path.join(OUT, item), path.join(ROOT, item));
-}
+// 5. Replace all /_next/ references with /assets/
+console.log('Replacing references...');
+replaceInAllFiles(DEPLOY, '/_next/', '/assets/');
 
-console.log('4. Copying _next → ' + ASSETS_DIR + ' (no underscore)...');
-copyRecursive(path.join(OUT, '_next'), path.join(ROOT, ASSETS_DIR));
+// 6. Write .htaccess for clean routing
+fs.writeFileSync(path.join(DEPLOY, '.htaccess'), `<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
+`);
 
-console.log('5. Replacing /_next/ → /' + ASSETS_DIR + '/ in all files...');
-replaceInAllFiles(ROOT, '/_next/', '/' + ASSETS_DIR + '/');
-replaceInAllFiles(path.join(ROOT, ASSETS_DIR), '/_next/', '/' + ASSETS_DIR + '/');
-
-console.log('Done. Commit and push to deploy.');
+console.log('\n=== DONE ===');
+console.log('Drag everything inside the "deploy" folder into public_html on Hostinger.\n');
