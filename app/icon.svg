@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   
-  <!-- Red Outline -->
+  <!-- Blue Outline -->
   <text 
     x="50" 
     y="56" 
@@ -9,7 +9,7 @@
     font-style="italic" 
     font-size="78" 
     fill="none" 
-    stroke="#DC2626" 
+    stroke="#2563EB" 
     stroke-width="8" 
     stroke-linejoin="round"
     text-anchor="middle" 
