@@ -1,3 +1,0 @@
-fix: Remove language context from ProjectDetailModal.jsx
-
-Removed all references to `useLanguage` and `t()` from `components/modals/ProjectDetailModal.jsx` by hardcoding strings.
