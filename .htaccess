@@ -1,0 +1,8 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Internally serve everything from the out/ subdirectory
+  RewriteCond %{REQUEST_URI} !^/out/
+  RewriteRule ^(.*)$ out/$1 [L]
+</IfModule>
