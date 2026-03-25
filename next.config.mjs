@@ -2,7 +2,6 @@
 const nextConfig = {
   output: 'export',
   trailingSlash: true,
-  assetPrefix: '/static-assets',
   images: {
     unoptimized: true,
     remotePatterns: [
