@@ -10,7 +10,7 @@ import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 function ProjectCard({ project, index, isActive }) {
   return (
     <TiltCard
-      className={`relative flex-shrink-0 w-[82vw] md:w-[50vw] lg:w-[36vw] h-[40vh] shimmer-card overflow-hidden ${
+      className={`relative flex-shrink-0 w-[82vw] md:w-[50vw] lg:w-[40vw] xl:w-[38vw] h-[44vh] xl:h-[50vh] shimmer-card overflow-hidden ${
         isActive ? 'animated-border-card' : 'academic-card'
       }`}
       style={{ borderRadius: '8px' }}

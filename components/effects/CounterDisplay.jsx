@@ -47,7 +47,7 @@ export default function CounterDisplay({ value, label, delay = 0 }) {
         </motion.span>
       </div>
 
-      <span className="font-mono text-xs uppercase tracking-[0.25em] text-muted text-center max-w-[14ch]">
+      <span className="font-mono text-xs xl:text-sm uppercase tracking-[0.25em] text-muted text-center max-w-[14ch]">
         {label}
       </span>
     </div>

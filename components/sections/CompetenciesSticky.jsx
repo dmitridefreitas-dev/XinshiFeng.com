@@ -18,7 +18,7 @@ export default function CompetenciesSticky() {
         CORE COMPETENCIES
       </motion.p>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 max-w-5xl mx-auto w-full">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-8 xl:gap-10 max-w-6xl mx-auto w-full">
         {competencies.map((comp, i) => {
           const Icon = comp.icon;
           return (
@@ -30,7 +30,7 @@ export default function CompetenciesSticky() {
               transition={{ duration: 0.7, delay: i * 0.15, ease: [0.22, 1, 0.36, 1] }}
             >
               <TiltCard
-                className="shimmer-card academic-card flex flex-col items-center text-center md:items-start md:text-left p-6 rounded-xl h-full"
+                className="shimmer-card academic-card flex flex-col items-center text-center md:items-start md:text-left p-6 xl:p-8 rounded-xl h-full"
               >
                 {/* Icon with rotating glow aura */}
                 <div className="relative w-10 h-10 flex items-center justify-center rounded-full mb-5">

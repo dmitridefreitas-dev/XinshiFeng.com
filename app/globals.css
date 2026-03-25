@@ -222,10 +222,10 @@
   }
 
   /* Fluid typography utilities */
-  .text-display    { font-family: var(--font-playfair), "Source Han Serif SC", "Noto Serif SC", serif; font-size: clamp(1.85rem, 4.5vw, 4.25rem); line-height: 1.0;  letter-spacing: -0.03em; }
-  .text-headline   { font-family: var(--font-playfair), "Source Han Serif SC", "Noto Serif SC", serif; font-size: clamp(1.25rem, 3vw, 2.75rem);    line-height: 1.05; letter-spacing: -0.02em; }
-  .text-subhead    { font-family: var(--font-playfair), "Source Han Serif SC", "Noto Serif SC", serif; font-size: clamp(1.0rem, 2vw, 1.85rem);  line-height: 1.15; letter-spacing: -0.01em; }
-  .text-body-fluid { font-size: clamp(0.85rem, 1.2vw, 1.25rem);  line-height: 1.65; }
+  .text-display    { font-family: var(--font-playfair), "Source Han Serif SC", "Noto Serif SC", serif; font-size: clamp(1.85rem, 5vw, 5.75rem); line-height: 1.0;  letter-spacing: -0.03em; }
+  .text-headline   { font-family: var(--font-playfair), "Source Han Serif SC", "Noto Serif SC", serif; font-size: clamp(1.25rem, 3.5vw, 3.75rem);    line-height: 1.05; letter-spacing: -0.02em; }
+  .text-subhead    { font-family: var(--font-playfair), "Source Han Serif SC", "Noto Serif SC", serif; font-size: clamp(1.0rem, 2.2vw, 2.4rem);  line-height: 1.15; letter-spacing: -0.01em; }
+  .text-body-fluid { font-size: clamp(0.85rem, 1.35vw, 1.45rem);  line-height: 1.65; }
 
   /* Accent gradient text */
   .text-accent-gradient {
