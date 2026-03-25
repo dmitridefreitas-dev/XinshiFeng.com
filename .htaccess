@@ -2,7 +2,7 @@
   RewriteEngine On
   RewriteBase /
 
-  # Serve existing files and directories as-is
+  # Serve existing files and directories directly
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
@@ -11,7 +11,6 @@
   RewriteRule ^ /index.html [L]
 </IfModule>
 
-# Cache static assets aggressively
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresByType text/css "access plus 1 year"

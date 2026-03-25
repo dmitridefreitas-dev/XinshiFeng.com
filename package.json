@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --port 3000",
     "build": "next build",
-    "deploy": "next build && node -e \"const fs=require('fs');const path=require('path');function cpR(s,d){fs.readdirSync(s).forEach(f=>{const sp=path.join(s,f),dp=path.join(d,f);fs.statSync(sp).isDirectory()?(fs.mkdirSync(dp,{recursive:true}),cpR(sp,dp)):fs.copyFileSync(sp,dp)})};cpR('out','.')\"",
+    "deploy": "node deploy.js",
     "start": "next start --port 3000",
     "lint": "next lint"
   },
